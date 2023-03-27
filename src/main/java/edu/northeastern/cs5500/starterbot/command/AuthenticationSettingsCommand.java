@@ -40,7 +40,9 @@ public class AuthenticationSettingsCommand implements SlashCommandHandler, Butto
                         Button.primary(this.getName() + ":captcha", "Captcha"),
                         Button.primary(this.getName() + ":twoFactor", "2-factor auth"),
                         Button.primary(this.getName() + ":email", "Email"));
-        messageCreateBuilder = messageCreateBuilder.setContent("Which authentication method do you want to set-up?");
+        messageCreateBuilder =
+                messageCreateBuilder.setContent(
+                        "Which authentication method do you want to set-up?");
         event.reply(messageCreateBuilder.build()).queue();
     }
 

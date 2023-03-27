@@ -8,13 +8,15 @@ import dagger.multibindings.IntoSet;
 public class CommandModule {
     @Provides
     @IntoSet
-    public SlashCommandHandler provideAuthenticationSettingsCommand(AuthenticationSettingsCommand settingsCommand) {
+    public SlashCommandHandler provideAuthenticationSettingsCommand(
+            AuthenticationSettingsCommand settingsCommand) {
         return settingsCommand;
     }
 
     @Provides
     @IntoSet
-    public ButtonHandler provideAuthenticationSettingsCommandClickHandler(AuthenticationSettingsCommand settingsCommand) {
+    public ButtonHandler provideAuthenticationSettingsCommandClickHandler(
+            AuthenticationSettingsCommand settingsCommand) {
         return settingsCommand;
     }
 
