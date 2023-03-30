@@ -28,7 +28,7 @@ public class AuthenticationModule {
 
     @Provides
     @IntoSet
-    public AuthenticationHandler provideEmailAuthenticationInterHandler(
+    public AuthenticationHandler provideEmailAuthenticationHandler(
             EmailAuthentication emailAuthentication) {
         return emailAuthentication;
     }

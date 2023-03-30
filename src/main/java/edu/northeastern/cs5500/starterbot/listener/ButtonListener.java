@@ -1,5 +1,6 @@
 package edu.northeastern.cs5500.starterbot.listener;
 
+import edu.northeastern.cs5500.starterbot.authentication.AuthenticationHandler;
 import edu.northeastern.cs5500.starterbot.command.ButtonHandler;
 import java.util.Objects;
 import java.util.Set;
@@ -11,7 +12,9 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 @Slf4j
 public class ButtonListener extends ListenerAdapter {
+
     @Inject Set<ButtonHandler> buttons;
+    @Inject Set<AuthenticationHandler> authenticationMethods;
 
     @Inject
     public ButtonListener() {
@@ -28,6 +31,13 @@ public class ButtonListener extends ListenerAdapter {
         for (ButtonHandler buttonHandler : buttons) {
             if (buttonHandler.getName().equals(handlerName)) {
                 buttonHandler.onButtonInteraction(event);
+                return;
+            }
+        }
+
+        for (AuthenticationHandler auth : authenticationMethods) {
+            if (auth.getName().equals(handlerName)) {
+                auth.onButtonInteraction(event);
                 return;
             }
         }

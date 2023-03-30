@@ -16,6 +16,6 @@ public class EmailAuthentication extends Authentication {
 
     @Override
     public void onButtonInteraction(@Nonnull ButtonInteractionEvent event) {
-        //
+        event.reply(event.getButton().getLabel()).queue();
     }
 }

@@ -7,13 +7,19 @@ import net.dv8tion.jda.api.interactions.components.buttons.Button;
 
 @Slf4j
 public class Authentication implements AuthenticationHandler {
-    @Nonnull public String name;
+    @Nonnull public String id;
+    @Nonnull public String name = "authenticate"; // handlerName
     @Nonnull public String label;
     ;
 
-    public Authentication(String name, String label) {
-        this.name = name;
+    public Authentication(String id, String label) {
+        this.id = id;
         this.label = label;
+    }
+
+    @Nonnull
+    public String getId() {
+        return name;
     }
 
     @Nonnull
@@ -31,7 +37,7 @@ public class Authentication implements AuthenticationHandler {
     }
 
     public Button createButton() {
-        return Button.primary("authenticate:" + name, label);
+        return Button.primary(name + ":" + id, label);
     }
 
     public void onButtonInteraction(@Nonnull ButtonInteractionEvent event) {

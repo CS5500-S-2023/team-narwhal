@@ -52,7 +52,7 @@ public class Bot {
                         .setDisabledIntents(
                                 GatewayIntent.GUILD_VOICE_STATES,
                                 GatewayIntent.GUILD_EMOJIS_AND_STICKERS)
-                        .addEventListeners(messageListener, eventListener)
+                        .addEventListeners(messageListener, eventListener, buttonListener)
                         .build();
 
         CommandListUpdateAction commands = jda.updateCommands();

@@ -1,6 +1,5 @@
 package edu.northeastern.cs5500.starterbot.listener;
 
-import edu.northeastern.cs5500.starterbot.command.ButtonHandler;
 import edu.northeastern.cs5500.starterbot.command.SlashCommandHandler;
 import edu.northeastern.cs5500.starterbot.command.StringSelectHandler;
 import java.util.ArrayList;
@@ -19,7 +18,6 @@ import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 public class MessageListener extends ListenerAdapter {
 
     @Inject Set<SlashCommandHandler> commands;
-    @Inject Set<ButtonHandler> buttons;
     @Inject Set<StringSelectHandler> stringSelects;
 
     @Inject

@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
-import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.dv8tion.jda.api.utils.messages.MessageCreateBuilder;
@@ -48,16 +47,5 @@ public class EventListener extends ListenerAdapter {
         member.openPrivateChannel()
                 .flatMap(channel -> channel.sendMessage(messageCreateBuilder.build()))
                 .queue();
-    }
-
-    // Logic that runs after one of the buttons created above are clicked
-    @Override
-    public void onButtonInteraction(@Nonnull ButtonInteractionEvent event) {
-        for (AuthenticationHandler auth : authenticationMethods) {
-            if (auth.getName().equals(event.getButton().getId())) {
-                auth.onButtonInteraction(event);
-                return;
-            }
-        }
     }
 }
