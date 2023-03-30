@@ -21,6 +21,16 @@ public class EventListener extends ListenerAdapter {
         super();
     }
 
+    // TODO: how do I use this with the current implementation
+
+    @Override
+     public String onMessageReceived(MessageReceivedEvent event)
+     {
+         return event.getMessage();
+         logger.log(message);
+         // would this work or do I need to use msg ID to retrieve msg?
+     }
+
     @Override
     public void onGuildMemberJoin(@Nonnull GuildMemberJoinEvent event) {
         log.info("On guild member join");

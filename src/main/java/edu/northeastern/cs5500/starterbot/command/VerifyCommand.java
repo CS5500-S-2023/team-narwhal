@@ -17,6 +17,8 @@ import net.dv8tion.jda.api.interactions.modals.Modal;
 @Singleton
 @Slf4j
 public class VerifyCommand implements SlashCommandHandler {
+    // this command is supposed to allow the owner/moderator to re-verify a user by typing
+    // their user name
 
     @Inject
     public VerifyCommand() {
