@@ -61,6 +61,8 @@ dependencies {
     // MongoDB for data storage
     implementation 'org.mongodb:mongo-java-driver:_'
 
+    // SimpleCaptcha to generate captcha images
+    implementation 'com.liferay:nl.captcha.simplecaptcha:_'
 }
 
 application {
