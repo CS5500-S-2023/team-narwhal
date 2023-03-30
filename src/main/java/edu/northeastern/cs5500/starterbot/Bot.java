@@ -4,7 +4,7 @@ import dagger.Component;
 import edu.northeastern.cs5500.starterbot.authentication.AuthenticationModule;
 import edu.northeastern.cs5500.starterbot.command.CommandModule;
 import edu.northeastern.cs5500.starterbot.listener.ButtonListener;
-import edu.northeastern.cs5500.starterbot.listener.EventListener;
+import edu.northeastern.cs5500.starterbot.listener.AuthenticationListener;
 import edu.northeastern.cs5500.starterbot.listener.MessageListener;
 import edu.northeastern.cs5500.starterbot.repository.RepositoryModule;
 import javax.annotation.Nonnull;
@@ -27,7 +27,7 @@ public class Bot {
     Bot() {}
 
     @Inject MessageListener messageListener;
-    @Inject EventListener eventListener;
+    @Inject AuthenticationListener eventListener;
     @Inject ButtonListener buttonListener;
 
     static String getBotToken() {

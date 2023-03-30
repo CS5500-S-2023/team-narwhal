@@ -6,30 +6,40 @@ import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.entities.channel.ChannelType;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.dv8tion.jda.api.utils.messages.MessageCreateBuilder;
 
 @Slf4j
-public class EventListener extends ListenerAdapter {
+public class AuthenticationListener extends ListenerAdapter {
 
     @Inject Set<AuthenticationHandler> authenticationMethods;
 
     @Inject
-    public EventListener() {
+    public AuthenticationListener() {
         super();
     }
 
-    // TODO: how do I use this with the current implementation
-
     @Override
-     public String onMessageReceived(MessageReceivedEvent event)
-     {
-         return event.getMessage();
-         logger.log(message);
-         // would this work or do I need to use msg ID to retrieve msg?
-     }
+    public void onMessageReceived(@Nonnull MessageReceivedEvent event)
+    {
+        if (event.getChannelType() != ChannelType.PRIVATE)
+        {
+            // We only listen to direct/private messages
+            return;
+        }
+    
+        for (AuthenticationHandler auth : authenticationMethods) {
+            if(auth.messageReceived(event)) {
+                return;
+            }
+        }
+
+        event.getMessage().reply("No authentication session found!").queue();
+    }
 
     @Override
     public void onGuildMemberJoin(@Nonnull GuildMemberJoinEvent event) {
@@ -47,7 +57,7 @@ public class EventListener extends ListenerAdapter {
         // Builds the message and adds buttons
         MessageCreateBuilder messageCreateBuilder = new MessageCreateBuilder();
 
-        Set<Button> buttons = new HashSet();
+        Set<Button> buttons = new HashSet<>();
         for (AuthenticationHandler auth : authenticationMethods) {
             buttons.add(auth.createButton());
         }
