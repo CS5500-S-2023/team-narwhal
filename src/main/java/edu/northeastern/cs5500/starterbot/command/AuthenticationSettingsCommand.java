@@ -3,6 +3,7 @@ package edu.northeastern.cs5500.starterbot.command;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 import javax.annotation.Nonnull;
 import javax.imageio.ImageIO;
@@ -57,7 +58,6 @@ public class AuthenticationSettingsCommand implements SlashCommandHandler, Butto
 
     @Override
     public void onButtonInteraction(@Nonnull ButtonInteractionEvent event) {
-        event.reply("You chose " + event.getButton().getLabel()).queue();
 
         switch (event.getButton().getId().split(":")[1]) {
             case "captcha":
@@ -72,6 +72,7 @@ public class AuthenticationSettingsCommand implements SlashCommandHandler, Butto
             default:
                 throw new IllegalStateException(event.getButton().getId());
         }
+        event.getMessage().editMessageComponents(List.of()).queue();
     }
 
     @Nonnull
