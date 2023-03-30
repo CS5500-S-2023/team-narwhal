@@ -1,8 +1,15 @@
 package edu.northeastern.cs5500.starterbot.command;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.List;
+import java.util.Objects;
 import javax.annotation.Nonnull;
+import javax.imageio.ImageIO;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
@@ -12,8 +19,10 @@ import net.dv8tion.jda.api.interactions.components.ActionRow;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.dv8tion.jda.api.interactions.components.text.TextInput;
 import net.dv8tion.jda.api.interactions.components.text.TextInputStyle;
-import net.dv8tion.jda.api.interactions.modals.Modal;
+import net.dv8tion.jda.api.utils.FileUpload;
 import net.dv8tion.jda.api.utils.messages.MessageCreateBuilder;
+import net.dv8tion.jda.api.utils.messages.MessageCreateData;
+import nl.captcha.Captcha;
 
 @Singleton
 @Slf4j
@@ -52,6 +61,7 @@ public class AuthenticationSettingsCommand implements SlashCommandHandler, Butto
 
     @Override
     public void onButtonInteraction(@Nonnull ButtonInteractionEvent event) {
+        // Modal code example; not being used yet
         TextInput testString =
                 TextInput.create("welcome", "Authenticate", TextInputStyle.SHORT)
                         .setMinLength(1)
@@ -67,7 +77,54 @@ public class AuthenticationSettingsCommand implements SlashCommandHandler, Butto
                         .addActionRows(ActionRow.of(testString), ActionRow.of(message))
                         .build();
 
-        event.replyModal(modal).queue();
+        // event.replyModal(modal).queue();
         // event.reply("You chose " + event.getButton().getLabel()).queue();
+
+        switch (event.getButton().getId().split(":")[1]) {
+            case "captcha":
+                onRequestedCaptcha(event);
+                break;
+            case "twoFactor":
+                event.reply(onRequestedTwoFactor(event)).queue();
+                break;
+            case "email":
+                event.reply(onRequestedEmail(event)).queue();
+                break;
+            default:
+                throw new IllegalStateException(event.getButton().getId());
+        }
+        event.getMessage().editMessageComponents(List.of()).queue();
+    }
+
+    @Nonnull
+    MessageCreateData onRequestedEmail(ButtonInteractionEvent event) {
+        MessageCreateBuilder builder = new MessageCreateBuilder();
+        builder.addContent("Not yet implemented!");
+        return builder.build();
+    }
+
+    @Nonnull
+    MessageCreateData onRequestedTwoFactor(ButtonInteractionEvent event) {
+        MessageCreateBuilder builder = new MessageCreateBuilder();
+        builder.addContent("Not yet implemented!");
+        return builder.build();
+    }
+
+    @SneakyThrows({IOException.class})
+    @Nonnull
+    static byte[] imageToByteArray(@Nonnull BufferedImage image) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        ImageIO.write(image, "png", stream);
+        return Objects.requireNonNull(stream.toByteArray());
+    }
+
+    void onRequestedCaptcha(ButtonInteractionEvent event) {
+        Captcha captcha = new Captcha.Builder(200, 50).addText().build();
+
+        FileUpload file =
+                FileUpload.fromData(
+                        imageToByteArray(Objects.requireNonNull(captcha.getImage())), "image.png");
+
+        event.replyFiles(file).queue();
     }
 }
