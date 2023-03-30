@@ -1,11 +1,12 @@
 package edu.northeastern.cs5500.starterbot;
 
 import dagger.Component;
+import edu.northeastern.cs5500.starterbot.authentication.AuthenticationModule;
 import edu.northeastern.cs5500.starterbot.command.CommandModule;
+import edu.northeastern.cs5500.starterbot.listener.ButtonListener;
+import edu.northeastern.cs5500.starterbot.listener.EventListener;
 import edu.northeastern.cs5500.starterbot.listener.MessageListener;
 import edu.northeastern.cs5500.starterbot.repository.RepositoryModule;
-import java.util.Collection;
-import java.util.EnumSet;
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -14,7 +15,7 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
 
-@Component(modules = {CommandModule.class, RepositoryModule.class})
+@Component(modules = {CommandModule.class, RepositoryModule.class, AuthenticationModule.class})
 @Singleton
 interface BotComponent {
     public Bot bot();
@@ -26,6 +27,8 @@ public class Bot {
     Bot() {}
 
     @Inject MessageListener messageListener;
+    @Inject EventListener eventListener;
+    @Inject ButtonListener buttonListener;
 
     static String getBotToken() {
         return new ProcessBuilder().environment().get("BOT_TOKEN");
@@ -39,8 +42,18 @@ public class Bot {
         }
         @SuppressWarnings("null")
         @Nonnull
-        Collection<GatewayIntent> intents = EnumSet.noneOf(GatewayIntent.class);
-        JDA jda = JDABuilder.createLight(token, intents).addEventListeners(messageListener).build();
+        JDA jda =
+                JDABuilder.createDefault(
+                                token,
+                                GatewayIntent.GUILD_MEMBERS,
+                                GatewayIntent.GUILD_MESSAGES,
+                                GatewayIntent.DIRECT_MESSAGES,
+                                GatewayIntent.GUILD_MESSAGE_REACTIONS)
+                        .setDisabledIntents(
+                                GatewayIntent.GUILD_VOICE_STATES,
+                                GatewayIntent.GUILD_EMOJIS_AND_STICKERS)
+                        .addEventListeners(messageListener, eventListener)
+                        .build();
 
         CommandListUpdateAction commands = jda.updateCommands();
         commands.addCommands(messageListener.allCommandData());
