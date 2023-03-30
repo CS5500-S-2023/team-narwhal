@@ -58,6 +58,22 @@ public class AuthenticationSettingsCommand implements SlashCommandHandler, Butto
 
     @Override
     public void onButtonInteraction(@Nonnull ButtonInteractionEvent event) {
+        // --- Modal code example ---
+        // TextInput testString =
+        //         TextInput.create("welcome", "Authenticate", TextInputStyle.SHORT)
+        //                 .setMinLength(1)
+        //                 .build();
+        // TextInput message =
+        //         TextInput.create("welcome-message", "Message", TextInputStyle.PARAGRAPH)
+        //                 .setMinLength(1)
+        //                 .setPlaceholder("placeholder")
+        //                 .build();
+
+        // Modal modal =
+        //         Modal.create("welcome-modal", "Welcome")
+        //                 .addActionRows(ActionRow.of(testString), ActionRow.of(message))
+        //                 .build();
+        // event.replyModal(modal).queue();
 
         switch (event.getButton().getId().split(":")[1]) {
             case "captcha":

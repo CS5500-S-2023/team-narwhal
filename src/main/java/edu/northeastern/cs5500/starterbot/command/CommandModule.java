@@ -36,6 +36,12 @@ public class CommandModule {
 
     @Provides
     @IntoSet
+    public SlashCommandHandler provideVerifyCommand(VerifyCommand verifyCommand) {
+        return verifyCommand;
+    }
+
+    @Provides
+    @IntoSet
     public SlashCommandHandler provideButtonCommand(ButtonCommand buttonCommand) {
         return buttonCommand;
     }
