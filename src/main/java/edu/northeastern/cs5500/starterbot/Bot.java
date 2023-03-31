@@ -1,11 +1,17 @@
 package edu.northeastern.cs5500.starterbot;
 
+import edu.northeastern.cs5500.starterbot.listener.BotView;
+import edu.northeastern.cs5500.starterbot.model.CaptchaAuthenticationModel;
+import edu.northeastern.cs5500.starterbot.controller.CaptchaAuthenticationController;
+
 import dagger.Component;
 import edu.northeastern.cs5500.starterbot.authentication.AuthenticationModule;
+import edu.northeastern.cs5500.starterbot.authentication.CaptchaAuthentication;
 import edu.northeastern.cs5500.starterbot.command.CommandModule;
 import edu.northeastern.cs5500.starterbot.listener.ButtonListener;
 import edu.northeastern.cs5500.starterbot.listener.AuthenticationListener;
 import edu.northeastern.cs5500.starterbot.listener.MessageListener;
+import edu.northeastern.cs5500.starterbot.model.CaptchaAuthenticationModel;
 import edu.northeastern.cs5500.starterbot.repository.RepositoryModule;
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
@@ -35,6 +41,10 @@ public class Bot {
     }
 
     void start() {
+        CaptchaAuthenticationModel model = new CaptchaAuthenticationModel();
+        BotView view = new BotView();
+        CaptchaAuthenticationController controller = new CaptchaAuthenticationController(model, view);
+
         String token = getBotToken();
         if (token == null) {
             throw new IllegalArgumentException(
@@ -52,11 +62,11 @@ public class Bot {
                         .setDisabledIntents(
                                 GatewayIntent.GUILD_VOICE_STATES,
                                 GatewayIntent.GUILD_EMOJIS_AND_STICKERS)
-                        .addEventListeners(messageListener, eventListener, buttonListener)
-                        .build();
-
-        CommandListUpdateAction commands = jda.updateCommands();
-        commands.addCommands(messageListener.allCommandData());
-        commands.queue();
+                        .addEventListeners(messageListener, view, buttonListener).build();
+          
+       // jda.addEventListener(view);
+        //CommandListUpdateAction commands = jda.updateCommands();
+        //commands.addCommands(messageListener.allCommandData());
+        //commands.queue();
     }
 }

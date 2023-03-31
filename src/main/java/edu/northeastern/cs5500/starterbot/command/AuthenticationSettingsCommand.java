@@ -19,12 +19,12 @@ import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.dv8tion.jda.api.utils.FileUpload;
 import net.dv8tion.jda.api.utils.messages.MessageCreateBuilder;
 import net.dv8tion.jda.api.utils.messages.MessageCreateData;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import nl.captcha.Captcha;
 
 @Singleton
 @Slf4j
 public class AuthenticationSettingsCommand implements SlashCommandHandler, ButtonHandler {
-
     @Inject
     public AuthenticationSettingsCommand() {}
 
@@ -58,27 +58,10 @@ public class AuthenticationSettingsCommand implements SlashCommandHandler, Butto
 
     @Override
     public void onButtonInteraction(@Nonnull ButtonInteractionEvent event) {
-        // --- Modal code example ---
-        // TextInput testString =
-        //         TextInput.create("welcome", "Authenticate", TextInputStyle.SHORT)
-        //                 .setMinLength(1)
-        //                 .build();
-        // TextInput message =
-        //         TextInput.create("welcome-message", "Message", TextInputStyle.PARAGRAPH)
-        //                 .setMinLength(1)
-        //                 .setPlaceholder("placeholder")
-        //                 .build();
-
-        // Modal modal =
-        //         Modal.create("welcome-modal", "Welcome")
-        //                 .addActionRows(ActionRow.of(testString), ActionRow.of(message))
-        //                 .build();
-        // event.replyModal(modal).queue();
-
         switch (event.getButton().getId().split(":")[1]) {
             case "captcha":
                 onRequestedCaptcha(event);
-                onMessageReceived(event);
+                //onMessageReceived(event);
                 break;
             case "twoFactor":
                 event.reply(onRequestedTwoFactor(event)).queue();
@@ -121,8 +104,6 @@ public class AuthenticationSettingsCommand implements SlashCommandHandler, Butto
                         imageToByteArray(Objects.requireNonNull(captcha.getImage())), "image.png");
 
         event.replyFiles(file).queue();
-        // TODO: move this code once code are refactored
-        String answer = captcha.getAnswer(); // return this?
     }
 
     // detect user input, once they hit enter, call this method

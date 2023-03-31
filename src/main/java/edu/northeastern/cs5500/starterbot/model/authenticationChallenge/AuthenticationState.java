@@ -1,4 +1,4 @@
-package edu.northeastern.cs5500.starterbot.model;
+package edu.northeastern.cs5500.starterbot.model.authenticationChallenge;
 
 public enum AuthenticationState {
     // UNKNOWN in case we get a state from the DB that doesn't make sense
