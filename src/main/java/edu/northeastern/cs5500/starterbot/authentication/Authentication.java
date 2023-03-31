@@ -11,8 +11,6 @@ public class Authentication implements AuthenticationHandler {
     @Nonnull public String name = "authenticate"; // handlerName
     @Nonnull public String label;
     
-    // TODO: this authentication probably should also has a status?
-
     public Authentication(String id, String label) {
         this.id = id;
         this.label = label;
@@ -37,7 +35,6 @@ public class Authentication implements AuthenticationHandler {
         log.info(String.format("Authenticating using %s", label));
     }
     
-    // TODO: change this
     public Button createButton() {
         return Button.primary(name + ":" + id, label);
     }

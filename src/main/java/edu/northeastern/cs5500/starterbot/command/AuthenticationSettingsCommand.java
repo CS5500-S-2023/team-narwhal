@@ -78,7 +78,7 @@ public class AuthenticationSettingsCommand implements SlashCommandHandler, Butto
         switch (event.getButton().getId().split(":")[1]) {
             case "captcha":
                 onRequestedCaptcha(event);
-                onMessageReceived(event);
+                //onMessageReceived(event);
                 break;
             case "twoFactor":
                 event.reply(onRequestedTwoFactor(event)).queue();
@@ -121,17 +121,12 @@ public class AuthenticationSettingsCommand implements SlashCommandHandler, Butto
                         imageToByteArray(Objects.requireNonNull(captcha.getImage())), "image.png");
 
         event.replyFiles(file).queue();
-        // TODO: move this code once code are refactored
-        String answer = captcha.getAnswer(); // return this?
-    }
-
-    // detect user input, once they hit enter, call this method
-
-
-    boolean verifyCaptcha(@Nonnull String userInput, String answer){
-        return userInput.equals(answer);
+        String answer = captcha.getAnswer();
     }
     
 
-
+    // detect user input, once they hit enter, call this method
+    boolean verifyCaptcha(@Nonnull String userInput, String answer){
+        return userInput.equals(answer);
+    }
 }

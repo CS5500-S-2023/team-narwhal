@@ -14,4 +14,5 @@ public interface AuthenticationHandler extends ButtonHandler {
     public void authenticate();
 
     public Button createButton();
+    
 }

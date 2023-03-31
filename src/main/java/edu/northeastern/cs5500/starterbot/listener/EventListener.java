@@ -10,9 +10,13 @@ import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.dv8tion.jda.api.utils.messages.MessageCreateBuilder;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.entities.channel.ChannelType;
+
 
 @Slf4j
 public class EventListener extends ListenerAdapter {
+    private boolean messageSent = false;
 
     @Inject Set<AuthenticationHandler> authenticationMethods;
 
@@ -20,16 +24,6 @@ public class EventListener extends ListenerAdapter {
     public EventListener() {
         super();
     }
-
-    // TODO: how do I use this with the current implementation
-
-    @Override
-     public String onMessageReceived(MessageReceivedEvent event)
-     {
-         return event.getMessage();
-         logger.log(message);
-         // would this work or do I need to use msg ID to retrieve msg?
-     }
 
     @Override
     public void onGuildMemberJoin(@Nonnull GuildMemberJoinEvent event) {
@@ -47,7 +41,7 @@ public class EventListener extends ListenerAdapter {
         // Builds the message and adds buttons
         MessageCreateBuilder messageCreateBuilder = new MessageCreateBuilder();
 
-        Set<Button> buttons = new HashSet();
+        Set<Button> buttons = new HashSet<>();
         for (AuthenticationHandler auth : authenticationMethods) {
             buttons.add(auth.createButton());
         }
@@ -57,5 +51,44 @@ public class EventListener extends ListenerAdapter {
         member.openPrivateChannel()
                 .flatMap(channel -> channel.sendMessage(messageCreateBuilder.build()))
                 .queue();
+
     }
+
+    // wait for user input, once user input something, verify
+    // once user hit enter, verify
+    public void onMessageReceived(@Nonnull MessageReceivedEvent event)
+    {
+        if (event.getChannelType() != ChannelType.PRIVATE)
+        {
+            // We only listen to direct/private messages
+            return;
+        }
+        String userInput = event.getMessage().getContentRaw();
+        if (!event.getAuthor().isBot() && !messageSent) {
+            event.getChannel().sendMessage(userInput).queue();
+            messageSent = true;
+        }
+        
+        /* 
+        final User member = event.getMember().getUser();
+        final String statusMsg = verify(userInput, answer);
+        // TODO: seperate this out
+        member.openPrivateChannel()
+        .flatMap(channel -> channel.sendMessage("Hello " + statusMsg))
+        .queue();
+        */
+    }
+
+    /* 
+    public String verify(@Nonnull String userInput, @Nonnull String answer){
+        if(userInput.equals(answer)){
+            return "You solved the CAPTCHA correctly.\n";
+        } else{
+            return "Incorrect answer. Try again.\n";
+        }
+        
+    }
+    */
+
+
 }
