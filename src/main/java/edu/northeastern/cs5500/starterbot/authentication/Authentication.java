@@ -10,6 +10,7 @@ public class Authentication implements AuthenticationHandler {
     @Nonnull public String id;
     @Nonnull public String name = "authenticate"; // handlerName
     @Nonnull public String label;
+    public String answer = "";
     
     public Authentication(String id, String label) {
         this.id = id;
@@ -31,6 +32,10 @@ public class Authentication implements AuthenticationHandler {
         return label;
     }
 
+    public String getAnswer(){
+        return answer;
+    }
+
     public void authenticate() {
         log.info(String.format("Authenticating using %s", label));
     }
@@ -39,7 +44,12 @@ public class Authentication implements AuthenticationHandler {
         return Button.primary(name + ":" + id, label);
     }
 
+    public void setAnswer(String newAnswer) {
+        this.answer = newAnswer;
+    }
+
     public void onButtonInteraction(@Nonnull ButtonInteractionEvent event) {
         //
     }
+
 }

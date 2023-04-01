@@ -121,7 +121,6 @@ public class AuthenticationSettingsCommand implements SlashCommandHandler, Butto
                         imageToByteArray(Objects.requireNonNull(captcha.getImage())), "image.png");
 
         event.replyFiles(file).queue();
-        String answer = captcha.getAnswer();
     }
     
 

@@ -32,11 +32,7 @@ import nl.captcha.Captcha;
 
 @Singleton
 @Slf4j
-public class CaptchaAuthentication extends Authentication {
-    private String userInput;
-    private String answer;
-    private boolean isVerified;
-
+public class CaptchaAuthentication extends Authentication{
     @Inject
     public CaptchaAuthentication() {
         super("captcha", "CAPTCHA");
@@ -53,7 +49,7 @@ public class CaptchaAuthentication extends Authentication {
                         imageToByteArray(Objects.requireNonNull(captcha.getImage())), "image.png");
 
         event.replyFiles(file).queue();
-        this.answer = captcha.getAnswer();
+        this.setAnswer(captcha.getAnswer());
     }
 
     @SneakyThrows({IOException.class})
