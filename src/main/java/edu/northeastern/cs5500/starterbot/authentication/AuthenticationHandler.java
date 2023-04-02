@@ -15,8 +15,6 @@ public interface AuthenticationHandler extends ButtonHandler {
 
     // public void authenticate();
 
-    public Button createButton();
-
     /**
      * If true, this event was handled by a handler that was expecting it.
      * If false, this event was not handled and the next handler should be called.

@@ -36,11 +36,7 @@ public abstract class Authentication implements AuthenticationHandler {
         log.info(String.format("Authenticating using %s", label));
     }
     
-    // TODO: change this
-    public Button createButton() {
-        return Button.primary(name + ":" + id, label);
-    }
-
+    
     public void onButtonInteraction(@Nonnull ButtonInteractionEvent event) {
         
         event.reply(event.getButton().getLabel()).queue();

@@ -9,9 +9,10 @@ import edu.northeastern.cs5500.starterbot.model.AuthenticationChallenge;
 import edu.northeastern.cs5500.starterbot.model.CaptchaAuthenticationChallenge;
 import edu.northeastern.cs5500.starterbot.repository.GenericRepository;
 
-public class CaptchaAuthenticatorController implements Authenticator {
+public class CaptchaAuthenticationController {
 
-    @Inject GenericRepository<CaptchaAuthenticationChallenge> challengeRepository;
+    //@Inject GenericRepository<CaptchaAuthenticationChallenge> challengeRepository;
+    private View view;
 
     @Inject
     CaptchaAuthenticatorController() {
@@ -30,9 +31,11 @@ public class CaptchaAuthenticatorController implements Authenticator {
     }
 
 
-    @Override
-    public AuthenticationChallenge begin(String discordMemberId) {
-        // TODO Auto-generated method stub
+
+    void privideAuthentication (@Nonnull ButtonInteractionEvent event) {
+        Captcha captcha = new Captcha.Builder(200, 50).addText().build();
+        
+
         throw new UnsupportedOperationException("Unimplemented method 'begin'");
     }
 
