@@ -2,6 +2,8 @@ package edu.northeastern.cs5500.starterbot.listener;
 
 import edu.northeastern.cs5500.starterbot.authentication.AuthenticationHandler;
 import edu.northeastern.cs5500.starterbot.command.VerifyCommand;
+import edu.northeastern.cs5500.starterbot.controller.AuthenticationController;
+import edu.northeastern.cs5500.starterbot.controller.ButtonClickController;
 import edu.northeastern.cs5500.starterbot.controller.UserEnterController;
 
 import java.util.*;
@@ -19,14 +21,17 @@ import net.dv8tion.jda.api.utils.messages.MessageCreateBuilder;
 @Slf4j
 public class AuthenticationListener extends ListenerAdapter {
     private UserEnterController userEnterController;
+    private ButtonClickController buttonClickController;
 
     @Inject VerifyCommand verifyCommand;
     @Inject Set<AuthenticationHandler> authenticationMethods;
+    @Inject AuthenticationController authenticationController;
 
     @Inject
-    public AuthenticationListener(UserEnterController userEnterController) {
+    public AuthenticationListener(UserEnterController userEnterController, ButtonClickController buttonClickController) {
         super();
         this.userEnterController = userEnterController;
+        this.buttonClickController = buttonClickController;
     }
 
     // when a new user joins the server
@@ -37,12 +42,17 @@ public class AuthenticationListener extends ListenerAdapter {
     }
     
     // when the user inputs an answer
-    
+
+    @Override
+    public void onButtonInteraction(@Nonnull ButtonInteractionEvent event) {
+        buttonController.onButtonInteraction(event);
+    }
+
     @Override
     public void onSlashCommand(@Nonnull SlashCommandEvent event){
         if (event.getName().equals("verify")) {
-            // listen to user input with /verify
-            String userInput = event.getCommandData
+            verifyCommand.onSlashCommandInteraction(event);
+            //
           }
 
     }

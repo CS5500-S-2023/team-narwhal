@@ -18,7 +18,7 @@ import net.dv8tion.jda.api.interactions.modals.Modal;
 @Slf4j
 // part of the service, controlled by controller
 public class VerifyCommand implements SlashCommandHandler {
-    
+
     @Inject GenericRepository<AuthenticationChallenge> challengeRepository;
 
     @Inject
@@ -35,11 +35,11 @@ public class VerifyCommand implements SlashCommandHandler {
     @Override
     @Nonnull
     public CommandData getCommandData() {
-        return Commands.slash(getName(), "Ask the bot to reply with the provided text")
+        return Commands.slash(getName(), "xxx")
                 .addOption(
                         OptionType.STRING,
                         "content",
-                        "The bot will reply to your command with the provided text",
+                        "xxx",
                         true);
     }
 
@@ -47,24 +47,22 @@ public class VerifyCommand implements SlashCommandHandler {
     public void onSlashCommandInteraction(@Nonnull SlashCommandInteractionEvent event) {
         log.info("event: /verify");
         String userInput = Objects.requireNonNull(event.getOption("content")).getAsString();
-
         String discordUserId = event.getUser().getId();
-
-        String captchaAnswer = userPreferenceController.getPreferredNameForUser(discordUserId);
-
-        userPreferenceController.setPreferredNameForUser(discordUserId, preferredName);
-
-        if (oldPreferredName == null) {
-            event.reply("Your preferred name has been set to " + preferredName).queue();
-        } else {
-            event.reply(
-                            "Your preferred name has been changed from "
-                                    + oldPreferredName
-                                    + " to "
-                                    + preferredName)
-                    .queue();
+        String captchaAnswer = getAuthencationAnswerForMemberId(discordUserId);
+        Boolean correct = userInput.equals(captchaAnswer);
+        if (correct){
+            
         }
-
     }
 
+    @Nonnull
+    protected String getAuthencationAnswerForMemberId(String discordMemberId) {
+        for (AuthenticationChallenge currentUserAuth : challengeRepository.getAll()) {
+            if (currentUserAuth.getDiscordUserId().equals(discordMemberId)) {
+                return currentUserAuth.getAnswer();
+            }
+        }
+        // throw custom user not found exceptions
+        throw new RuntimeException("User not found!");
+    }
 }
