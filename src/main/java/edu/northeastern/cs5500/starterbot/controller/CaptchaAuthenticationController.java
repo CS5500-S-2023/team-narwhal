@@ -8,35 +8,35 @@ import edu.northeastern.cs5500.starterbot.authentication.TooManyAttemptsExceptio
 import edu.northeastern.cs5500.starterbot.model.AuthenticationChallenge;
 import edu.northeastern.cs5500.starterbot.model.CaptchaAuthenticationChallenge;
 import edu.northeastern.cs5500.starterbot.repository.GenericRepository;
+import edu.northeastern.cs5500.starterbot.view.BotView;
 
 public class CaptchaAuthenticationController {
 
-    //@Inject GenericRepository<CaptchaAuthenticationChallenge> challengeRepository;
-    private View view;
-
-    @Inject
-    CaptchaAuthenticatorController() {
-        // needed for Dagger
-    }
-
-    @Nullable
-    AuthenticationChallenge getChallenge(String discordMemberId) {
-        for (CaptchaAuthenticationChallenge challenge : challengeRepository.getAll()) {
-            if (discordMemberId.equals(challenge.getDiscordMemberId())) {
-                return challenge;
-            }
-        }
+    @Inject GenericRepository<AuthenticationChallenge> challengeRepository;
+    private BotView view;
     
-        return null;
+    @Inject
+    CaptchaAuthenticatorController(BotView view) {
+        this.view = view;
     }
 
+    // @Nullable
+    // AuthenticationChallenge getChallenge(String discordMemberId) {
+    //     for (CaptchaAuthenticationChallenge challenge : challengeRepository.getAll()) {
+    //         if (discordMemberId.equals(challenge.getDiscordMemberId())) {
+    //             return challenge;
+    //         }
+    //     }
+    
+    //     return null;
+    // }
 
-
-    void privideAuthentication (@Nonnull ButtonInteractionEvent event) {
+    // generate captcha, save it in the model, and present the captcha to user
+    void generateCaptcha (@Nonnull ButtonInteractionEvent event) {
         Captcha captcha = new Captcha.Builder(200, 50).addText().build();
-        
-
-        throw new UnsupportedOperationException("Unimplemented method 'begin'");
+        AuthenticationChallenge model = new AuthenticationChallenge(event.getDiscordMemberId(), captcha.getAnswer());
+        FileUpload captchaFile = view.generateCaptchaView(captcha);
+        event.replyFiles(captchaFile).queue();
     }
 
     @Override

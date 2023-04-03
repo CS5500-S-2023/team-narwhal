@@ -17,8 +17,6 @@ import net.dv8tion.jda.api.interactions.modals.Modal;
 @Singleton
 @Slf4j
 public class VerifyCommand implements SlashCommandHandler {
-    // this command is supposed to allow the owner/moderator to re-verify a user by typing
-    // their user name
 
     @Inject
     public VerifyCommand() {
@@ -45,29 +43,7 @@ public class VerifyCommand implements SlashCommandHandler {
     @Override
     public void onSlashCommandInteraction(@Nonnull SlashCommandInteractionEvent event) {
         log.info("event: /verify");
-        TextInput subject =
-                TextInput.create("subject", "Subject", TextInputStyle.SHORT)
-                        .setPlaceholder("Subject of this ticket")
-                        .setMinLength(10)
-                        .setMaxLength(100) // or setRequiredRange(10, 100)
-                        .build();
 
-        TextInput body =
-                TextInput.create("body", "Body", TextInputStyle.PARAGRAPH)
-                        .setPlaceholder("Your concerns go here")
-                        .setMinLength(30)
-                        .setMaxLength(1000)
-                        .build();
-
-        Modal modal =
-                Modal.create("modmail", "Modmail")
-                        .addActionRows(ActionRow.of(subject), ActionRow.of(body))
-                        .build();
-
-        event.replyModal(modal).queue();
     }
 
-    public void onGuildMemberJoin(@Nonnull GuildMemberJoinEvent event) {
-        log.info("event: member join");
-    }
 }

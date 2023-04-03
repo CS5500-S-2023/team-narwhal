@@ -8,10 +8,10 @@ import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 
 @Singleton
 @Slf4j
-public class TextAuthentication extends Authentication {
+public class EmailAuthenticationHandler extends AuthenticationHandler {
     @Inject
-    public TextAuthentication() {
-        super("text", "SMS / Text");
+    public EmailAuthenticationHandler() {
+        super("email", "Email");
     }
 
     @Override

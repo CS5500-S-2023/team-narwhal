@@ -6,43 +6,29 @@ import dagger.multibindings.IntoSet;
 
 @Module
 public class AuthenticationModule {
-    @Provides
-    @IntoSet
-    public CaptchaAuthentication provideCaptchaAuthentication(
-            CaptchaAuthentication captchaAuthentication) {
-        return captchaAuthentication;
-    }
-
-    @Provides
-    @IntoSet
+    @Binds
+    @IntoMap
+    @ViewHolderKey(AuthenticationType.CAPTCHA)
     public AuthenticationHandler provideCaptchaAuthenticationHandler(
-            CaptchaAuthentication captchaAuthentication) {
-        return captchaAuthentication;
+            CaptchaAuthenticationHandler captchaAuthenticationHandler) {
+        return captchaAuthenticationHandler;
     }
 
-    @Provides
-    @IntoSet
-    public EmailAuthentication provideEmailAuthentication(EmailAuthentication emailAuthentication) {
-        return emailAuthentication;
-    }
 
-    @Provides
-    @IntoSet
+    @Binds
+    @IntoMap
+    @ViewHolderKey(AuthenticationType.EMAIL)
     public AuthenticationHandler provideEmailAuthenticationHandler(
-            EmailAuthentication emailAuthentication) {
-        return emailAuthentication;
+            EmailAuthenticationHandler emailAuthenticationHandler) {
+        return emailAuthenticationHandler;
     }
 
-    @Provides
-    @IntoSet
-    public TextAuthentication provideTextAuthentication(TextAuthentication textAuthentication) {
-        return textAuthentication;
-    }
 
-    @Provides
-    @IntoSet
+    @Binds
+    @IntoMap
+    @ViewHolderKey(AuthenticationType.TEXT)
     public AuthenticationHandler provideTextAuthenticationHandler(
-            TextAuthentication textAuthentication) {
-        return textAuthentication;
+            TextAuthenticationHandler textAuthenticationHandler) {
+        return textAuthenticationHandler;
     }
 }

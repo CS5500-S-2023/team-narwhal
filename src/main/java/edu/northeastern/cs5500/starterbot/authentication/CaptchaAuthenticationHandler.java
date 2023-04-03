@@ -8,14 +8,17 @@ import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 
 @Singleton
 @Slf4j
-public class EmailAuthentication extends Authentication {
+public class CaptchaAuthenticationHandler extends AuthenticationHandler {
+
     @Inject
-    public EmailAuthentication() {
-        super("email", "Email");
+    public CaptchaAuthenticationHandler() {
+        super("captcha", "CAPTCHA");
     }
 
     @Override
     public void onButtonInteraction(@Nonnull ButtonInteractionEvent event) {
+        
         event.reply(event.getButton().getLabel()).queue();
+
     }
 }

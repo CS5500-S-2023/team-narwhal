@@ -8,10 +8,10 @@ import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 
 @Singleton
 @Slf4j
-public class CaptchaAuthentication extends Authentication {
+public class TextAuthenticationHandler extends AuthenticationHandler {
     @Inject
-    public CaptchaAuthentication() {
-        super("captcha", "CAPTCHA");
+    public TextAuthenticationHandler() {
+        super("text", "SMS / Text");
     }
 
     @Override

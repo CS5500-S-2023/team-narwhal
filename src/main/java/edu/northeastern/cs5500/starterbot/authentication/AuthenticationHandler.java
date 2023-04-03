@@ -6,21 +6,45 @@ import javax.annotation.Nonnull;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 
-public interface AuthenticationHandler extends ButtonHandler {
-    // @Nonnull
-    // public String getId();
 
-    // @Nonnull
-    // public String getLabel();
+public abstract class AuthenticationHandler extends ButtonHandler {
+    @Nonnull public String id;
+    @Nonnull public String name = "authenticate"; // handlerName
+    @Nonnull public String label;
 
-    // public void authenticate();
+    protected Authentication(@Nonnull String id, @Nonnull String label) {
+        this.id = id;
+        this.label = label;
+    }
+    
+    @Nonnull
+    public String getId() {
+        return name;
+    }
 
-    /**
-     * If true, this event was handled by a handler that was expecting it.
-     * If false, this event was not handled and the next handler should be called.
-     * 
-     * @param event a private message event from a user
-     * @return true if handled; false if not
-     */
-    public boolean messageReceived(MessageReceivedEvent event);
+    @Nonnull
+    public String getName() {
+        return name;
+    }
+
+    @Nonnull
+    public String getLabel() {
+        return label;
+    }
+
+    public void authenticate() {
+        log.info(String.format("Authenticating using %s", label));
+    }
+    
+    
+    public void onButtonInteraction(@Nonnull ButtonInteractionEvent event) {
+        
+        event.reply(event.getButton().getLabel()).queue();
+    }
+
+    @Override
+    public boolean messageReceived(MessageReceivedEvent event) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'messageReceived'");
+    }
 }

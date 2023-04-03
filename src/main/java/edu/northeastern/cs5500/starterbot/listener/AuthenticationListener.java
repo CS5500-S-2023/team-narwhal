@@ -33,6 +33,17 @@ public class AuthenticationListener extends ListenerAdapter {
         log.info("On guild member join");
         userEnterController.handlerUserEvent(event);
     }
+    
+    // when the user inputs an answer
+    
+    @Override
+    public void onSlashCommand(@Nonnull SlashCommandEvent event){
+        if (event.getName().equals("verify")) {
+            // listen to user input with /verify
+            String userInput = event.getCommandData
+          }
+
+    }
 
     @Override
     public void onMessageReceived(@Nonnull MessageReceivedEvent event)

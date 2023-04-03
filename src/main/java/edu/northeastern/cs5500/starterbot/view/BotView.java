@@ -14,11 +14,11 @@ import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.dv8tion.jda.api.utils.messages.MessageCreateBuilder;
 
 @Singleton
-public class View {
-    private Set<AuthenticationHandler> authenticationMethods;
+public class BotView {
+    private Map<AuthenticarionType, AuthenticationHandler> authenticationMethods;
 
     @Inject
-    UserEnterView(Set<AuthenticationHandler> authenticationMethods){
+    UserEnterView(Map<AuthenticarionType, AuthenticationHandler> authenticationMethods){
         this.authenticationMethods = authenticationMethods;
     }
 
@@ -38,7 +38,7 @@ public class View {
     MessageCreateBuilder messageCreateBuilder = new MessageCreateBuilder();
 
     Set<Button> buttons = new HashSet<>();
-    for (AuthenticationHandler auth : authenticationMethods) {
+    for (AuthenticationHandler auth : authenticationMethods.values()) {
         buttons.add(createButton(auth));
     }
     return messageCreateBuilder.addActionRow(buttons).setContent(welcomeMessage);
