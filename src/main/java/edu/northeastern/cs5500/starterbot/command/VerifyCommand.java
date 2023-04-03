@@ -16,7 +16,10 @@ import net.dv8tion.jda.api.interactions.modals.Modal;
 
 @Singleton
 @Slf4j
+// part of the service, controlled by controller
 public class VerifyCommand implements SlashCommandHandler {
+    
+    @Inject GenericRepository<AuthenticationChallenge> challengeRepository;
 
     @Inject
     public VerifyCommand() {
@@ -43,6 +46,24 @@ public class VerifyCommand implements SlashCommandHandler {
     @Override
     public void onSlashCommandInteraction(@Nonnull SlashCommandInteractionEvent event) {
         log.info("event: /verify");
+        String userInput = Objects.requireNonNull(event.getOption("content")).getAsString();
+
+        String discordUserId = event.getUser().getId();
+
+        String captchaAnswer = userPreferenceController.getPreferredNameForUser(discordUserId);
+
+        userPreferenceController.setPreferredNameForUser(discordUserId, preferredName);
+
+        if (oldPreferredName == null) {
+            event.reply("Your preferred name has been set to " + preferredName).queue();
+        } else {
+            event.reply(
+                            "Your preferred name has been changed from "
+                                    + oldPreferredName
+                                    + " to "
+                                    + preferredName)
+                    .queue();
+        }
 
     }
 

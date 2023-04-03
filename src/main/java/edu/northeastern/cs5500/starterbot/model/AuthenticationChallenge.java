@@ -28,4 +28,14 @@ public class AuthenticationChallenge implements Model {
         state = AuthenticationState.WAITING_FOR_RESPONSE;
     }
 
+    @Override
+    public void setId(ObjectId id){
+        this.id = id;
+    }
+
+    @Override
+    public ObjectId getId(){
+        return this.id;
+    }
+
 }

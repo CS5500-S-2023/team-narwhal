@@ -1,6 +1,7 @@
 package edu.northeastern.cs5500.starterbot.listener;
 
 import edu.northeastern.cs5500.starterbot.authentication.AuthenticationHandler;
+import edu.northeastern.cs5500.starterbot.command.VerifyCommand;
 import edu.northeastern.cs5500.starterbot.controller.UserEnterController;
 
 import java.util.*;
@@ -19,6 +20,7 @@ import net.dv8tion.jda.api.utils.messages.MessageCreateBuilder;
 public class AuthenticationListener extends ListenerAdapter {
     private UserEnterController userEnterController;
 
+    @Inject VerifyCommand verifyCommand;
     @Inject Set<AuthenticationHandler> authenticationMethods;
 
     @Inject
