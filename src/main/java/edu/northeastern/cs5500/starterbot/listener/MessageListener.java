@@ -1,7 +1,6 @@
 package edu.northeastern.cs5500.starterbot.listener;
 
-import edu.northeastern.cs5500.starterbot.command.SlashCommandHandler;
-import edu.northeastern.cs5500.starterbot.command.StringSelectHandler;
+import edu.northeastern.cs5500.starterbot.config.command.SlashCommandHandler;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
@@ -10,7 +9,6 @@ import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
-import net.dv8tion.jda.api.events.interaction.component.StringSelectInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 
@@ -18,22 +16,23 @@ import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 public class MessageListener extends ListenerAdapter {
 
     @Inject Set<SlashCommandHandler> commands;
-    @Inject Set<StringSelectHandler> stringSelects;
+    // @Inject Set<StringSelectHandler> stringSelects;
 
     @Inject
     public MessageListener() {
         super();
     }
 
-    @Override
-    public void onSlashCommandInteraction(@Nonnull SlashCommandInteractionEvent event) {
-        for (SlashCommandHandler command : commands) {
-            if (command.getName().equals(event.getName())) {
-                command.onSlashCommandInteraction(event);
-                return;
-            }
-        }
-    }
+
+//    @Override
+//    public void onSlashCommandInteraction(@Nonnull SlashCommandInteractionEvent event) {
+//        for (SlashCommandHandler command : commands) {
+//            if (command.getName().equals(event.getName())) {
+//                command.onSlashCommandInteraction(event);
+//                return;
+//            }
+//        }
+//    }
 
     public @Nonnull Collection<CommandData> allCommandData() {
         Collection<CommandData> commandData =
@@ -46,6 +45,7 @@ public class MessageListener extends ListenerAdapter {
         return commandData;
     }
 
+    /*
     @Override
     public void onStringSelectInteraction(@Nonnull StringSelectInteractionEvent event) {
         log.info("onStringSelectInteraction: {}", event.getComponent().getId());
@@ -60,4 +60,5 @@ public class MessageListener extends ListenerAdapter {
 
         log.error("Unknown button handler: {}", handlerName);
     }
+    */
 }

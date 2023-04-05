@@ -1,4 +1,4 @@
-package edu.northeastern.cs5500.starterbot.command;
+package edu.northeastern.cs5500.starterbot.config.command;
 
 import javax.annotation.Nonnull;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
@@ -10,6 +10,4 @@ public interface SlashCommandHandler {
 
     @Nonnull
     public CommandData getCommandData();
-
-    public void onSlashCommandInteraction(@Nonnull SlashCommandInteractionEvent event);
 }

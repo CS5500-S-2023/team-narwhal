@@ -15,7 +15,7 @@ public enum AuthenticationState {
     FAILED_TO_SEND;
 
     public boolean isTerminal() {
-        switch(this) {
+        switch (this) {
             case VERIFIED:
             case TOO_MANY_ATTEMPTS:
             case FAILED_TO_SEND:

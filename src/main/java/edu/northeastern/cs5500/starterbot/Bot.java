@@ -1,12 +1,11 @@
 package edu.northeastern.cs5500.starterbot;
 
 import dagger.Component;
-import edu.northeastern.cs5500.starterbot.authentication.AuthenticationModule;
-import edu.northeastern.cs5500.starterbot.command.CommandModule;
-import edu.northeastern.cs5500.starterbot.listener.ButtonListener;
+import edu.northeastern.cs5500.starterbot.config.authentication.AuthenticationModule;
 import edu.northeastern.cs5500.starterbot.listener.AuthenticationListener;
 import edu.northeastern.cs5500.starterbot.listener.MessageListener;
 import edu.northeastern.cs5500.starterbot.repository.RepositoryModule;
+import edu.northeastern.cs5500.starterbot.config.command.CommandModule;
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -27,8 +26,7 @@ public class Bot {
     Bot() {}
 
     @Inject MessageListener messageListener;
-    @Inject AuthenticationListener eventListener;
-    @Inject ButtonListener buttonListener;
+    @Inject AuthenticationListener authenticationListener;
 
     static String getBotToken() {
         return new ProcessBuilder().environment().get("BOT_TOKEN");
@@ -52,7 +50,7 @@ public class Bot {
                         .setDisabledIntents(
                                 GatewayIntent.GUILD_VOICE_STATES,
                                 GatewayIntent.GUILD_EMOJIS_AND_STICKERS)
-                        .addEventListeners(messageListener, eventListener, buttonListener)
+                        .addEventListeners(messageListener, authenticationListener)
                         .build();
 
         CommandListUpdateAction commands = jda.updateCommands();
