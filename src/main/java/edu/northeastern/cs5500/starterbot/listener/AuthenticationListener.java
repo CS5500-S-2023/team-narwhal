@@ -5,8 +5,10 @@ import edu.northeastern.cs5500.starterbot.config.authentication.AuthenticationTy
 import edu.northeastern.cs5500.starterbot.controller.ButtonClickController;
 import edu.northeastern.cs5500.starterbot.controller.SlashCommandController;
 import edu.northeastern.cs5500.starterbot.controller.UserEnterController;
+import edu.northeastern.cs5500.starterbot.model.UserGuild;
 import edu.northeastern.cs5500.starterbot.service.AuthenticationService;
 import edu.northeastern.cs5500.starterbot.config.command.VerifySlashCommand;
+import edu.northeastern.cs5500.starterbot.service.UserEnterService;
 import java.util.Map;
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
@@ -22,11 +24,15 @@ public class AuthenticationListener extends ListenerAdapter {
     private ButtonClickController buttonClickController;
     private SlashCommandController slashCommandController;
 
+    /*
     @Inject
     VerifySlashCommand verifySlashCommand;
     @Inject Map<AuthenticationType, AuthenticationConfig> authenticationMethods;
     @Inject
     AuthenticationService authenticationService;
+    @Inject
+    UserEnterService userEnterService;
+     */
 
     @Inject
     public AuthenticationListener(

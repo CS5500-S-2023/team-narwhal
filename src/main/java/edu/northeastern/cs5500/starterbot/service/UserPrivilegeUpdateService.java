@@ -15,5 +15,6 @@ public class UserPrivilegeUpdateService {
 
   public void updateNewUserPrivilege(@Nonnull SlashCommandInteractionEvent event){
     //event.getGuildChannel();
+
   }
 }

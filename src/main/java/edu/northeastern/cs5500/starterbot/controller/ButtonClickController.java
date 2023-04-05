@@ -39,6 +39,7 @@ public class ButtonClickController {
                     //long startTime = System.currentTimeMillis();
                     event.reply("Generating captcha...").queue();
                     Captcha captcha = authenticationService.generateCaptcha(event);
+                    // TODO: add new captcha challenge to the db
                     FileUpload captchaFile = view.generateCaptchaView(captcha);
                     //System.out.println(System.currentTimeMillis() - startTime);
                     User member = event.getUser();

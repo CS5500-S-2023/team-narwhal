@@ -42,6 +42,7 @@ public class AuthenticationService {
             return "You are verified!";
 
             // change user privilege
+
         } else {
             // increase attempt count
             // send a msg to retry

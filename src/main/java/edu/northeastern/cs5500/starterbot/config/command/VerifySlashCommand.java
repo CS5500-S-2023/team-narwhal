@@ -1,6 +1,7 @@
 package edu.northeastern.cs5500.starterbot.config.command;
 
 import edu.northeastern.cs5500.starterbot.model.AuthenticationChallenge;
+import edu.northeastern.cs5500.starterbot.model.UserGuild;
 import edu.northeastern.cs5500.starterbot.repository.GenericRepository;
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
