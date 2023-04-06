@@ -43,7 +43,6 @@ public class UserPreferenceController {
                 return currentUserPreference;
             }
         }
-
         UserPreference userPreference = new UserPreference();
         userPreference.setDiscordUserId(discordMemberId);
         userPreferenceRepository.add(userPreference);
