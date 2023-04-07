@@ -35,6 +35,7 @@ public class SlashCommandController {
 
   /**
    * Handles all types of slash command interaction events supported by the program.
+   *
    * @param event a SlashCommandInteractionEvent object
    */
   public void handleSlashCommandInteraction(@Nonnull SlashCommandInteractionEvent event) {
@@ -58,33 +59,40 @@ public class SlashCommandController {
 
   /**
    * Helper to handle the /verify command interaction event.
+   *
    * @param event a SlashCommandInteractionEvent object
    */
   private void handleVerifySlashCommand(@Nonnull SlashCommandInteractionEvent event) {
+    log.info("User " + event.getUser().getId() + " is verifying");
     // 1. verify user answer
     // get the user input from the event
     String userInput = Objects.requireNonNull(event.getOption("answer")).getAsString();
     // verify user and return a message that indicates their verified status
-    String verifiedStatusMsg = authenticationService.authenticateUser(event.getUser().getId(),
+    Boolean verifiedStatus = authenticationService.authenticateUser(event.getUser().getId(),
         userInput);
-    // show the message to the user
-    event.reply(verifiedStatusMsg).queue();
 
-    // 2. update user permission
-    // get the guildId using the event userId
-    String guildId = userPermissionUpdateService.getGuildIdForEventUser(
-        event.getUser().getId());
-    List<TextChannel> textChannelList = Objects.requireNonNull(
-            event.getJDA().getGuildById(guildId))
-        .getTextChannels();
-    // update user permission in text channels
-    for (TextChannel channel : textChannelList) {
-      // user tag is the username, use this to get the member in the guild/server
-      String eventUserTag = event.getUser().getAsTag();
-      Member member = Objects.requireNonNull(event.getJDA().getGuildById(guildId))
-          .getMemberByTag(eventUserTag);
-      userPermissionUpdateService.grantUserPermissionInTextChannel(channel, member,
-          Permission.VIEW_CHANNEL).queue();
+    if (verifiedStatus) {
+      event.reply("You are verified!").queue();
+      // 2. update user permission
+      // get the guildId using the event userId
+      String guildId = userPermissionUpdateService.getGuildIdForEventUser(
+          event.getUser().getId());
+      List<TextChannel> textChannelList = Objects.requireNonNull(
+              event.getJDA().getGuildById(guildId))
+          .getTextChannels();
+      // update user permission in text channels
+      for (TextChannel channel : textChannelList) {
+        // user tag is the username, use this to get the member in the guild/server
+        String eventUserTag = event.getUser().getAsTag();
+        Member member = Objects.requireNonNull(event.getJDA().getGuildById(guildId))
+            .getMemberByTag(eventUserTag);
+        userPermissionUpdateService.grantUserPermissionInTextChannel(channel, member,
+            Permission.VIEW_CHANNEL).queue();
+      }
+    } else {
+      event.reply("You've entered the wrong answer, please try again.").queue();
+
     }
+
   }
 }

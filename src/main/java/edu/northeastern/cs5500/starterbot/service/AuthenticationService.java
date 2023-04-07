@@ -39,18 +39,18 @@ public class AuthenticationService {
     return captcha;
   }
 
-    /**
-     * Authenticate a user and output a message based on the authentication status.
-     * @param eventUserId the userId as a String
-     * @param userInput the user input as a String
-     * @return a String message based on the authentication status
-     */
-  public String authenticateUser(String eventUserId, String userInput) {
-      // TODO: based on the message output from this, the controller needs to do things
-      // could also change the return type to the verification status, easier for controller
-      // to work with
+  /**
+   * Authenticate a user and output a message based on the authentication status.
+   *
+   * @param eventUserId the userId as a String
+   * @param userInput   the user input as a String
+   * @return a Boolean indicating the authentication status
+   */
+  public Boolean authenticateUser(String eventUserId, String userInput) {
+    // TODO: based on the message output from this, the controller needs to do things
+    // could also change the return type to the verification status, easier for controller
+    // to work with
 
-    log.info("Authenticating user " + eventUserId);
     // TODO: take care of too many attempts
     AuthenticationChallenge captchaModel = getAuthenticationModelForMemberId(eventUserId);
     if (captchaModel.getAnswer().equals(userInput)) {
@@ -58,23 +58,23 @@ public class AuthenticationService {
       captchaModel.setState(AuthenticationState.VERIFIED);
       captchaModel.setNumAttempts(captchaModel.getNumAttempts() + 1);
       // TODO: take care of timeout
-      return "You are verified!";
+      return true;
 
     } else {
-        captchaModel.setState(AuthenticationState.INCORRECT_RESPONSE);
+      captchaModel.setState(AuthenticationState.INCORRECT_RESPONSE);
       // increase attempt count
-        captchaModel.setNumAttempts(captchaModel.getNumAttempts() + 1);
+      captchaModel.setNumAttempts(captchaModel.getNumAttempts() + 1);
       // send a msg to retry
-      return "You've entered the wrong answer, please try again.";
-      // represent captcha
+      return false;
     }
   }
 
-    /**
-     * Get the authentication challenge associated with this user
-     * @param eventUserID the userId
-     * @return an AuthenticationChallenge object
-     */
+  /**
+   * Get the authentication challenge associated with this user
+   *
+   * @param eventUserID the userId
+   * @return an AuthenticationChallenge object
+   */
   @Nonnull
   protected AuthenticationChallenge getAuthenticationModelForMemberId(String eventUserID) {
     for (AuthenticationChallenge currentUserAuth : challengeRepository.getAll()) {

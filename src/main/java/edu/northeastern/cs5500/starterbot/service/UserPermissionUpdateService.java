@@ -4,6 +4,7 @@ import edu.northeastern.cs5500.starterbot.model.EventUserGuild;
 import edu.northeastern.cs5500.starterbot.repository.GenericRepository;
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
+import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
@@ -12,6 +13,7 @@ import net.dv8tion.jda.api.requests.restaction.PermissionOverrideAction;
 /**
  * Update user permissions.
  */
+@Slf4j
 public class UserPermissionUpdateService {
 
   @Inject
@@ -45,8 +47,9 @@ public class UserPermissionUpdateService {
    */
   @Nonnull
   public String getGuildIdForEventUser(String eventUserID) {
+    log.info("Updating permission for user " + eventUserID);
     for (EventUserGuild currentEventUserGuild : EventUserGuildRepository.getAll()) {
-      if (eventUserID.equals(currentEventUserGuild.getGuildId())) {
+      if (eventUserID.equals(currentEventUserGuild.getUserEventId())) {
         return currentEventUserGuild.getGuildId();
       }
     }
