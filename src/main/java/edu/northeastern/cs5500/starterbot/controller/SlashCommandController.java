@@ -63,7 +63,7 @@ public class SlashCommandController {
   private void handleVerifySlashCommand(@Nonnull SlashCommandInteractionEvent event) {
     // 1. verify user answer
     // get the user input from the event
-    String userInput = Objects.requireNonNull(event.getOption("content")).getAsString();
+    String userInput = Objects.requireNonNull(event.getOption("answer")).getAsString();
     // verify user and return a message that indicates their verified status
     String verifiedStatusMsg = authenticationService.authenticateUser(event.getUser().getId(),
         userInput);
