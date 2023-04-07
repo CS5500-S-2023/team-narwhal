@@ -3,10 +3,13 @@ package edu.northeastern.cs5500.starterbot.config.command;
 import javax.annotation.Nonnull;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 
-public interface SlashCommandHandler {
+/**
+ * The slash commands that the program supports.
+ */
+public interface SlashCommandConfig {
     @Nonnull
-    public String getName();
+    String getName();
 
     @Nonnull
-    public CommandData getCommandData();
+    CommandData getCommandData();
 }

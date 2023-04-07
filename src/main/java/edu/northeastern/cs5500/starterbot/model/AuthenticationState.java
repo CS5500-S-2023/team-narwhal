@@ -1,5 +1,8 @@
 package edu.northeastern.cs5500.starterbot.model;
 
+/**
+ * The states of a {@link AuthenticationChallenge}.
+ */
 public enum AuthenticationState {
     // UNKNOWN in case we get a state from the DB that doesn't make sense
     UNKNOWN,
@@ -14,14 +17,14 @@ public enum AuthenticationState {
     // [TERMINAL] The challenge could not be sent
     FAILED_TO_SEND;
 
+    /**
+     * If the program terminates based on an AuthenticationState.
+     * @return true if it terminates the program
+     */
     public boolean isTerminal() {
-        switch (this) {
-            case VERIFIED:
-            case TOO_MANY_ATTEMPTS:
-            case FAILED_TO_SEND:
-                return true;
-            default:
-                return false;
-        }
+        return switch (this) {
+            case VERIFIED, TOO_MANY_ATTEMPTS, FAILED_TO_SEND -> true;
+            default -> false;
+        };
     }
 }

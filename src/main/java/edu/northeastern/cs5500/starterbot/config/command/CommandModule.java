@@ -4,12 +4,14 @@ import dagger.Module;
 import dagger.Provides;
 import dagger.multibindings.IntoSet;
 
-// TODO: is this class used? vs. get all commmands
+/**
+ * Provides all the commands supported by the program, stored in a set.
+ */
 @Module
 public class CommandModule {
     @Provides
     @IntoSet
-    public SlashCommandHandler provideVerifyCommand(VerifySlashCommand verifySlashCommand) {
+    public SlashCommandConfig provideVerifyCommand(VerifySlashCommand verifySlashCommand) {
         return verifySlashCommand;
     }
 

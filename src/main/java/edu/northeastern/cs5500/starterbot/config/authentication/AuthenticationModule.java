@@ -4,12 +4,15 @@ import dagger.Module;
 import dagger.Provides;
 import dagger.multibindings.IntoMap;
 
+/**
+ * Provides the authentication types that the program supports, stored in a map.
+ */
 @Module
 public class AuthenticationModule {
     // https://dagger.dev/dev-guide/multibindings.html
     @Provides
     @IntoMap
-    @AuthenticationMapKey(AuthenticationType.CAPTCHA)
+    @AuthenticationTypeMapKey(AuthenticationType.CAPTCHA)
     public AuthenticationConfig provideCaptchaAuthenticationConfig(
             CaptchaAuthenticationConfig captchaAuthenticationConfig) {
         return captchaAuthenticationConfig;
@@ -17,7 +20,7 @@ public class AuthenticationModule {
 
     @Provides
     @IntoMap
-    @AuthenticationMapKey(AuthenticationType.EMAIL)
+    @AuthenticationTypeMapKey(AuthenticationType.EMAIL)
     public AuthenticationConfig provideEmailAuthenticationConfig(
             EmailAuthenticationConfig emailAuthenticationConfig) {
         return emailAuthenticationConfig;
@@ -25,7 +28,7 @@ public class AuthenticationModule {
 
     @Provides
     @IntoMap
-    @AuthenticationMapKey(AuthenticationType.TEXT)
+    @AuthenticationTypeMapKey(AuthenticationType.TEXT)
     public AuthenticationConfig provideTextAuthenticationConfig(
             TextAuthenticationConfig textAuthenticationConfig) {
         return textAuthenticationConfig;

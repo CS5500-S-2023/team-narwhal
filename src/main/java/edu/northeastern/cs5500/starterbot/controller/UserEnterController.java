@@ -42,7 +42,8 @@ public class UserEnterController {
         userEnterService.mapEventUserGuildId(userId, guildId);
 
         // use the view to  build the welcome msg
-        MessageCreateBuilder welcomeMsg = botView.generateWelcomeMsg(event);
+        String guildName = event.getGuild().getName();
+        MessageCreateBuilder welcomeMsg = botView.generateWelcomeMsg(guildName);
 
         // Open a private channel with the user and send the welcome msg
         // TODO: add try catch

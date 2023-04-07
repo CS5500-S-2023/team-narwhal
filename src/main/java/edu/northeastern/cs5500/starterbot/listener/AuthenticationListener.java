@@ -23,7 +23,6 @@ public class AuthenticationListener extends ListenerAdapter {
     private ButtonClickController buttonClickController;
     private SlashCommandController slashCommandController;
 
-    // constructor with supported event interactions
     @Inject
     public AuthenticationListener(
             UserEnterController userEnterController, ButtonClickController buttonClickController,
@@ -43,16 +42,13 @@ public class AuthenticationListener extends ListenerAdapter {
     // when the user clicks on buttons
     @Override
     public void onButtonInteraction(@Nonnull ButtonInteractionEvent event) {
-        buttonClickController.onButtonInteraction(event);
+        buttonClickController.handleButtonInteraction(event);
     }
 
     // when the user uses slash commands
     @Override
     public void onSlashCommandInteraction(@Nonnull SlashCommandInteractionEvent event) {
-        if (event.getName().equals("verify")) {
-            slashCommandController.onSlashCommandInteraction(event);
-        }
-        // other types of slash command
+        slashCommandController.handleSlashCommandInteraction(event);
     }
 
     /*

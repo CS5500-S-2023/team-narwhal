@@ -12,8 +12,7 @@ import net.dv8tion.jda.api.interactions.commands.build.Commands;
 
 @Singleton
 @Slf4j
-// part of the service, controlled by controller
-public class VerifySlashCommand implements SlashCommandHandler {
+public class VerifySlashCommand implements SlashCommandConfig {
 
     @Inject GenericRepository<AuthenticationChallenge> challengeRepository;
 
@@ -31,7 +30,7 @@ public class VerifySlashCommand implements SlashCommandHandler {
     @Override
     @Nonnull
     public CommandData getCommandData() {
-        return Commands.slash(getName(), "xxx")
-                .addOption(OptionType.STRING, "content", "xxx", true);
+        return Commands.slash(getName(), "use this to authenticate")
+                .addOption(OptionType.STRING, "answer", "", true);
     }
 }
