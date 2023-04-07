@@ -36,6 +36,7 @@ public class ButtonClickController {
             // could have another switch statement to handle other handler types
             switch (handlerType) {
                 case "captcha":
+                    log.info(event.getUser().getId());
                     //long startTime = System.currentTimeMillis();
                     event.reply("Generating captcha...").queue();
                     Captcha captcha = authenticationService.generateCaptcha(event);

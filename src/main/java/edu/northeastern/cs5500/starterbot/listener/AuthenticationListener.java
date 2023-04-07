@@ -1,15 +1,8 @@
 package edu.northeastern.cs5500.starterbot.listener;
 
-import edu.northeastern.cs5500.starterbot.config.authentication.AuthenticationConfig;
-import edu.northeastern.cs5500.starterbot.config.authentication.AuthenticationType;
 import edu.northeastern.cs5500.starterbot.controller.ButtonClickController;
 import edu.northeastern.cs5500.starterbot.controller.SlashCommandController;
 import edu.northeastern.cs5500.starterbot.controller.UserEnterController;
-import edu.northeastern.cs5500.starterbot.model.UserGuild;
-import edu.northeastern.cs5500.starterbot.service.AuthenticationService;
-import edu.northeastern.cs5500.starterbot.config.command.VerifySlashCommand;
-import edu.northeastern.cs5500.starterbot.service.UserEnterService;
-import java.util.Map;
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
@@ -18,22 +11,19 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
+/**
+ * A generic EventListener that detects user interaction related to authentication services provided
+ * by the bot. For example, listens to when a user has joined, button clicks, and slash commands,
+ * etc.
+ */
 @Slf4j
 public class AuthenticationListener extends ListenerAdapter {
+    // TODO: can this code be replaced with lombok?
     private UserEnterController userEnterController;
     private ButtonClickController buttonClickController;
     private SlashCommandController slashCommandController;
 
-    /*
-    @Inject
-    VerifySlashCommand verifySlashCommand;
-    @Inject Map<AuthenticationType, AuthenticationConfig> authenticationMethods;
-    @Inject
-    AuthenticationService authenticationService;
-    @Inject
-    UserEnterService userEnterService;
-     */
-
+    // constructor with supported event interactions
     @Inject
     public AuthenticationListener(
             UserEnterController userEnterController, ButtonClickController buttonClickController,
@@ -47,21 +37,22 @@ public class AuthenticationListener extends ListenerAdapter {
     // when a new user joins the server
     @Override
     public void onGuildMemberJoin(@Nonnull GuildMemberJoinEvent event) {
-        log.info("On guild member join");
-        userEnterController.handleUserEvent(event);
+        userEnterController.handleUserJoinEvent(event);
     }
 
-    // when the user inputs an answer
+    // when the user clicks on buttons
     @Override
     public void onButtonInteraction(@Nonnull ButtonInteractionEvent event) {
         buttonClickController.onButtonInteraction(event);
     }
 
+    // when the user uses slash commands
     @Override
     public void onSlashCommandInteraction(@Nonnull SlashCommandInteractionEvent event) {
         if (event.getName().equals("verify")) {
             slashCommandController.onSlashCommandInteraction(event);
         }
+        // other types of slash command
     }
 
     /*

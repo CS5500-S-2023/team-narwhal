@@ -3,7 +3,7 @@ package edu.northeastern.cs5500.starterbot.repository;
 import dagger.Module;
 import dagger.Provides;
 import edu.northeastern.cs5500.starterbot.model.AuthenticationChallenge;
-import edu.northeastern.cs5500.starterbot.model.UserGuild;
+import edu.northeastern.cs5500.starterbot.model.EventUserGuild;
 
 @Module
 public class RepositoryModule {
@@ -16,8 +16,8 @@ public class RepositoryModule {
     }
 
     @Provides
-    public GenericRepository<UserGuild> provideUserGuildMapRepository(
-        InMemoryRepository<UserGuild> repository) {
+    public GenericRepository<EventUserGuild> provideUserGuildMapRepository(
+        InMemoryRepository<EventUserGuild> repository) {
         return repository;
     }
 

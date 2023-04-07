@@ -4,6 +4,7 @@ import dagger.Module;
 import dagger.Provides;
 import dagger.multibindings.IntoSet;
 
+// TODO: is this class used? vs. get all commmands
 @Module
 public class CommandModule {
     @Provides

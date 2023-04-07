@@ -1,25 +1,25 @@
 package edu.northeastern.cs5500.starterbot.controller;
 
-import edu.northeastern.cs5500.starterbot.model.GuildStore;
-import edu.northeastern.cs5500.starterbot.model.UserGuild;
-import edu.northeastern.cs5500.starterbot.repository.GenericRepository;
 import edu.northeastern.cs5500.starterbot.service.UserEnterService;
 import edu.northeastern.cs5500.starterbot.view.BotView;
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
-import net.dv8tion.jda.api.entities.Member;
+import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.channel.concrete.PrivateChannel;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.utils.messages.MessageCreateBuilder;
 
+/**
+ * Delegate the {@link BotView} and use the {@link UserEnterService} to render a welcome message
+ * when the user first joins the server.
+ */
+@Slf4j
 public class UserEnterController {
 
     private BotView botView;
 
     private UserEnterService userEnterService;
-    @Inject
-    GuildStore guildStore;
 
     @Inject
     UserEnterController(BotView botView, UserEnterService userEnterService) {
@@ -27,29 +27,26 @@ public class UserEnterController {
         this.userEnterService = userEnterService;
     }
 
-    public void handleUserEvent(@Nonnull GuildMemberJoinEvent event) {
+    /**
+     * Handle user joining the server event.
+     * @param event user joining the server event as a GuildMemberJoinEvent
+     */
+    public void handleUserJoinEvent(@Nonnull GuildMemberJoinEvent event) {
+        log.info("On guild member join");
         // Getting the user to open a private channel with
         User user = event.getUser();
+
+        // add the event user id and the guild id to the repo for later use
         String userId = user.getId();
-        Member member = event.getGuild().getMemberById(userId);
-        //event.getGuild().addMember(new ProcessBuilder().environment().get("BOT_TOKEN"), event.getUser());
-//        System.out.println(event.getUser().getAsTag());
-//        for(Member m: event.getGuild().getMembers()){
-//            System.out.println(m.getUser().getAsTag());
-//        }
-//        String userTag = event.getUser().getAsTag();
+        String guildId = event.getGuild().getId();
+        userEnterService.mapEventUserGuildId(userId, guildId);
 
-        guildStore.setGuild(event.getJDA().getGuilds().get(0));
-
-        // add the user event id with the guild id - not necessary for now
-        // TODO: store the Guild ID too? when the guild is added to multiple servers?
-        //userEnterService.mapUserGuild(event.getUser().getId(), member.getId());
-
+        // use the view to  build the welcome msg
         MessageCreateBuilder welcomeMsg = botView.generateWelcomeMsg(event);
-        // Open private channel with user
+
+        // Open a private channel with the user and send the welcome msg
         // TODO: add try catch
-        PrivateChannel channel = event.getUser().openPrivateChannel().complete();
-        userEnterService.mapUserGuild(channel.getUser().getId(), member.getId());
+        PrivateChannel channel = user.openPrivateChannel().complete();
         channel.sendMessage(welcomeMsg.build()).queue();
     }
 }

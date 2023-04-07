@@ -3,7 +3,6 @@ package edu.northeastern.cs5500.starterbot.service;
 import edu.northeastern.cs5500.starterbot.model.AuthenticationChallenge;
 import edu.northeastern.cs5500.starterbot.model.AuthenticationState;
 import edu.northeastern.cs5500.starterbot.repository.GenericRepository;
-import edu.northeastern.cs5500.starterbot.config.command.VerifySlashCommand;
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;

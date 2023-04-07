@@ -8,10 +8,12 @@ import java.util.stream.Collectors;
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
-import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 
+/**
+ * Default implementation from the Prof. Alexander Lash.
+ */
 @Slf4j
 public class MessageListener extends ListenerAdapter {
 
