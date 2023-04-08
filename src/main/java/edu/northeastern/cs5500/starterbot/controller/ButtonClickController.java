@@ -58,8 +58,9 @@ public class ButtonClickController {
       String authenticationType) {
     switch (authenticationType) {
       case "captcha":
+        boolean isNull = (event.getMember() == null);
+        log.info("The member is null: " + isNull);
         event.reply("Generating captcha...").queue();
-
         String userId = event.getUser().getId();
         // generateCaptcha handles adding the Authentication challenge to db
         Captcha captcha = authenticationService.generateCaptcha(userId);

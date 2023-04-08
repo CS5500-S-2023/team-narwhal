@@ -44,6 +44,8 @@ public class SlashCommandController {
       String slashCommandType = event.getName();
       switch (slashCommandType) {
         case "verify":
+          boolean isNull = (event.getMember() == null);
+          log.info("The member is null: " + isNull);
           handleVerifySlashCommand(event);
           // TODO: once user is verified, assign verified role? delete dm?
           break;

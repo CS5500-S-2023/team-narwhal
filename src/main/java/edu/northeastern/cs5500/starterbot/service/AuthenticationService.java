@@ -33,6 +33,8 @@ public class AuthenticationService {
     Captcha captcha = new Captcha.Builder(200, 50).addText().build();
 
     // add the generated AuthenticationChallenge to in memory db
+    // TODO: the problem is that, when the bot shuts down and the user rejoins, they are assigned a new event user ID?
+    // find out if this is true;
     AuthenticationChallenge data =
         new AuthenticationChallenge(eventUserId, captcha.getAnswer());
     challengeRepository.add(data);
