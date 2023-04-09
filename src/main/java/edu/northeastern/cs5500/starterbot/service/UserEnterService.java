@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 public class UserEnterService {
 
   @Inject
-  GenericRepository<EventUserGuild> EventUserGuildRepository;
+  GenericRepository<EventUserGuild> eventUserGuildRepository;
 
   @Inject
   public UserEnterService() {
