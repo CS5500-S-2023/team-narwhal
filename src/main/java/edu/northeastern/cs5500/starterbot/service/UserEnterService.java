@@ -27,6 +27,6 @@ public class UserEnterService {
    */
   public void mapEventUserGuildId(String eventUserId, String guildId){
     log.info("Adding " + eventUserId + " to DB");
-    EventUserGuildRepository.add(new EventUserGuild(eventUserId, guildId));
+    eventUserGuildRepository.add(new EventUserGuild(eventUserId, guildId));
   }
 }
