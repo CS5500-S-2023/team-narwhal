@@ -66,7 +66,10 @@ public class ButtonClickController {
         // generateCaptcha handles adding the Authentication challenge to db
         Captcha captcha = authenticationService.generateCaptcha(userId);
         FileUpload captchaFile = view.generateCaptchaView(captcha);
-        event.getUser().openPrivateChannel()
+        MessageCreateData msg = new MessageCreateBuilder()
+                                      .setContent("Please reply with \"/verify {answer}\"")
+                                      .addFiles(captchaFile).build();
+        channel.sendMessage(msg).queue();
             .flatMap(channel -> channel.sendFiles(captchaFile)).queue();
 
         break;
