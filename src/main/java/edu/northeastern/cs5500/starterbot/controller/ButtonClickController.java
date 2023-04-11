@@ -70,7 +70,6 @@ public class ButtonClickController {
                                       .setContent("Please reply with \"/verify {answer}\"")
                                       .addFiles(captchaFile).build();
         channel.sendMessage(msg).queue();
-            .flatMap(channel -> channel.sendFiles(captchaFile)).queue();
 
         break;
 
