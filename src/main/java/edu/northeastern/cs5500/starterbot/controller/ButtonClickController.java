@@ -60,6 +60,7 @@ public class ButtonClickController {
       case "captcha":
         boolean isNull = (event.getMember() == null);
         log.info("The member is null: " + isNull);
+        MessageChannelUnion channel = event.getChannel();
         event.reply("Generating captcha...").queue();
         String userId = event.getUser().getId();
         // generateCaptcha handles adding the Authentication challenge to db
