@@ -4,9 +4,7 @@ import dagger.Module;
 import dagger.Provides;
 import dagger.multibindings.IntoSet;
 
-/**
- * Provides all the commands supported by the program, stored in a set.
- */
+/** Provides all the commands supported by the program, stored in a set. */
 @Module
 public class CommandModule {
     @Provides

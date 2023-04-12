@@ -26,75 +26,75 @@ import nl.captcha.Captcha;
 @Singleton
 public class BotView {
 
-  private final Map<AuthenticationType, AuthenticationConfig> authenticationMethods;
+    private final Map<AuthenticationType, AuthenticationConfig> authenticationMethods;
 
-  // constructor
-  @Inject
-  public BotView(Map<AuthenticationType, AuthenticationConfig> authenticationMethods) {
-    this.authenticationMethods = authenticationMethods;
-  }
-
-  /**
-   * Builds a welcome message with buttons, used by UserEnterController.
-   *
-   * @param guildName the guild name to be used in the welcome message
-   * @return an MessageCreateBuilder with a welcome msg and buttons
-   */
-  public MessageCreateBuilder generateWelcomeMsg(String guildName) {
-    // Creating message string to send user in private channel
-    String welcomeMessage =
-        String.format(
-            "Welcome to %s! Before you can get access to the server, please verify using one of "
-                + "the following methods:",
-            guildName);
-
-    // Builds the message and adds buttons
-    MessageCreateBuilder messageCreateBuilder = new MessageCreateBuilder();
-
-    Set<Button> buttons = new HashSet<>();
-    for (AuthenticationConfig auth : authenticationMethods.values()) {
-      // calls helper to create the buttons
-      buttons.add(createButton(auth));
+    // constructor
+    @Inject
+    public BotView(Map<AuthenticationType, AuthenticationConfig> authenticationMethods) {
+        this.authenticationMethods = authenticationMethods;
     }
-    return messageCreateBuilder.addActionRow(buttons).setContent(welcomeMessage);
-  }
 
-  /**
-   * Private helper to build the buttons.
-   *
-   * @param authenticationConfig an AuthenticationConfig (authentication configuration type) that
-   *                             the program supports
-   * @return a custom button for this configuration type
-   */
-  private Button createButton(AuthenticationConfig authenticationConfig) {
-    return Button.primary(
-        authenticationConfig.getName() + ":" + authenticationConfig.getId(),
-        authenticationConfig.getLabel());
-  }
+    /**
+     * Builds a welcome message with buttons, used by UserEnterController.
+     *
+     * @param guildName the guild name to be used in the welcome message
+     * @return an MessageCreateBuilder with a welcome msg and buttons
+     */
+    public MessageCreateBuilder generateWelcomeMsg(String guildName) {
+        // Creating message string to send user in private channel
+        String welcomeMessage =
+                String.format(
+                        "Welcome to %s! Before you can get access to the server, please verify using one of "
+                                + "the following methods:",
+                        guildName);
 
-  /**
-   * Creates a captcha file that can be uploaded and rendered to the user, used by
-   * ButtonClickController.
-   *
-   * @param captcha the Captcha object to be rendered
-   * @return a FileUpload object that can be rendered
-   */
-  public FileUpload generateCaptchaView(Captcha captcha) {
-    return FileUpload.fromData(
-        imageToByteArray(Objects.requireNonNull(captcha.getImage())), "image.png");
-  }
+        // Builds the message and adds buttons
+        MessageCreateBuilder messageCreateBuilder = new MessageCreateBuilder();
 
-  /**
-   * Private helper to convert a BufferedImage object to byte array.
-   *
-   * @param image the BufferedImage to be converted
-   * @return the byte array representation of the image
-   */
-  @SneakyThrows({IOException.class})
-  @Nonnull
-  private static byte[] imageToByteArray(@Nonnull BufferedImage image) {
-    ByteArrayOutputStream stream = new ByteArrayOutputStream();
-    ImageIO.write(image, "png", stream);
-    return Objects.requireNonNull(stream.toByteArray());
-  }
+        Set<Button> buttons = new HashSet<>();
+        for (AuthenticationConfig auth : authenticationMethods.values()) {
+            // calls helper to create the buttons
+            buttons.add(createButton(auth));
+        }
+        return messageCreateBuilder.addActionRow(buttons).setContent(welcomeMessage);
+    }
+
+    /**
+     * Private helper to build the buttons.
+     *
+     * @param authenticationConfig an AuthenticationConfig (authentication configuration type) that
+     *     the program supports
+     * @return a custom button for this configuration type
+     */
+    private Button createButton(AuthenticationConfig authenticationConfig) {
+        return Button.primary(
+                authenticationConfig.getName() + ":" + authenticationConfig.getId(),
+                authenticationConfig.getLabel());
+    }
+
+    /**
+     * Creates a captcha file that can be uploaded and rendered to the user, used by
+     * ButtonClickController.
+     *
+     * @param captcha the Captcha object to be rendered
+     * @return a FileUpload object that can be rendered
+     */
+    public FileUpload generateCaptchaView(Captcha captcha) {
+        return FileUpload.fromData(
+                imageToByteArray(Objects.requireNonNull(captcha.getImage())), "image.png");
+    }
+
+    /**
+     * Private helper to convert a BufferedImage object to byte array.
+     *
+     * @param image the BufferedImage to be converted
+     * @return the byte array representation of the image
+     */
+    @SneakyThrows({IOException.class})
+    @Nonnull
+    private static byte[] imageToByteArray(@Nonnull BufferedImage image) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        ImageIO.write(image, "png", stream);
+        return Objects.requireNonNull(stream.toByteArray());
+    }
 }

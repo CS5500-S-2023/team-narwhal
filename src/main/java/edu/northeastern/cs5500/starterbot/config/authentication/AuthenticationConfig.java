@@ -8,12 +8,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public abstract class AuthenticationConfig {
 
-    @Nonnull
-    public String id;
-    @Nonnull
-    public String name = "authenticate"; // button type
-    @Nonnull
-    public String label;
+    @Nonnull public String id;
+    @Nonnull public String name = "authenticate"; // button type
+    @Nonnull public String label;
 
     protected AuthenticationConfig(@Nonnull String id, @Nonnull String label) {
         this.id = id;

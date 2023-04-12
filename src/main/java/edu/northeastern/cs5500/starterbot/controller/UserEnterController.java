@@ -29,11 +29,13 @@ public class UserEnterController {
 
     /**
      * Handle user joining the server event.
+     *
      * @param event user joining the server event as a GuildMemberJoinEvent
      */
     public void handleUserJoinEvent(@Nonnull GuildMemberJoinEvent event) {
         // log.info("On guild member join");
-        // log.info("The member ID in the guild is : " + event.getJDA().getGuilds().get(0).getMemberByTag(event.getUser().getAsTag()).getId());
+        // log.info("The member ID in the guild is : " +
+        // event.getJDA().getGuilds().get(0).getMemberByTag(event.getUser().getAsTag()).getId());
         // String memberTag = event.getMember().getUser().getAsTag();
         // for (Member m : event.getJDA().getGuilds().get(0).getMembers()){
         //     log.info("The member from the guild is " + m.getId());

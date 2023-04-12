@@ -7,11 +7,9 @@ import org.junit.jupiter.api.Test;
 
 class UserEnterControllerTest {
 
-  @BeforeEach
-  void setUp() {
-  }
+    @BeforeEach
+    void setUp() {}
 
-  @Test
-  void handleUserJoinEvent() {
-  }
+    @Test
+    void handleUserJoinEvent() {}
 }

@@ -17,7 +17,7 @@ public class RepositoryModule {
 
     @Provides
     public GenericRepository<EventUserGuild> provideUserGuildMapRepository(
-        InMemoryRepository<EventUserGuild> repository) {
+            InMemoryRepository<EventUserGuild> repository) {
         return repository;
     }
 

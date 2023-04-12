@@ -7,19 +7,15 @@ import org.junit.jupiter.api.Test;
 
 class AuthenticationServiceTest {
 
-  @BeforeEach
-  void setUp() {
-  }
+    @BeforeEach
+    void setUp() {}
 
-  @Test
-  void generateCaptcha() {
-  }
+    @Test
+    void generateCaptcha() {}
 
-  @Test
-  void authenticateUser() {
-  }
+    @Test
+    void authenticateUser() {}
 
-  @Test
-  void getAuthenticationModelForMemberId() {
-  }
+    @Test
+    void getAuthenticationModelForMemberId() {}
 }

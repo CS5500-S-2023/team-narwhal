@@ -7,63 +7,48 @@ import org.junit.jupiter.api.Test;
 
 class AuthenticationChallengeTest {
 
-  @BeforeEach
-  void setUp() {
-  }
+    @BeforeEach
+    void setUp() {}
 
-  @Test
-  void getEventUserId() {
-  }
+    @Test
+    void getEventUserId() {}
 
-  @Test
-  void getAnswer() {
-  }
+    @Test
+    void getAnswer() {}
 
-  @Test
-  void getNumAttempts() {
-  }
+    @Test
+    void getNumAttempts() {}
 
-  @Test
-  void getTimeStamp() {
-  }
+    @Test
+    void getTimeStamp() {}
 
-  @Test
-  void getState() {
-  }
+    @Test
+    void getState() {}
 
-  @Test
-  void setEventUserId() {
-  }
+    @Test
+    void setEventUserId() {}
 
-  @Test
-  void setAnswer() {
-  }
+    @Test
+    void setAnswer() {}
 
-  @Test
-  void setNumAttempts() {
-  }
+    @Test
+    void setNumAttempts() {}
 
-  @Test
-  void setTimeStamp() {
-  }
+    @Test
+    void setTimeStamp() {}
 
-  @Test
-  void setState() {
-  }
+    @Test
+    void setState() {}
 
-  @Test
-  void testEquals() {
-  }
+    @Test
+    void testEquals() {}
 
-  @Test
-  void canEqual() {
-  }
+    @Test
+    void canEqual() {}
 
-  @Test
-  void testHashCode() {
-  }
+    @Test
+    void testHashCode() {}
 
-  @Test
-  void testToString() {
-  }
+    @Test
+    void testToString() {}
 }

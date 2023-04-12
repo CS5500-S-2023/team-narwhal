@@ -31,8 +31,7 @@ public class Bot {
     @Inject
     Bot() {}
 
-    @Inject
-    Set<SlashCommandConfig> commands;
+    @Inject Set<SlashCommandConfig> commands;
 
     @Inject AuthenticationListener authenticationListener;
 
@@ -44,9 +43,9 @@ public class Bot {
     private @Nonnull Collection<CommandData> allCommandData() {
         // you can also use a for loop, add everything from the set
         Collection<CommandData> commandData =
-            commands.stream()
-                .map(SlashCommandConfig::getCommandData)
-                .collect(Collectors.toList());
+                commands.stream()
+                        .map(SlashCommandConfig::getCommandData)
+                        .collect(Collectors.toList());
         if (commandData == null) {
             return new ArrayList<>();
         }
@@ -57,28 +56,28 @@ public class Bot {
         String token = getBotToken();
         if (token == null) {
             throw new IllegalArgumentException(
-                "The BOT_TOKEN environment variable is not defined.");
+                    "The BOT_TOKEN environment variable is not defined.");
         }
         @SuppressWarnings("null")
         @Nonnull
         JDA jda =
-            JDABuilder.createDefault(
-                    token,
-                    GatewayIntent.GUILD_MEMBERS,
-                    GatewayIntent.GUILD_MESSAGES,
-                    GatewayIntent.DIRECT_MESSAGES,
-                    GatewayIntent.GUILD_MESSAGE_REACTIONS)
-                .setDisabledIntents(
-                    GatewayIntent.GUILD_VOICE_STATES,
-                    GatewayIntent.GUILD_EMOJIS_AND_STICKERS)
-                .setMemberCachePolicy(MemberCachePolicy.ALL)
-                .addEventListeners(authenticationListener)
-                .build();
+                JDABuilder.createDefault(
+                                token,
+                                GatewayIntent.GUILD_MEMBERS,
+                                GatewayIntent.GUILD_MESSAGES,
+                                GatewayIntent.DIRECT_MESSAGES,
+                                GatewayIntent.GUILD_MESSAGE_REACTIONS)
+                        .setDisabledIntents(
+                                GatewayIntent.GUILD_VOICE_STATES,
+                                GatewayIntent.GUILD_EMOJIS_AND_STICKERS)
+                        .setMemberCachePolicy(MemberCachePolicy.ALL)
+                        .addEventListeners(authenticationListener)
+                        .build();
 
         CommandListUpdateAction commands = jda.updateCommands();
         // right now we only have slash commands
         commands.addCommands(allCommandData());
         commands.queue();
-        //jda.awaitReady(); is this needed?
+        // jda.awaitReady(); is this needed?
     }
 }

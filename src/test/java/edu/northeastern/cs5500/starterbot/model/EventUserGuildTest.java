@@ -7,39 +7,30 @@ import org.junit.jupiter.api.Test;
 
 class EventUserGuildTest {
 
-  @BeforeEach
-  void setUp() {
-  }
+    @BeforeEach
+    void setUp() {}
 
-  @Test
-  void getUserEventId() {
-  }
+    @Test
+    void getUserEventId() {}
 
-  @Test
-  void getGuildId() {
-  }
+    @Test
+    void getGuildId() {}
 
-  @Test
-  void setUserEventId() {
-  }
+    @Test
+    void setUserEventId() {}
 
-  @Test
-  void setGuildId() {
-  }
+    @Test
+    void setGuildId() {}
 
-  @Test
-  void testEquals() {
-  }
+    @Test
+    void testEquals() {}
 
-  @Test
-  void canEqual() {
-  }
+    @Test
+    void canEqual() {}
 
-  @Test
-  void testHashCode() {
-  }
+    @Test
+    void testHashCode() {}
 
-  @Test
-  void testToString() {
-  }
+    @Test
+    void testToString() {}
 }

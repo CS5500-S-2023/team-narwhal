@@ -7,11 +7,9 @@ import org.junit.jupiter.api.Test;
 
 class ButtonClickControllerTest {
 
-  @BeforeEach
-  void setUp() {
-  }
+    @BeforeEach
+    void setUp() {}
 
-  @Test
-  void handleButtonInteraction() {
-  }
+    @Test
+    void handleButtonInteraction() {}
 }

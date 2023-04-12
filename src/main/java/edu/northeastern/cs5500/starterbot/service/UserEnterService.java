@@ -12,23 +12,22 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class UserEnterService {
 
-  @Inject
-  GenericRepository<EventUserGuild> eventUserGuildRepository;
+    @Inject GenericRepository<EventUserGuild> eventUserGuildRepository;
 
-  @Inject
-  public UserEnterService(GenericRepository<EventUserGuild> eventUserGuildRepository) {
-    this.eventUserGuildRepository = eventUserGuildRepository;
-  }
+    @Inject
+    public UserEnterService(GenericRepository<EventUserGuild> eventUserGuildRepository) {
+        this.eventUserGuildRepository = eventUserGuildRepository;
+    }
 
-  /**
-   * Add the user id from the GuildMemberJoinEvent and the guild id which the user has joined to the
-   * in memory db.
-   *
-   * @param eventUserId the user id from the GuildMemberJoinEvent as a String
-   * @param guildId     the guild id that the user has joined as a String
-   */
-  public void mapEventUserGuildId(String eventUserId, String guildId) {
-    log.info("Adding " + eventUserId + " to DB");
-    eventUserGuildRepository.add(new EventUserGuild(eventUserId, guildId));
-  }
+    /**
+     * Add the user id from the GuildMemberJoinEvent and the guild id which the user has joined to
+     * the in memory db.
+     *
+     * @param eventUserId the user id from the GuildMemberJoinEvent as a String
+     * @param guildId the guild id that the user has joined as a String
+     */
+    public void mapEventUserGuildId(String eventUserId, String guildId) {
+        log.info("Adding " + eventUserId + " to DB");
+        eventUserGuildRepository.add(new EventUserGuild(eventUserId, guildId));
+    }
 }

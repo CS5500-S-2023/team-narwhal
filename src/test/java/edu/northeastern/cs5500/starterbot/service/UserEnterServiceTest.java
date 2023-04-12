@@ -8,16 +8,16 @@ import org.junit.jupiter.api.Test;
 
 class UserEnterServiceTest {
 
-  private UserEnterService userEnterService;
+    private UserEnterService userEnterService;
 
-  @BeforeEach
-  void setUp() {
-    userEnterService = new UserEnterService(new InMemoryRepository<>());
-  }
+    @BeforeEach
+    void setUp() {
+        userEnterService = new UserEnterService(new InMemoryRepository<>());
+    }
 
-  @Test
-  void mapEventUserGuildId() {
-    userEnterService.mapEventUserGuildId("testEventUser1", "testGuild1");
-    assertEquals(1, userEnterService.eventUserGuildRepository.count());
-  }
+    @Test
+    void mapEventUserGuildId() {
+        userEnterService.mapEventUserGuildId("testEventUser1", "testGuild1");
+        assertEquals(1, userEnterService.eventUserGuildRepository.count());
+    }
 }

@@ -25,8 +25,9 @@ public class AuthenticationListener extends ListenerAdapter {
 
     @Inject
     public AuthenticationListener(
-            UserEnterController userEnterController, ButtonClickController buttonClickController,
-        SlashCommandController slashCommandController) {
+            UserEnterController userEnterController,
+            ButtonClickController buttonClickController,
+            SlashCommandController slashCommandController) {
         super();
         this.userEnterController = userEnterController;
         this.buttonClickController = buttonClickController;

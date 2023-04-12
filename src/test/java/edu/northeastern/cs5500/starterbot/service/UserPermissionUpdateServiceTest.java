@@ -7,15 +7,12 @@ import org.junit.jupiter.api.Test;
 
 class UserPermissionUpdateServiceTest {
 
-  @BeforeEach
-  void setUp() {
-  }
+    @BeforeEach
+    void setUp() {}
 
-  @Test
-  void grantUserPermissionInTextChannel() {
-  }
+    @Test
+    void grantUserPermissionInTextChannel() {}
 
-  @Test
-  void getGuildIdForEventUser() {
-  }
+    @Test
+    void getGuildIdForEventUser() {}
 }

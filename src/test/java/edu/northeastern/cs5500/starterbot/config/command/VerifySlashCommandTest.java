@@ -7,15 +7,12 @@ import org.junit.jupiter.api.Test;
 
 class VerifySlashCommandTest {
 
-  @BeforeEach
-  void setUp() {
-  }
+    @BeforeEach
+    void setUp() {}
 
-  @Test
-  void getName() {
-  }
+    @Test
+    void getName() {}
 
-  @Test
-  void getCommandData() {
-  }
+    @Test
+    void getCommandData() {}
 }

@@ -4,9 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.bson.types.ObjectId;
 
-/**
- * Data model that stores various fields needed for authenticating a user.
- */
+/** Data model that stores various fields needed for authenticating a user. */
 @Data
 @AllArgsConstructor
 public class AuthenticationChallenge implements Model {

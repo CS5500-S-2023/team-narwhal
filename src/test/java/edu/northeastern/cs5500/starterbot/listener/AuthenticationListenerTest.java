@@ -7,19 +7,15 @@ import org.junit.jupiter.api.Test;
 
 class AuthenticationListenerTest {
 
-  @BeforeEach
-  void setUp() {
-  }
+    @BeforeEach
+    void setUp() {}
 
-  @Test
-  void onGuildMemberJoin() {
-  }
+    @Test
+    void onGuildMemberJoin() {}
 
-  @Test
-  void onButtonInteraction() {
-  }
+    @Test
+    void onButtonInteraction() {}
 
-  @Test
-  void onSlashCommandInteraction() {
-  }
+    @Test
+    void onSlashCommandInteraction() {}
 }

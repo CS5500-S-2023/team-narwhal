@@ -7,11 +7,9 @@ import org.junit.jupiter.api.Test;
 
 class SlashCommandControllerTest {
 
-  @BeforeEach
-  void setUp() {
-  }
+    @BeforeEach
+    void setUp() {}
 
-  @Test
-  void handleSlashCommandInteraction() {
-  }
+    @Test
+    void handleSlashCommandInteraction() {}
 }

@@ -14,25 +14,27 @@ import net.dv8tion.jda.api.interactions.commands.build.Commands;
 @Slf4j
 public class VerifySlashCommand implements SlashCommandConfig {
 
-  @Inject
-  GenericRepository<AuthenticationChallenge> challengeRepository;
+    @Inject GenericRepository<AuthenticationChallenge> challengeRepository;
 
-  @Inject
-  public VerifySlashCommand() {
-    // Defined public and empty for Dagger injection
-  }
+    @Inject
+    public VerifySlashCommand() {
+        // Defined public and empty for Dagger injection
+    }
 
-  @Override
-  @Nonnull
-  public String getName() {
-    return "verify";
-  }
+    @Override
+    @Nonnull
+    public String getName() {
+        return "verify";
+    }
 
-  @Override
-  @Nonnull
-  public CommandData getCommandData() {
-    return Commands.slash(getName(), "Tell the bot your answer to this captcha")
-        .addOption(OptionType.STRING, "answer",
-            "The bot will use this input to authenticate", true);
-  }
+    @Override
+    @Nonnull
+    public CommandData getCommandData() {
+        return Commands.slash(getName(), "Tell the bot your answer to this captcha")
+                .addOption(
+                        OptionType.STRING,
+                        "answer",
+                        "The bot will use this input to authenticate",
+                        true);
+    }
 }

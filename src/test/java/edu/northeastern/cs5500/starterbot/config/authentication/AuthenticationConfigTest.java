@@ -7,47 +7,36 @@ import org.junit.jupiter.api.Test;
 
 class AuthenticationConfigTest {
 
-  @BeforeEach
-  void setUp() {
-  }
+    @BeforeEach
+    void setUp() {}
 
-  @Test
-  void getId() {
-  }
+    @Test
+    void getId() {}
 
-  @Test
-  void getName() {
-  }
+    @Test
+    void getName() {}
 
-  @Test
-  void getLabel() {
-  }
+    @Test
+    void getLabel() {}
 
-  @Test
-  void setId() {
-  }
+    @Test
+    void setId() {}
 
-  @Test
-  void setName() {
-  }
+    @Test
+    void setName() {}
 
-  @Test
-  void setLabel() {
-  }
+    @Test
+    void setLabel() {}
 
-  @Test
-  void testEquals() {
-  }
+    @Test
+    void testEquals() {}
 
-  @Test
-  void canEqual() {
-  }
+    @Test
+    void canEqual() {}
 
-  @Test
-  void testHashCode() {
-  }
+    @Test
+    void testHashCode() {}
 
-  @Test
-  void testToString() {
-  }
+    @Test
+    void testToString() {}
 }

@@ -4,9 +4,7 @@ import dagger.Module;
 import dagger.Provides;
 import dagger.multibindings.IntoMap;
 
-/**
- * Provides the authentication types that the program supports, stored in a map.
- */
+/** Provides the authentication types that the program supports, stored in a map. */
 @Module
 public class AuthenticationModule {
     // https://dagger.dev/dev-guide/multibindings.html

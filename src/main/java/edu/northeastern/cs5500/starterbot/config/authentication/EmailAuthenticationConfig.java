@@ -9,5 +9,4 @@ public class EmailAuthenticationConfig extends AuthenticationConfig {
     public EmailAuthenticationConfig() {
         super("email", "Email");
     }
-
 }

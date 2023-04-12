@@ -7,48 +7,46 @@ import java.util.Collection;
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
 
-/**
- * Default implementation from Prof. Alexander Lash, not currently used.
- */
+/** Default implementation from Prof. Alexander Lash, not currently used. */
 public class UserPreferenceController {
 
-  GenericRepository<UserPreference> userPreferenceRepository;
+    GenericRepository<UserPreference> userPreferenceRepository;
 
-  @Inject
-  UserPreferenceController(GenericRepository<UserPreference> userPreferenceRepository) {
-    this.userPreferenceRepository = userPreferenceRepository;
+    @Inject
+    UserPreferenceController(GenericRepository<UserPreference> userPreferenceRepository) {
+        this.userPreferenceRepository = userPreferenceRepository;
 
-    if (userPreferenceRepository.count() == 0) {
-      UserPreference userPreference = new UserPreference();
-      userPreference.setDiscordUserId("1234");
-      userPreference.setPreferredName("Alex");
-      userPreferenceRepository.add(userPreference);
+        if (userPreferenceRepository.count() == 0) {
+            UserPreference userPreference = new UserPreference();
+            userPreference.setDiscordUserId("1234");
+            userPreference.setPreferredName("Alex");
+            userPreferenceRepository.add(userPreference);
+        }
     }
-  }
 
-  public void setPreferredNameForUser(String discordMemberId, String preferredName) {
-    UserPreference userPreference = getUserPreferenceForMemberId(discordMemberId);
+    public void setPreferredNameForUser(String discordMemberId, String preferredName) {
+        UserPreference userPreference = getUserPreferenceForMemberId(discordMemberId);
 
-    userPreference.setPreferredName(preferredName);
-    userPreferenceRepository.update(userPreference);
-  }
-
-  @Nullable
-  public String getPreferredNameForUser(String discordMemberId) {
-    return getUserPreferenceForMemberId(discordMemberId).getPreferredName();
-  }
-
-  @Nonnull
-  public UserPreference getUserPreferenceForMemberId(String discordMemberId) {
-    Collection<UserPreference> userPreferences = userPreferenceRepository.getAll();
-    for (UserPreference currentUserPreference : userPreferences) {
-      if (currentUserPreference.getDiscordUserId().equals(discordMemberId)) {
-        return currentUserPreference;
-      }
+        userPreference.setPreferredName(preferredName);
+        userPreferenceRepository.update(userPreference);
     }
-    UserPreference userPreference = new UserPreference();
-    userPreference.setDiscordUserId(discordMemberId);
-    userPreferenceRepository.add(userPreference);
-    return userPreference;
-  }
+
+    @Nullable
+    public String getPreferredNameForUser(String discordMemberId) {
+        return getUserPreferenceForMemberId(discordMemberId).getPreferredName();
+    }
+
+    @Nonnull
+    public UserPreference getUserPreferenceForMemberId(String discordMemberId) {
+        Collection<UserPreference> userPreferences = userPreferenceRepository.getAll();
+        for (UserPreference currentUserPreference : userPreferences) {
+            if (currentUserPreference.getDiscordUserId().equals(discordMemberId)) {
+                return currentUserPreference;
+            }
+        }
+        UserPreference userPreference = new UserPreference();
+        userPreference.setDiscordUserId(discordMemberId);
+        userPreferenceRepository.add(userPreference);
+        return userPreference;
+    }
 }

@@ -1,8 +1,6 @@
 package edu.northeastern.cs5500.starterbot.model;
 
-/**
- * The states of a {@link AuthenticationChallenge}.
- */
+/** The states of a {@link AuthenticationChallenge}. */
 public enum AuthenticationState {
     // UNKNOWN in case we get a state from the DB that doesn't make sense
     UNKNOWN,
@@ -19,6 +17,7 @@ public enum AuthenticationState {
 
     /**
      * If the program terminates based on an AuthenticationState.
+     *
      * @return true if it terminates the program
      */
     public boolean isTerminal() {

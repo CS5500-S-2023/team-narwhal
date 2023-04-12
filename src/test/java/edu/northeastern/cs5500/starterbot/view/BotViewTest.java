@@ -7,15 +7,12 @@ import org.junit.jupiter.api.Test;
 
 class BotViewTest {
 
-  @BeforeEach
-  void setUp() {
-  }
+    @BeforeEach
+    void setUp() {}
 
-  @Test
-  void generateWelcomeMsg() {
-  }
+    @Test
+    void generateWelcomeMsg() {}
 
-  @Test
-  void generateCaptchaView() {
-  }
+    @Test
+    void generateCaptchaView() {}
 }
