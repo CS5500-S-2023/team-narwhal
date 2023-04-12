@@ -16,16 +16,18 @@ public class UserEnterService {
   GenericRepository<EventUserGuild> eventUserGuildRepository;
 
   @Inject
-  public UserEnterService() {
+  public UserEnterService(GenericRepository<EventUserGuild> eventUserGuildRepository) {
+    this.eventUserGuildRepository = eventUserGuildRepository;
   }
 
   /**
    * Add the user id from the GuildMemberJoinEvent and the guild id which the user has joined to the
    * in memory db.
+   *
    * @param eventUserId the user id from the GuildMemberJoinEvent as a String
-   * @param guildId the guild id that the user has joined as a String
+   * @param guildId     the guild id that the user has joined as a String
    */
-  public void mapEventUserGuildId(String eventUserId, String guildId){
+  public void mapEventUserGuildId(String eventUserId, String guildId) {
     log.info("Adding " + eventUserId + " to DB");
     eventUserGuildRepository.add(new EventUserGuild(eventUserId, guildId));
   }
