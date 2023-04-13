@@ -3,14 +3,12 @@ package edu.northeastern.cs5500.starterbot.controller;
 import edu.northeastern.cs5500.starterbot.service.AuthenticationService;
 import edu.northeastern.cs5500.starterbot.service.UserPermissionUpdateService;
 import edu.northeastern.cs5500.starterbot.view.BotView;
-import java.util.List;
 import java.util.Objects;
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
-import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 
 /**
@@ -66,32 +64,27 @@ public class SlashCommandController {
      * @param event a SlashCommandInteractionEvent object
      */
     private void handleVerifySlashCommand(@Nonnull SlashCommandInteractionEvent event) {
-        log.info("User " + event.getUser().getId() + " is verifying");
+        User user = event.getUser();
+        String userEventId = user.getId();
+
         // 1. verify user answer
         // get the user input from the event
         String userInput = Objects.requireNonNull(event.getOption("answer")).getAsString();
         // verify user and return a message that indicates their verified status
-        Boolean verifiedStatus =
-                authenticationService.authenticateUser(event.getUser().getId(), userInput);
+        Boolean verifiedStatus = authenticationService.authenticateUser(userEventId, userInput);
 
         if (verifiedStatus) {
-            event.reply("You are verified!").queue();
             // 2. update user permission
             // get the guildId using the event userId
             String guildId =
                     userPermissionUpdateService.getGuildIdForEventUser(event.getUser().getId());
-            List<TextChannel> textChannelList =
-                    Objects.requireNonNull(event.getJDA().getGuildById(guildId)).getTextChannels();
-            // update user permission in text channels
-            for (TextChannel channel : textChannelList) {
-                // user tag is the username, use this to get the member in the guild/server
-                String eventUserTag = event.getUser().getAsTag();
-                Member member =
-                        Objects.requireNonNull(event.getJDA().getGuildById(guildId))
-                                .getMemberByTag(eventUserTag);
-                userPermissionUpdateService
-                        .grantUserPermissionInTextChannel(channel, member, Permission.VIEW_CHANNEL)
-                        .queue();
+            Guild guild = event.getJDA().getGuildById(guildId);
+
+            if (guild != null) {
+                userPermissionUpdateService.removeUnverifiedRoleFromUser(guild, user);
+                event.reply("You are verified!").queue();
+            } else {
+                throw new RuntimeException("Can't find guild.");
             }
         } else {
             event.reply("You've entered the wrong answer, please try again.").queue();

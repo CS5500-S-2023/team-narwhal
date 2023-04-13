@@ -1,10 +1,12 @@
 package edu.northeastern.cs5500.starterbot.controller;
 
 import edu.northeastern.cs5500.starterbot.service.UserEnterService;
+import edu.northeastern.cs5500.starterbot.service.UserPermissionUpdateService;
 import edu.northeastern.cs5500.starterbot.view.BotView;
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
+import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.channel.concrete.PrivateChannel;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
@@ -20,6 +22,8 @@ public class UserEnterController {
     private BotView botView;
 
     private UserEnterService userEnterService;
+
+    @Inject UserPermissionUpdateService permissionService;
 
     @Inject
     UserEnterController(BotView botView, UserEnterService userEnterService) {
@@ -45,15 +49,19 @@ public class UserEnterController {
         // }
         // log.info("The user ID from the event user is : " + event.getUser().getId());
         // Getting the user to open a private channel with
+
+        // Add unverified role to new member trying to join the guild
+        Guild guild = event.getGuild();
         User user = event.getUser();
+        permissionService.addUnverifiedRoleToUser(guild, user);
 
         // add the event user id and the guild id to the repo for later use
         String userId = user.getId();
-        String guildId = event.getGuild().getId();
+        String guildId = guild.getId();
         userEnterService.mapEventUserGuildId(userId, guildId);
 
         // use the view to  build the welcome msg
-        String guildName = event.getGuild().getName();
+        String guildName = guild.getName();
         MessageCreateBuilder welcomeMsg = botView.generateWelcomeMsg(guildName);
 
         // Open a private channel with the user and send the welcome msg
