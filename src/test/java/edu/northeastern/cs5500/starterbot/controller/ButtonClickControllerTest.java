@@ -12,4 +12,7 @@ class ButtonClickControllerTest {
 
     @Test
     void handleButtonInteraction() {}
+
+    @Test
+    void handleAuthenticationButtonClicks() {}
 }

@@ -15,4 +15,16 @@ class UserPermissionUpdateServiceTest {
 
     @Test
     void getGuildIdForEventUser() {}
+
+    @Test
+    void getUnverifiedRole() {}
+
+    @Test
+    void addUnverifiedRoleToUser() {}
+
+    @Test
+    void setPermissionOverrides() {}
+
+    @Test
+    void removeUnverifiedRoleFromUser() {}
 }

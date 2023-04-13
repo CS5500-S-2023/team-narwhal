@@ -12,4 +12,7 @@ class SlashCommandControllerTest {
 
     @Test
     void handleSlashCommandInteraction() {}
+
+    @Test
+    void handleVerifySlashCommand() {}
 }
