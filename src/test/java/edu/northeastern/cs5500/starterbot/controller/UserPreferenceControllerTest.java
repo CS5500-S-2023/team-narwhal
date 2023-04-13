@@ -6,6 +6,7 @@ import edu.northeastern.cs5500.starterbot.repository.InMemoryRepository;
 import org.junit.jupiter.api.Test;
 
 class UserPreferenceControllerTest {
+
     // TODO: replace with discord IDs that are more real
     static final String USER_ID_1 = "23h5ikoqaehokljhaoe";
     static final String USER_ID_2 = "2kjfksdjdkhokljhaoe";

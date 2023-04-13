@@ -7,6 +7,7 @@ import java.util.Collection;
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
 
+/** Default implementation from Prof. Alexander Lash, not currently used. */
 public class UserPreferenceController {
 
     GenericRepository<UserPreference> userPreferenceRepository;
@@ -43,7 +44,6 @@ public class UserPreferenceController {
                 return currentUserPreference;
             }
         }
-
         UserPreference userPreference = new UserPreference();
         userPreference.setDiscordUserId(discordMemberId);
         userPreferenceRepository.add(userPreference);

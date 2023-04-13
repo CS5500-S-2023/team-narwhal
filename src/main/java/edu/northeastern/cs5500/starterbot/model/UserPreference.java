@@ -3,6 +3,7 @@ package edu.northeastern.cs5500.starterbot.model;
 import lombok.Data;
 import org.bson.types.ObjectId;
 
+/** Default implementation of a UserPreference data model from Prof. Alexander Lash. */
 @Data
 public class UserPreference implements Model {
     ObjectId id;

@@ -2,15 +2,22 @@ package edu.northeastern.cs5500.starterbot.repository;
 
 import dagger.Module;
 import dagger.Provides;
-import edu.northeastern.cs5500.starterbot.model.UserPreference;
+import edu.northeastern.cs5500.starterbot.model.AuthenticationChallenge;
+import edu.northeastern.cs5500.starterbot.model.EventUserGuild;
 
 @Module
 public class RepositoryModule {
     // NOTE: You can use the following lines if you'd like to store objects in memory.
     // NOTE: The presence of commented-out code in your project *will* result in a lowered grade.
     @Provides
-    public GenericRepository<UserPreference> provideUserPreferencesRepository(
-            InMemoryRepository<UserPreference> repository) {
+    public GenericRepository<AuthenticationChallenge> provideAuthenticationRepository(
+            InMemoryRepository<AuthenticationChallenge> repository) {
+        return repository;
+    }
+
+    @Provides
+    public GenericRepository<EventUserGuild> provideUserGuildMapRepository(
+            InMemoryRepository<EventUserGuild> repository) {
         return repository;
     }
 

@@ -5,7 +5,7 @@ import static spark.Spark.port;
 
 public class App {
 
-    public static void main(String[] arg) {
+    public static void main(String[] arg) throws InterruptedException {
 
         DaggerBotComponent.create().bot().start();
 
