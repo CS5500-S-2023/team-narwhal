@@ -33,7 +33,10 @@ public class AuthenticationService {
         // assigned a new event user ID?
         // find out if this is true;
         AuthenticationChallenge data =
-                new AuthenticationChallenge(eventUserId, captcha.getAnswer());
+                AuthenticationChallenge.builder()
+                        .eventUserId(eventUserId)
+                        .answer(captcha.getAnswer())
+                        .build();
         challengeRepository.add(data);
         return captcha;
     }
@@ -45,7 +48,7 @@ public class AuthenticationService {
      * @param userInput the user input as a String
      * @return a Boolean indicating the authentication status
      */
-    public Boolean authenticateUser(String eventUserId, String userInput) {
+    public boolean authenticateUser(String eventUserId, String userInput) {
         // TODO: based on the message output from this, the controller needs to do things
         // could also change the return type to the verification status, easier for controller
         // to work with
@@ -58,14 +61,13 @@ public class AuthenticationService {
             captchaModel.setNumAttempts(captchaModel.getNumAttempts() + 1);
             // TODO: take care of timeout
             return true;
-
-        } else {
-            captchaModel.setState(AuthenticationState.INCORRECT_RESPONSE);
-            // increase attempt count
-            captchaModel.setNumAttempts(captchaModel.getNumAttempts() + 1);
-            // send a msg to retry
-            return false;
         }
+
+        captchaModel.setState(AuthenticationState.INCORRECT_RESPONSE);
+        // increase attempt count
+        captchaModel.setNumAttempts(captchaModel.getNumAttempts() + 1);
+        // send a msg to retry
+        return false;
     }
 
     /**

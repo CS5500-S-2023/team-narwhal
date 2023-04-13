@@ -66,7 +66,7 @@ public class BotView {
      *     the program supports
      * @return a custom button for this configuration type
      */
-    private Button createButton(AuthenticationConfig authenticationConfig) {
+    private static Button createButton(AuthenticationConfig authenticationConfig) {
         return Button.primary(
                 authenticationConfig.getName() + ":" + authenticationConfig.getId(),
                 authenticationConfig.getLabel());
@@ -79,7 +79,7 @@ public class BotView {
      * @param captcha the Captcha object to be rendered
      * @return a FileUpload object that can be rendered
      */
-    public FileUpload generateCaptchaView(Captcha captcha) {
+    public static FileUpload generateCaptchaView(Captcha captcha) {
         return FileUpload.fromData(
                 imageToByteArray(Objects.requireNonNull(captcha.getImage())), "image.png");
     }

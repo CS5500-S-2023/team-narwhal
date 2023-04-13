@@ -14,10 +14,12 @@ import net.dv8tion.jda.api.requests.restaction.PermissionOverrideAction;
 @Slf4j
 public class UserPermissionUpdateService {
 
-    @Inject GenericRepository<EventUserGuild> EventUserGuildRepository;
+    @Inject GenericRepository<EventUserGuild> eventUserGuildRepository;
 
     @Inject
-    public UserPermissionUpdateService() {}
+    public UserPermissionUpdateService() {
+        // empty for Dagger injection
+    }
 
     /**
      * Give a member of the server a certain permission in a Discord text channel.
@@ -44,7 +46,7 @@ public class UserPermissionUpdateService {
     @Nonnull
     public String getGuildIdForEventUser(String eventUserID) {
         log.info("Updating permission for user " + eventUserID);
-        for (EventUserGuild currentEventUserGuild : EventUserGuildRepository.getAll()) {
+        for (EventUserGuild currentEventUserGuild : eventUserGuildRepository.getAll()) {
             if (eventUserID.equals(currentEventUserGuild.getUserEventId())) {
                 return currentEventUserGuild.getGuildId();
             }
