@@ -12,6 +12,4 @@ public class CommandModule {
     public SlashCommandConfig provideVerifyCommand(VerifySlashCommand verifySlashCommand) {
         return verifySlashCommand;
     }
-
-    // feedback slash command
 }

@@ -1,53 +1,61 @@
 package edu.northeastern.cs5500.starterbot.model;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class AuthenticationChallengeTest {
-
-    @BeforeEach
-    void setUp() {}
+public class AuthenticationChallengeTest {
+    @Test
+    void testBuilder() {}
 
     @Test
-    void getEventUserId() {}
-
-    @Test
-    void getAnswer() {}
-
-    @Test
-    void getNumAttempts() {}
-
-    @Test
-    void getTimeStamp() {}
-
-    @Test
-    void getState() {}
-
-    @Test
-    void setEventUserId() {}
-
-    @Test
-    void setAnswer() {}
-
-    @Test
-    void setNumAttempts() {}
-
-    @Test
-    void setTimeStamp() {}
-
-    @Test
-    void setState() {}
+    void testCanEqual() {}
 
     @Test
     void testEquals() {}
 
     @Test
-    void canEqual() {}
+    void testGetAnswer() {}
+
+    @Test
+    void testGetEventUserId() {}
+
+    @Test
+    void testGetGuildId() {}
+
+    @Test
+    void testGetId() {}
+
+    @Test
+    void testGetNumAttempts() {}
+
+    @Test
+    void testGetState() {}
+
+    @Test
+    void testGetTimeStamp() {}
 
     @Test
     void testHashCode() {}
+
+    @Test
+    void testSetAnswer() {}
+
+    @Test
+    void testSetEventUserId() {}
+
+    @Test
+    void testSetGuildId() {}
+
+    @Test
+    void testSetId() {}
+
+    @Test
+    void testSetNumAttempts() {}
+
+    @Test
+    void testSetState() {}
+
+    @Test
+    void testSetTimeStamp() {}
 
     @Test
     void testToString() {}

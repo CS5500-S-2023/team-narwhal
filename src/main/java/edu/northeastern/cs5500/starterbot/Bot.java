@@ -4,7 +4,14 @@ import dagger.Component;
 import edu.northeastern.cs5500.starterbot.config.authentication.AuthenticationModule;
 import edu.northeastern.cs5500.starterbot.config.command.CommandModule;
 import edu.northeastern.cs5500.starterbot.config.command.SlashCommandConfig;
-import edu.northeastern.cs5500.starterbot.listener.AuthenticationListener;
+import edu.northeastern.cs5500.starterbot.handler.button.ButtonModule;
+import edu.northeastern.cs5500.starterbot.handler.join.JoinModule;
+import edu.northeastern.cs5500.starterbot.handler.message.MessageModule;
+import edu.northeastern.cs5500.starterbot.handler.slash.SlashCommandModule;
+import edu.northeastern.cs5500.starterbot.listener.ButtonListener;
+import edu.northeastern.cs5500.starterbot.listener.GuildMemberJoinListener;
+import edu.northeastern.cs5500.starterbot.listener.MessageListener;
+import edu.northeastern.cs5500.starterbot.listener.SlashCommandListener;
 import edu.northeastern.cs5500.starterbot.repository.RepositoryModule;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,20 +27,40 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 
-@Component(modules = {CommandModule.class, RepositoryModule.class, AuthenticationModule.class})
+@Component(
+        modules = {
+            RepositoryModule.class,
+            AuthenticationModule.class,
+            ButtonModule.class,
+            JoinModule.class,
+            MessageModule.class,
+            CommandModule.class,
+            SlashCommandModule.class,
+        })
 @Singleton
 interface BotComponent {
-    Bot bot();
+    public Bot bot();
 }
 
 public class Bot {
-
-    @Inject
-    Bot() {}
+    ButtonListener buttonListener;
+    GuildMemberJoinListener guildMemberJoinListener;
+    MessageListener messageListener;
+    SlashCommandListener slashCommandListener;
 
     @Inject Set<SlashCommandConfig> commands;
 
-    @Inject AuthenticationListener authenticationListener;
+    @Inject
+    Bot(
+            ButtonListener buttonListener,
+            GuildMemberJoinListener guildMemberJoinListener,
+            MessageListener messageListener,
+            SlashCommandListener slashCommandListener) {
+        this.buttonListener = buttonListener;
+        this.guildMemberJoinListener = guildMemberJoinListener;
+        this.messageListener = messageListener;
+        this.slashCommandListener = slashCommandListener;
+    }
 
     static String getBotToken() {
         return new ProcessBuilder().environment().get("BOT_TOKEN");
@@ -71,7 +98,11 @@ public class Bot {
                                 GatewayIntent.GUILD_VOICE_STATES,
                                 GatewayIntent.GUILD_EMOJIS_AND_STICKERS)
                         .setMemberCachePolicy(MemberCachePolicy.ALL)
-                        .addEventListeners(authenticationListener)
+                        .addEventListeners(
+                                buttonListener,
+                                guildMemberJoinListener,
+                                messageListener,
+                                slashCommandListener)
                         .build();
 
         CommandListUpdateAction commands = jda.updateCommands();

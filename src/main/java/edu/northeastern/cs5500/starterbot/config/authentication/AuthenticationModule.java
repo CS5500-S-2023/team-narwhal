@@ -3,9 +3,11 @@ package edu.northeastern.cs5500.starterbot.config.authentication;
 import dagger.Module;
 import dagger.Provides;
 import dagger.multibindings.IntoMap;
+import edu.northeastern.cs5500.starterbot.annotation.IgnoreInGeneratedReport;
 
 /** Provides the authentication types that the program supports, stored in a map. */
 @Module
+@IgnoreInGeneratedReport
 public class AuthenticationModule {
     // https://dagger.dev/dev-guide/multibindings.html
     @Provides
