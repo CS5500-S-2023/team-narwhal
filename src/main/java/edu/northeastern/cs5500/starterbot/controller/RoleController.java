@@ -38,7 +38,7 @@ public class RoleController {
         for (Role role : roles) {
             if (role.getName().equals(unverifiedRoleName)) {
                 return role;
-            }git 
+            }
         }
 
         // Creates the unverified role as it does not currently exist in the guild
