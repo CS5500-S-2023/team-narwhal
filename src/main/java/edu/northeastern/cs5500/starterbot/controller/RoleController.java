@@ -15,6 +15,7 @@ import net.dv8tion.jda.api.entities.channel.middleman.GuildChannel;
 import net.dv8tion.jda.api.requests.restaction.PermissionOverrideAction;
 import net.dv8tion.jda.api.requests.restaction.RoleAction;
 
+/** */
 @Singleton
 public class RoleController {
     private @Nonnull String unverifiedRoleName = "SFDB Unverified";
@@ -37,7 +38,7 @@ public class RoleController {
         for (Role role : roles) {
             if (role.getName().equals(unverifiedRoleName)) {
                 return role;
-            }
+            }git 
         }
 
         // Creates the unverified role as it does not currently exist in the guild
@@ -94,7 +95,10 @@ public class RoleController {
      */
     public void setPermissionOverrides(@Nonnull Guild guild, @Nonnull Role role) {
         for (GuildChannel channel : guild.getChannels()) {
-            channel.getPermissionContainer().upsertPermissionOverride(role).complete();
+            channel.getPermissionContainer()
+                    .getManager()
+                    .putPermissionOverride(role, 0, Permission.ALL_CHANNEL_PERMISSIONS)
+                    .complete();
         }
     }
 
@@ -110,7 +114,8 @@ public class RoleController {
             @Nonnull TextChannel textChannel,
             @Nonnull Member member,
             @Nonnull Permission permissionToGive) {
-        PermissionOverrideAction override = textChannel.upsertPermissionOverride(member);
+        PermissionOverrideAction override =
+                textChannel.getPermissionContainer().upsertPermissionOverride(member);
         return override.grant(permissionToGive);
     }
 }
