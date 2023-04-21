@@ -6,10 +6,10 @@ import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 
 public interface SlashCommandHandler {
     @Nonnull
-    public String getName();
+    String getName();
 
     @Nonnull
-    public CommandData getCommandData();
+    CommandData getCommandData();
 
     void handleSlashCommandInteraction(SlashCommandInteractionEvent event);
 }
