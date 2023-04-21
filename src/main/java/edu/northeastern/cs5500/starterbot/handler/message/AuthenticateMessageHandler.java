@@ -41,13 +41,12 @@ public class AuthenticateMessageHandler implements MessageHandler {
     public void handleMessage(@Nonnull MessageReceivedEvent event) {
         String userId = event.getAuthor().getId();
         String userInput = event.getMessage().getContentRaw();
-
         try {
             AuthenticationChallenge challenge =
                     authenticationController.attemptChallenge(userId, userInput);
             sendChallengeResultMessage(event, challenge.getState());
         } catch (NoAuthenticationSessionException e) {
-            log.error(String.format("No authentication sesssion for %s", userId), e);
+            log.error(String.format("No authentication session for %s", userId), e);
         } catch (FailedToSendMessageException e) {
             // future implementation: wait for x amount of time to retry sending message
             log.error("Failed to send message", e);

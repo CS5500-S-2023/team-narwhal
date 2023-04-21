@@ -11,5 +11,5 @@ public interface SlashCommandHandler {
     @Nonnull
     public CommandData getCommandData();
 
-    public void handleSlashCommandInteraction(SlashCommandInteractionEvent event);
+    void handleSlashCommandInteraction(SlashCommandInteractionEvent event);
 }

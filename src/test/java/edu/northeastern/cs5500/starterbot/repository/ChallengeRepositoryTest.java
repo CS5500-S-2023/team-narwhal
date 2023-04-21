@@ -1,8 +1,16 @@
 package edu.northeastern.cs5500.starterbot.repository;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ChallengeRepositoryTest {
+    private ChallengeRepository challengeRepository;
+
+    @BeforeEach
+    void setUp() {
+        // challengeRepository = new ChallengeRepository(new InMemoryRepository<>());
+    }
+
     @Test
     void testAdd() {}
 

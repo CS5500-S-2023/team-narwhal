@@ -1,6 +1,5 @@
 package edu.northeastern.cs5500.starterbot.handler.button;
 
-import edu.northeastern.cs5500.starterbot.controller.AuthenticationController;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -19,7 +18,8 @@ import nl.captcha.Captcha;
 public class CaptchaButtonHandler extends AuthenticationButtonHandler {
 
     @Inject
-    public CaptchaButtonHandler(AuthenticationController authenticationController) {
+    public CaptchaButtonHandler() {
+        // TODO: the input arg in constructor isn't used
         super("captcha");
     }
 
