@@ -9,7 +9,7 @@ public class JoinModule {
     // https://dagger.dev/dev-guide/multibindings.html
     @Provides
     @IntoSet
-    public JoinHandler provideWelcomJoinHandler(WelcomeJoinHandler welcomeJoinHandler) {
+    public JoinHandler provideWelcomeJoinHandler(WelcomeJoinHandler welcomeJoinHandler) {
         return welcomeJoinHandler;
     }
 }

@@ -13,6 +13,9 @@ plugins {
 
     // Spotless to format code easily
     id "com.diffplug.spotless"
+
+    // https://docs.gradle.org/current/userguide/jacoco_plugin.html
+    id 'jacoco'
 }
 
 repositories {
@@ -87,11 +90,34 @@ jacocoTestReport {
     reports {
         xml.enabled true
         // Change html.enabled to true if you want html reports
-        html.enabled false
+        html.enabled true
         csv.enabled false
         xml.destination file("${buildDir}/reports/jacoco.xml")
     }
 }
+
+/*
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                // minimum percentage of code coverage
+                minimum = 0.5
+            }
+        }
+        rule {
+            enabled = false
+            element = 'CLASS'
+            includes = ['org.gradle.*']
+            limit {
+                counter = 'LINE'
+                value = 'TOTALCOUNT'
+                maximum = 0.3
+            }
+        }
+    }
+}
+*/
 
 // Check coverage after each test run
 check.dependsOn jacocoTestCoverageVerification

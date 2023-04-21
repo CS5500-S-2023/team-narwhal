@@ -1,30 +1,30 @@
 package edu.northeastern.cs5500.starterbot.config.authentication;
 
-import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
+import static com.google.common.truth.Truth.assertThat;
 
 import org.junit.jupiter.api.Test;
 
 public class CaptchaAuthenticationConfigTest {
+
     CaptchaAuthenticationConfig testConfig = new CaptchaAuthenticationConfig();
 
     @Test
     void testName() {
-        assertEquals(testConfig.name, "authenticate");
+        assertThat(AuthenticationConfig.name).isEqualTo("authenticate");
     }
 
     @Test
-    void testId() {
-        assertEquals(testConfig.getId(), "captcha");
+    void testGetId() {
+        assertThat(testConfig.getId()).isEqualTo("captcha");
     }
 
     @Test
-    void testLabel() {
-        assertEquals(testConfig.getLabel(), "CAPTCHA");
+    void testGetLabel() {
+        assertThat(testConfig.getLabel()).isEqualTo("CAPTCHA");
     }
 
     @Test
     void testButtonId() {
-        assertEquals(testConfig.asButton().getId(), "authenticate:captcha");
+        assertThat(testConfig.asButton().getId()).isEqualTo("authenticate:captcha");
     }
 }
