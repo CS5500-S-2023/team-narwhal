@@ -32,8 +32,3 @@ The SpamFree bot allows discord server owners to verify their members upon joini
 ## License
 
 ## Acknowledgement
-
-
-
-
-
