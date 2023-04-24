@@ -23,24 +23,54 @@ public class ChallengeController {
         this.challengeRepository = challengeRepository;
     }
 
+    /**
+     * Creates an AuthenticationChallege.
+     *
+     * @param userId - The user creating the AuthenticationChallenge.
+     * @param answer - The answer to the AuthenticationChallenge.
+     * @return an AuthenticationChallenge.
+     */
     public AuthenticationChallenge createChallenge(String userId, String answer) {
         return AuthenticationChallenge.builder().eventUserId(userId).answer(answer).build();
     }
 
+    /**
+     * Gets the correct AuthenticationChallenge for the user from the ChallengeRepository.
+     *
+     * @param userId - The user whose AuthenticationChallenge we are getting.
+     * @return an AuthenticationChallenge.
+     */
     @Nullable
     public AuthenticationChallenge getChallenge(String userId) {
         return challengeRepository.get(userId);
     }
 
+    /**
+     * Adds an AuthenticationChallenge to the ChallengeRepository.
+     *
+     * @param challenge - The AuthenticationChallenge we are adding to the ChallengeRepository.
+     */
     public void addChallenge(@Nonnull AuthenticationChallenge challenge) {
         challengeRepository.add(challenge);
     }
 
+    /**
+     * Removes an AuthenticationChallenge from the ChallengeRepository.
+     *
+     * @param userId - The user whose AuthenticationChallenge we are removing from the repository.
+     */
     public void removeChallenge(String userId) {
         AuthenticationChallenge challenge = challengeRepository.get(userId);
         challengeRepository.delete(Objects.requireNonNull(challenge.getId()));
     }
 
+    /**
+     * Restarts the AuthenticationChallenge.
+     *
+     * @param challenge - The AuthenticationChallenge we are restarting.
+     * @param answer - The updated answer to the AuthenticationChallenge.
+     * @return an updated AuthenticationChallenge.
+     */
     public AuthenticationChallenge restartChallenge(
             AuthenticationChallenge challenge, String answer) {
         challenge.setAnswer(answer);
@@ -49,11 +79,23 @@ public class ChallengeController {
         return challenge;
     }
 
+    /**
+     * Updates the AuthenticationState to VERIFIED.
+     *
+     * @param challenge - The AuthenticationChallenge we are updating.
+     * @return an updated AuthenticationChallenge.
+     */
     public AuthenticationChallenge passChallenge(@Nonnull AuthenticationChallenge challenge) {
         challenge.setState(AuthenticationState.VERIFIED);
         return challenge;
     }
 
+    /**
+     * Updates the AuthenticationState to INCORRECT_RESPONSE.
+     *
+     * @param challenge - The AuthenticationChallenge we are updating.
+     * @return an updated AuthenticationChallenge.
+     */
     public AuthenticationChallenge failChallenge(@Nonnull AuthenticationChallenge challenge) {
         int attempts = challenge.getNumAttempts();
         challenge.setNumAttempts(attempts + 1);
@@ -62,6 +104,7 @@ public class ChallengeController {
         return challenge;
     }
 
+    // TODO: Future implementation - Use method for timeout & lockout
     public boolean checkCooldown(AuthenticationChallenge challenge) {
         return new Date().after(challenge.getTimeStamp());
     }

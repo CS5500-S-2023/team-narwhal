@@ -9,7 +9,6 @@ import edu.northeastern.cs5500.starterbot.annotation.IgnoreInGeneratedReport;
 @Module
 @IgnoreInGeneratedReport
 public class AuthenticationModule {
-    // https://dagger.dev/dev-guide/multibindings.html
     @Provides
     @IntoMap
     @AuthenticationTypeMapKey(AuthenticationType.CAPTCHA)

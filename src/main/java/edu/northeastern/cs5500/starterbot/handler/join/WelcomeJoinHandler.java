@@ -17,6 +17,7 @@ import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.dv8tion.jda.api.utils.messages.MessageCreateBuilder;
 
+/** A class to welcome a member when they join a server. */
 public class WelcomeJoinHandler implements JoinHandler {
     @Inject Map<AuthenticationType, AuthenticationConfig> authenticationMethods;
     MembershipController membershipController;
@@ -29,6 +30,7 @@ public class WelcomeJoinHandler implements JoinHandler {
         this.roleController = roleController;
     }
 
+    /** Runs after a member joins a guild. */
     @Override
     @SneakyThrows
     public void handleGuildMemberJoinEvent(GuildMemberJoinEvent event) {
@@ -36,8 +38,6 @@ public class WelcomeJoinHandler implements JoinHandler {
         Guild guild = event.getGuild();
 
         membershipController.addMembership(user, guild);
-
-        roleController.addUnverifiedRoleToUser(guild, user);
 
         String guildName = guild.getName();
         MessageCreateBuilder welcomeMsg = generateWelcomeMsg(guildName);
@@ -56,8 +56,8 @@ public class WelcomeJoinHandler implements JoinHandler {
         // Creating message string to send user in private channel
         String welcomeMessage =
                 String.format(
-                        "Welcome to %s!"
-                                + "Before you can get access to the server, "
+                        "Welcome to \"%s\" server!"
+                                + "Before you can get access, "
                                 + "please verify using one of the following methods:",
                         guildName);
 

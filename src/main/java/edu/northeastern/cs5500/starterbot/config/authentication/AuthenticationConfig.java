@@ -4,6 +4,7 @@ import javax.annotation.Nonnull;
 import lombok.Data;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 
+/** Configuration class for an authentication method. */
 @Data
 public abstract class AuthenticationConfig {
     public static final String name = "authenticate";
@@ -15,6 +16,11 @@ public abstract class AuthenticationConfig {
         this.label = label;
     }
 
+    /**
+     * Generates a button for the authentication method.
+     *
+     * @return a Button.
+     */
     public Button asButton() {
         return Button.primary(String.format("%s:%s", name, id), getLabel());
     }

@@ -15,14 +15,15 @@ import net.dv8tion.jda.api.utils.messages.MessageCreateData;
 import net.dv8tion.jda.api.utils.messages.MessageEditData;
 import nl.captcha.Captcha;
 
+/** A class to handle when a CAPTCHA button is clicked. */
 public class CaptchaButtonHandler extends AuthenticationButtonHandler {
 
     @Inject
     public CaptchaButtonHandler() {
-        // TODO: the input arg in constructor isn't used
         super("captcha");
     }
 
+    /** Runs after a CAPTCHA button is clicked. */
     @Override
     public void handleButtonInteraction(ButtonInteractionEvent event) {
         // Edit message to accomplish 2 things:

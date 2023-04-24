@@ -14,7 +14,12 @@ public class MembershipRepository extends InMemoryRepository<Membership> {
         super();
     }
 
-    /** Retrieves user's membership */
+    /**
+     * Retrieves user's membership.
+     *
+     * @param userId - User's Id we are retrieving the membership for.
+     * @return user's membership.
+     */
     @Nullable
     public Membership get(@Nonnull String userId) {
         return collection.values().stream()
@@ -22,6 +27,11 @@ public class MembershipRepository extends InMemoryRepository<Membership> {
                 .toArray(Membership[]::new)[0];
     }
 
+    /**
+     * Removes the user's membership from the MembershipRepository.
+     *
+     * @param userId - User's Id we are removing from the MembershipRepository.
+     */
     public void delete(@Nonnull String userId) {
         Membership[] memberships =
                 collection.values().stream()

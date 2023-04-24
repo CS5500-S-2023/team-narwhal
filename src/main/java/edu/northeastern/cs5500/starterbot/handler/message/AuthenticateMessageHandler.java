@@ -22,6 +22,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.dv8tion.jda.api.utils.messages.MessageCreateBuilder;
 
+/** A class to handle messages related to authentication. */
 @Slf4j
 public class AuthenticateMessageHandler implements MessageHandler {
     @Inject Map<AuthenticationType, AuthenticationConfig> authenticationMethods;
@@ -36,6 +37,8 @@ public class AuthenticateMessageHandler implements MessageHandler {
     /**
      * Handles message received event. Ignore message if there's no authentication session for
      * message author
+     *
+     * @param event - The message received event.
      */
     @SneakyThrows
     public void handleMessage(@Nonnull MessageReceivedEvent event) {
@@ -55,6 +58,14 @@ public class AuthenticateMessageHandler implements MessageHandler {
         }
     }
 
+    /**
+     * Sends a message depending on the AuthenticationState in the AuthenticationChallenge.
+     *
+     * @param event - The message received event.
+     * @param state - The AuthenticationState of the AuthenticationChallenge.
+     * @throws FailedToSendMessageException
+     * @throws UnknownAuthenticationStateException
+     */
     public void sendChallengeResultMessage(MessageReceivedEvent event, AuthenticationState state)
             throws FailedToSendMessageException, UnknownAuthenticationStateException {
         switch (state) {
@@ -78,24 +89,40 @@ public class AuthenticateMessageHandler implements MessageHandler {
         }
     }
 
+    /**
+     * Sends a message when the AuthenticationState is set to VERIFIED.
+     *
+     * @param event - The message received event.
+     */
     public void sendSuccessMessage(MessageReceivedEvent event) {
         MessageCreateBuilder msg = new MessageCreateBuilder().setContent("You are verified!");
         event.getAuthor().openPrivateChannel().complete().sendMessage(msg.build()).queue();
     }
 
+    /**
+     * Sends a message when the AuthenticationState is set to INCORRECT_RESPONSE.
+     *
+     * @param event - The message received event.
+     */
     public void sendRetryMessage(MessageReceivedEvent event) {
         User user = event.getAuthor();
         MessageCreateBuilder msg = generateRetryMsg();
         user.openPrivateChannel().complete().sendMessage(msg.build()).queue();
     }
-
+    /**
+     * Not yet implemented. For now, allow infinite retries. Future implementation: send message
+     * indicating user is locked out for n amount of time and cannot retry authentication before
+     * then.
+     */
     public void sendLockedOutMessage(MessageReceivedEvent event) {
-        // Not yet implemented. For now, allow infinite retries.
-        // Future implementation: send message indicating user is locked out for n amount of time
-        // and cannot retry authentication before then.
         sendRetryMessage(event);
     }
 
+    /**
+     * Generates a message when the AuthenticationState is set to INCORRECT_RESPONSE.
+     *
+     * @return - A message with the authentication method buttons.
+     */
     public MessageCreateBuilder generateRetryMsg() {
         String msg = "That is incorrect. Please verify using one of the following methods:";
         MessageCreateBuilder messageCreateBuilder = new MessageCreateBuilder();
@@ -108,6 +135,11 @@ public class AuthenticateMessageHandler implements MessageHandler {
         return messageCreateBuilder.addActionRow(Objects.requireNonNull(buttons)).setContent(msg);
     }
 
+    /**
+     * Sends a message when the AuthenticationState is set to WAITING_FOR_RESPONSE.
+     *
+     * @param event - The message received event.
+     */
     public void sendWaitingForResponseMessage(MessageReceivedEvent event) {
         MessageCreateBuilder msg = new MessageCreateBuilder().setContent("Waiting for response...");
         event.getAuthor().openPrivateChannel().complete().sendMessage(msg.build()).queue();

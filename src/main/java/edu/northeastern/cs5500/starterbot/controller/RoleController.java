@@ -15,13 +15,13 @@ import net.dv8tion.jda.api.entities.channel.middleman.GuildChannel;
 import net.dv8tion.jda.api.requests.restaction.PermissionOverrideAction;
 import net.dv8tion.jda.api.requests.restaction.RoleAction;
 
-/** */
+/** A class that handles role assignment flow. */
 @Singleton
 public class RoleController {
-    private @Nonnull String unverifiedRoleName = "SFDB Unverified";
+    private static final String VERIFIED_ROLE_NAME = "Verified";
 
     @Inject
-    RoleController() {
+    public RoleController() {
         //
     }
 
@@ -32,18 +32,16 @@ public class RoleController {
      * @param guild - the guild the user is trying to join
      * @return an unverified role
      */
-    public Role getUnverifiedRole(@Nonnull Guild guild) {
+    public Role getVerifiedRole(@Nonnull Guild guild) {
         // Loops through all roles in the guild to see if the unverified role already exists
-        List<Role> roles = guild.getRoles();
-        for (Role role : roles) {
-            if (role.getName().equals(unverifiedRoleName)) {
-                return role;
-            }
+        List<Role> roles = guild.getRolesByName(VERIFIED_ROLE_NAME, false);
+        if (!roles.isEmpty()) {
+            return roles.get(0);
         }
 
         // Creates the unverified role as it does not currently exist in the guild
         RoleAction roleAction = guild.createRole();
-        roleAction.setName(unverifiedRoleName).setPermissions(Permission.EMPTY_PERMISSIONS);
+        roleAction.setName(VERIFIED_ROLE_NAME).setPermissions(Permission.ALL_CHANNEL_PERMISSIONS);
         Role role = roleAction.complete();
         setPermissionOverrides(guild, role);
         return role;
@@ -55,39 +53,64 @@ public class RoleController {
      * @param guild - the guild the user is trying to join
      * @param user - the user trying to join the guild
      */
-    public void addUnverifiedRoleToUser(@Nonnull Guild guild, @Nonnull User user)
+    public void addVerifiedRoleToUser(@Nonnull Guild guild, @Nonnull User user)
             throws FailedToChangeUserRoleException {
         try {
-            Role role = getUnverifiedRole(guild);
+            Role role = getVerifiedRole(guild);
 
             if (role != null) {
                 guild.addRoleToMember(user, role).queue();
             }
         } catch (Exception exception) {
-            throw new FailedToChangeUserRoleException("Failed to add unverified role to user.");
+            throw new FailedToChangeUserRoleException("Failed to add verified role to user.");
         }
     }
 
     /**
-     * Removes an unverified role to the member trying to join the guild
+     * Removes a verified role from user
      *
      * @param guild - the guild the user is trying to join
      * @param user - the user trying to join the guild
      */
-    public void removeUnverifiedRoleFromUser(@Nonnull Guild guild, @Nonnull User user)
+    public void removeVerifiedRoleFromUser(@Nonnull Guild guild, @Nonnull User user)
             throws FailedToChangeUserRoleException {
         try {
-            Role role = guild.getRolesByName(unverifiedRoleName, false).get(0);
+            Role role = guild.getRolesByName(VERIFIED_ROLE_NAME, false).get(0);
             if (role != null) {
                 guild.removeRoleFromMember(user, role).complete();
             }
         } catch (Exception exception) {
-            throw new FailedToChangeUserRoleException("Failed to remove unverified role from user");
+            throw new FailedToChangeUserRoleException("Failed to remove verified role from user");
         }
     }
 
     /**
-     * Overrides permissions for all channels Ensures unverified role cannot see any channels or
+     * Removes all permissions from @everyone for the guild.
+     *
+     * @param guild - The guild we are updating permissions for.
+     */
+    public void updatePublicRolePermissions(@Nonnull Guild guild) {
+        guild.getPublicRole()
+                .getManager()
+                .revokePermissions(Permission.getPermissions(Permission.ALL_GUILD_PERMISSIONS))
+                .complete();
+    }
+
+    /**
+     * Adds the verified role to all members in a guild.
+     *
+     * @param guild - The guild we are adding the verified role to all members for.
+     * @throws FailedToChangeUserRoleException
+     */
+    public void addVerifiedRoleToAllMembers(Guild guild) throws FailedToChangeUserRoleException {
+        for (Member member : guild.getMembers()) {
+            User user = member.getUser();
+            addVerifiedRoleToUser(guild, user);
+        }
+    }
+
+    /**
+     * Overrides permissions for all channels; Ensures unverified role cannot see any channels or
      * members
      *
      * @param guild - the guild the user is trying to join
@@ -97,7 +120,7 @@ public class RoleController {
         for (GuildChannel channel : guild.getChannels()) {
             channel.getPermissionContainer()
                     .getManager()
-                    .putPermissionOverride(role, 0, Permission.ALL_CHANNEL_PERMISSIONS)
+                    .putPermissionOverride(role, Permission.ALL_CHANNEL_PERMISSIONS, 0)
                     .complete();
         }
     }
