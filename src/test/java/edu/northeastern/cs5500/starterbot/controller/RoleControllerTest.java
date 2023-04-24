@@ -4,17 +4,23 @@ import org.junit.jupiter.api.Test;
 
 public class RoleControllerTest {
     @Test
-    void testAddUnverifiedRoleToUser() {}
+    void testAddVerifiedRoleToAllMembers() {}
 
     @Test
-    void testGetUnverifiedRole() {}
+    void testAddVerifiedRoleToUser() {}
+
+    @Test
+    void testGetVerifiedRole() {}
 
     @Test
     void testGrantUserPermissionInTextChannel() {}
 
     @Test
-    void testRemoveUnverifiedRoleFromUser() {}
+    void testRemoveVerifiedRoleFromUser() {}
 
     @Test
     void testSetPermissionOverrides() {}
+
+    @Test
+    void testUpdatePublicRolePermissions() {}
 }

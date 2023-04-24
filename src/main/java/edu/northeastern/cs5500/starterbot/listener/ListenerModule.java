@@ -6,9 +6,9 @@ import dagger.multibindings.IntoSet;
 import javax.inject.Singleton;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
+/** Provides the listeners that the program supports, stored in a set. */
 @Module
 public class ListenerModule {
-    // https://dagger.dev/dev-guide/multibindings.html
     @Singleton
     @Provides
     @IntoSet

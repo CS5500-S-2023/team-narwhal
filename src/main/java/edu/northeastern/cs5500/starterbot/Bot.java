@@ -15,10 +15,11 @@ import edu.northeastern.cs5500.starterbot.listener.SlashCommandListener;
 import edu.northeastern.cs5500.starterbot.repository.RepositoryModule;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Set;
+import java.util.Map;
 import java.util.stream.Collectors;
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
+import javax.inject.Provider;
 import javax.inject.Singleton;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -48,7 +49,7 @@ public class Bot {
     MessageListener messageListener;
     SlashCommandListener slashCommandListener;
 
-    @Inject Set<SlashCommandConfig> commands;
+    @Inject Map<String, Provider<SlashCommandConfig>> commandConfigs;
 
     @Inject
     Bot(
@@ -70,7 +71,8 @@ public class Bot {
     private @Nonnull Collection<CommandData> allCommandData() {
         // you can also use a for loop, add everything from the set
         Collection<CommandData> commandData =
-                commands.stream()
+                commandConfigs.entrySet().stream()
+                        .map(provider -> provider.getValue().get())
                         .map(SlashCommandConfig::getCommandData)
                         .collect(Collectors.toList());
         if (commandData == null) {
