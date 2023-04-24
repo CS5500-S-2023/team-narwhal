@@ -13,7 +13,6 @@ import edu.northeastern.cs5500.starterbot.listener.GuildMemberJoinListener;
 import edu.northeastern.cs5500.starterbot.listener.MessageListener;
 import edu.northeastern.cs5500.starterbot.listener.SlashCommandListener;
 import edu.northeastern.cs5500.starterbot.repository.RepositoryModule;
-import edu.northeastern.cs5500.starterbot.service.ServiceModule;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
@@ -22,10 +21,12 @@ import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import javax.inject.Provider;
 import javax.inject.Singleton;
-import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
+import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
+import net.dv8tion.jda.api.utils.MemberCachePolicy;
 
 @Component(
         modules = {
@@ -36,21 +37,18 @@ import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
             MessageModule.class,
             CommandModule.class,
             SlashCommandModule.class,
-            ServiceModule.class,
         })
 @Singleton
 interface BotComponent {
     public Bot bot();
 }
 
-@Slf4j
 public class Bot {
     ButtonListener buttonListener;
     GuildMemberJoinListener guildMemberJoinListener;
     MessageListener messageListener;
     SlashCommandListener slashCommandListener;
 
-    @Inject JDA jda;
     @Inject Map<String, Provider<SlashCommandConfig>> commandConfigs;
 
     @Inject
@@ -63,6 +61,10 @@ public class Bot {
         this.guildMemberJoinListener = guildMemberJoinListener;
         this.messageListener = messageListener;
         this.slashCommandListener = slashCommandListener;
+    }
+
+    static String getBotToken() {
+        return new ProcessBuilder().environment().get("BOT_TOKEN");
     }
 
     // get all the commands supported by the program
@@ -80,16 +82,35 @@ public class Bot {
     }
 
     void start() throws InterruptedException {
-        try {
-            jda.addEventListener(
-                    buttonListener, guildMemberJoinListener, messageListener, slashCommandListener);
-
-            CommandListUpdateAction commands = jda.updateCommands();
-            // right now we only have slash commands
-            commands.addCommands(allCommandData());
-            commands.queue();
-        } catch (Exception e) {
-            log.error("Unable to add message listeners", e);
+        String token = getBotToken();
+        if (token == null) {
+            throw new IllegalArgumentException(
+                    "The BOT_TOKEN environment variable is not defined.");
         }
+        @SuppressWarnings("null")
+        @Nonnull
+        JDA jda =
+                JDABuilder.createDefault(
+                                token,
+                                GatewayIntent.GUILD_MEMBERS,
+                                GatewayIntent.GUILD_MESSAGES,
+                                GatewayIntent.DIRECT_MESSAGES,
+                                GatewayIntent.GUILD_MESSAGE_REACTIONS)
+                        .setDisabledIntents(
+                                GatewayIntent.GUILD_VOICE_STATES,
+                                GatewayIntent.GUILD_EMOJIS_AND_STICKERS)
+                        .setMemberCachePolicy(MemberCachePolicy.ALL)
+                        .addEventListeners(
+                                buttonListener,
+                                guildMemberJoinListener,
+                                messageListener,
+                                slashCommandListener)
+                        .build();
+
+        CommandListUpdateAction commands = jda.updateCommands();
+        // right now we only have slash commands
+        commands.addCommands(allCommandData());
+        commands.queue();
+        // jda.awaitReady(); is this needed?
     }
 }
