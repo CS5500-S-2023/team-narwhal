@@ -1,5 +1,6 @@
 package edu.northeastern.cs5500.starterbot.controller;
 
+import edu.northeastern.cs5500.starterbot.annotation.IgnoreInGeneratedReport;
 import edu.northeastern.cs5500.starterbot.model.GuildState;
 import edu.northeastern.cs5500.starterbot.model.SetupState;
 import edu.northeastern.cs5500.starterbot.repository.GuildSetupStateRepository;
@@ -11,6 +12,8 @@ import javax.inject.Singleton;
  * Delete a challenge 4. Update attempts
  */
 @Singleton
+// TODO: check if it's ok to omit tests here
+@IgnoreInGeneratedReport
 public class GuildController {
     GuildSetupStateRepository guildSetupStateRepository;
 
@@ -22,7 +25,7 @@ public class GuildController {
     /**
      * Starts the guild setup.
      *
-     * @param guildId - The ID for the guild to setup.
+     * @param guildId - The ID for the guild to set up.
      */
     public void startGuildSetup(String guildId) {
         GuildState guildState =

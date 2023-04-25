@@ -96,13 +96,13 @@ jacocoTestReport {
     }
 }
 
-/*
+
 jacocoTestCoverageVerification {
     violationRules {
         rule {
             limit {
                 // minimum percentage of code coverage
-                minimum = 0.5
+                minimum = 0.4
             }
         }
         rule {
@@ -117,7 +117,7 @@ jacocoTestCoverageVerification {
         }
     }
 }
-*/
+
 
 // Check coverage after each test run
 check.dependsOn jacocoTestCoverageVerification

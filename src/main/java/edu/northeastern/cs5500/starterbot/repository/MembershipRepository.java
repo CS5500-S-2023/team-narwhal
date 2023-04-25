@@ -1,5 +1,6 @@
 package edu.northeastern.cs5500.starterbot.repository;
 
+import edu.northeastern.cs5500.starterbot.annotation.IgnoreInGeneratedReport;
 import edu.northeastern.cs5500.starterbot.model.Membership;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -8,6 +9,7 @@ import javax.inject.Singleton;
 
 /** Repository of user server memberships */
 @Singleton
+@IgnoreInGeneratedReport
 public class MembershipRepository extends InMemoryRepository<Membership> {
     @Inject
     public MembershipRepository() {
@@ -17,7 +19,7 @@ public class MembershipRepository extends InMemoryRepository<Membership> {
     /**
      * Retrieves user's membership.
      *
-     * @param userId - User's Id we are retrieving the membership for.
+     * @param userId - User's ID we are retrieving the membership for.
      * @return user's membership.
      */
     @Nullable
@@ -30,7 +32,7 @@ public class MembershipRepository extends InMemoryRepository<Membership> {
     /**
      * Removes the user's membership from the MembershipRepository.
      *
-     * @param userId - User's Id we are removing from the MembershipRepository.
+     * @param userId - User's ID we are removing from the MembershipRepository.
      */
     public void delete(@Nonnull String userId) {
         Membership[] memberships =

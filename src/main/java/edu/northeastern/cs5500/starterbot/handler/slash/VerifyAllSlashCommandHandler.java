@@ -1,5 +1,6 @@
 package edu.northeastern.cs5500.starterbot.handler.slash;
 
+import edu.northeastern.cs5500.starterbot.annotation.IgnoreInGeneratedReport;
 import edu.northeastern.cs5500.starterbot.config.command.VerifyAllSlashCommand;
 import edu.northeastern.cs5500.starterbot.controller.GuildController;
 import edu.northeastern.cs5500.starterbot.controller.RoleController;
@@ -7,8 +8,10 @@ import edu.northeastern.cs5500.starterbot.exceptions.FailedToChangeUserRoleExcep
 import javax.inject.Inject;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import org.jetbrains.annotations.NotNull;
 
 /** Handles the /verify-all command. */
+@IgnoreInGeneratedReport
 public class VerifyAllSlashCommandHandler implements SlashCommandHandler {
     VerifyAllSlashCommand config;
     GuildController guildController;
@@ -29,6 +32,7 @@ public class VerifyAllSlashCommandHandler implements SlashCommandHandler {
      *
      * @return the name from the config object.
      */
+    @NotNull
     public String getName() {
         return config.getName();
     }

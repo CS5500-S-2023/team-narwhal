@@ -14,10 +14,10 @@ class VerifyAllSlashCommandHandlerTest {
 
     @BeforeEach
     void setUp() {
-        GuildSetupStateRepository guildSetupStateRepository = new GuildSetupStateRepository();
-        RoleController roleController = new RoleController();
         VerifyAllSlashCommand config = new VerifyAllSlashCommand();
+        GuildSetupStateRepository guildSetupStateRepository = new GuildSetupStateRepository();
         GuildController guildController = new GuildController(guildSetupStateRepository);
+        RoleController roleController = new RoleController();
         verifyAllSlashCommandHandler =
                 new VerifyAllSlashCommandHandler(config, guildController, roleController);
     }
@@ -25,20 +25,6 @@ class VerifyAllSlashCommandHandlerTest {
     @Test
     void getName() {
         assertThat(verifyAllSlashCommandHandler.getName()).matches("verify-all");
-    }
-
-    @Test
-    void getCommandData() {
-        /*
-        CommandData commandData =  Commands.slash("verify", "Tell the bot what name to address you with")
-            .addOptions(
-                new OptionData(
-                    OptionType.STRING,
-                    "name",
-                    "The bot will use this name to talk to you going forward")
-                    .setRequired(true));
-        assertThat(verifySlashCommandHandler.getCommandData())
-         */
     }
 
     @Test

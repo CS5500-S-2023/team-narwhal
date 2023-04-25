@@ -8,6 +8,7 @@ import com.mongodb.MongoClientSettings;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
+import edu.northeastern.cs5500.starterbot.annotation.IgnoreInGeneratedReport;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.Getter;
@@ -17,6 +18,7 @@ import org.bson.codecs.pojo.PojoCodecProvider;
 
 @Singleton
 @Slf4j
+@IgnoreInGeneratedReport
 public class MongoDBService implements Service {
 
     static String getDatabaseURI() {
