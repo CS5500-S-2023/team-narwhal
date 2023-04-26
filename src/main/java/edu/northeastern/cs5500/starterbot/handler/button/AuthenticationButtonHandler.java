@@ -6,7 +6,8 @@ import javax.inject.Inject;
 import lombok.Data;
 
 /** Abstract class for all authentication method buttons. */
-@Data
+@Getter
+@Setter
 public abstract class AuthenticationButtonHandler implements ButtonHandler {
     @Inject AuthenticationController authenticationController;
 
