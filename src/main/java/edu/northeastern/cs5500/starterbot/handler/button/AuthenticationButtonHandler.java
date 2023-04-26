@@ -3,10 +3,14 @@ package edu.northeastern.cs5500.starterbot.handler.button;
 import edu.northeastern.cs5500.starterbot.controller.AuthenticationController;
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 /** Abstract class for all authentication method buttons. */
 @Getter
 @Setter
+@RequiredArgsConstructor
 public abstract class AuthenticationButtonHandler implements ButtonHandler {
     @Inject AuthenticationController authenticationController;
 
