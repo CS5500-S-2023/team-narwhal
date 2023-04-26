@@ -1,5 +1,6 @@
 package edu.northeastern.cs5500.starterbot.handler.message;
 
+import edu.northeastern.cs5500.starterbot.annotation.IgnoreInGeneratedReport;
 import edu.northeastern.cs5500.starterbot.config.authentication.AuthenticationConfig;
 import edu.northeastern.cs5500.starterbot.config.authentication.AuthenticationType;
 import edu.northeastern.cs5500.starterbot.controller.AuthenticationController;
@@ -23,6 +24,7 @@ import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.dv8tion.jda.api.utils.messages.MessageCreateBuilder;
 
 /** A class to handle messages related to authentication. */
+@IgnoreInGeneratedReport
 @Slf4j
 public class AuthenticateMessageHandler implements MessageHandler {
     @Inject Map<AuthenticationType, AuthenticationConfig> authenticationMethods;

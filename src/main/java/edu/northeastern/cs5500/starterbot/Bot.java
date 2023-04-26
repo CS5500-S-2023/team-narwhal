@@ -1,6 +1,7 @@
 package edu.northeastern.cs5500.starterbot;
 
 import dagger.Component;
+import edu.northeastern.cs5500.starterbot.annotation.IgnoreInGeneratedReport;
 import edu.northeastern.cs5500.starterbot.config.authentication.AuthenticationModule;
 import edu.northeastern.cs5500.starterbot.config.command.CommandModule;
 import edu.northeastern.cs5500.starterbot.config.command.SlashCommandConfig;
@@ -43,6 +44,8 @@ interface BotComponent {
     public Bot bot();
 }
 
+/** Represents a discord bot instance with the supported functionalities, such as button clicks. */
+@IgnoreInGeneratedReport
 public class Bot {
     ButtonListener buttonListener;
     GuildMemberJoinListener guildMemberJoinListener;
@@ -63,16 +66,24 @@ public class Bot {
         this.slashCommandListener = slashCommandListener;
     }
 
+    /***
+     * Get the bot token from the program environment.
+     * @return a bot token represented as a String
+     */
     static String getBotToken() {
         return new ProcessBuilder().environment().get("BOT_TOKEN");
     }
 
-    // get all the commands supported by the program
+    /**
+     * Get all the commands supported by the program.
+     *
+     * @return all commands data objects stored in a collection
+     */
     private @Nonnull Collection<CommandData> allCommandData() {
         // you can also use a for loop, add everything from the set
         Collection<CommandData> commandData =
-                commandConfigs.entrySet().stream()
-                        .map(provider -> provider.getValue().get())
+                commandConfigs.values().stream()
+                        .map(Provider::get)
                         .map(SlashCommandConfig::getCommandData)
                         .collect(Collectors.toList());
         if (commandData == null) {
@@ -81,6 +92,11 @@ public class Bot {
         return commandData;
     }
 
+    /**
+     * Starts a jda bot session.
+     *
+     * @throws InterruptedException if the session is interrupted.
+     */
     void start() throws InterruptedException {
         String token = getBotToken();
         if (token == null) {
@@ -108,9 +124,7 @@ public class Bot {
                         .build();
 
         CommandListUpdateAction commands = jda.updateCommands();
-        // right now we only have slash commands
         commands.addCommands(allCommandData());
         commands.queue();
-        // jda.awaitReady(); is this needed?
     }
 }

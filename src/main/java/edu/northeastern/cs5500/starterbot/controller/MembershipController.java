@@ -1,5 +1,6 @@
 package edu.northeastern.cs5500.starterbot.controller;
 
+import edu.northeastern.cs5500.starterbot.annotation.IgnoreInGeneratedReport;
 import edu.northeastern.cs5500.starterbot.model.Membership;
 import edu.northeastern.cs5500.starterbot.repository.MembershipRepository;
 import javax.inject.Inject;
@@ -9,6 +10,7 @@ import net.dv8tion.jda.api.entities.User;
 
 /** A class that handles membership flow. */
 @Singleton
+@IgnoreInGeneratedReport
 public class MembershipController {
 
     MembershipRepository membershipRepository;

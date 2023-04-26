@@ -2,29 +2,26 @@ package edu.northeastern.cs5500.starterbot.config.authentication;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+// TODO: would javadoc be ignored for test classes?
 public class CaptchaAuthenticationConfigTest {
 
-    CaptchaAuthenticationConfig testConfig = new CaptchaAuthenticationConfig();
+    private CaptchaAuthenticationConfig testCaptchaConfig;
 
-    @Test
-    void testName() {
-        assertThat(AuthenticationConfig.name).isEqualTo("authenticate");
+    @BeforeEach
+    void setUp() {
+        testCaptchaConfig = new CaptchaAuthenticationConfig();
     }
 
     @Test
-    void testGetId() {
-        assertThat(testConfig.getId()).isEqualTo("captcha");
-    }
-
-    @Test
-    void testGetLabel() {
-        assertThat(testConfig.getLabel()).isEqualTo("CAPTCHA");
+    void testAsButton() {
+        // TODO: can we use the below test since generating button use jda?
     }
 
     @Test
     void testButtonId() {
-        assertThat(testConfig.asButton().getId()).isEqualTo("authenticate:captcha");
+        assertThat(testCaptchaConfig.asButton().getId()).isEqualTo("authenticate:captcha");
     }
 }

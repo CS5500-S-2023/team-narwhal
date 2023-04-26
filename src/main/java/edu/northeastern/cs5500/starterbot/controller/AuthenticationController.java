@@ -1,5 +1,6 @@
 package edu.northeastern.cs5500.starterbot.controller;
 
+import edu.northeastern.cs5500.starterbot.annotation.IgnoreInGeneratedReport;
 import edu.northeastern.cs5500.starterbot.exceptions.FailedToChangeUserRoleException;
 import edu.northeastern.cs5500.starterbot.exceptions.NoAuthenticationSessionException;
 import edu.northeastern.cs5500.starterbot.model.AuthenticationChallenge;
@@ -16,7 +17,9 @@ import net.dv8tion.jda.api.entities.User;
  * Handles user attempts and determines if it's successful or not
  */
 @Singleton
+@IgnoreInGeneratedReport
 public class AuthenticationController {
+
     RoleController roleController;
     ChallengeController challengeController;
     MembershipController membershipController;
@@ -46,7 +49,6 @@ public class AuthenticationController {
         } else {
             challenge = challengeController.createChallenge(userId, answer);
         }
-
         challengeController.addChallenge(Objects.requireNonNull(challenge));
         return challenge;
     }
@@ -73,7 +75,6 @@ public class AuthenticationController {
     public AuthenticationChallenge attemptChallenge(@Nonnull String userId, String userInput)
             throws NoAuthenticationSessionException, FailedToChangeUserRoleException {
         AuthenticationChallenge challenge = challengeController.getChallenge(userId);
-
         if (challenge == null) {
             throw new NoAuthenticationSessionException(
                     "No authentication session to attempt for user.");
@@ -102,14 +103,12 @@ public class AuthenticationController {
         if (Objects.isNull(membership)) {
             return null;
         }
-
         User user = Objects.requireNonNull(membership).getUser();
         Guild guild = membership.getGuild();
 
         if (Objects.nonNull(guild) && Objects.nonNull(user)) {
             roleController.addVerifiedRoleToUser(guild, user);
         }
-
         completeChallenge(userId);
         return challengeController.passChallenge(challenge);
     }

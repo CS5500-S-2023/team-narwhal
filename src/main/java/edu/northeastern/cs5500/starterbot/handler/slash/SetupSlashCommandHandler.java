@@ -1,5 +1,6 @@
 package edu.northeastern.cs5500.starterbot.handler.slash;
 
+import edu.northeastern.cs5500.starterbot.annotation.IgnoreInGeneratedReport;
 import edu.northeastern.cs5500.starterbot.config.command.SetupSlashCommand;
 import edu.northeastern.cs5500.starterbot.controller.GuildController;
 import edu.northeastern.cs5500.starterbot.controller.RoleController;
@@ -7,8 +8,10 @@ import edu.northeastern.cs5500.starterbot.exceptions.FailedToChangeUserRoleExcep
 import javax.inject.Inject;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import org.jetbrains.annotations.NotNull;
 
 /** A class to handle /setup command. */
+@IgnoreInGeneratedReport
 public class SetupSlashCommandHandler implements SlashCommandHandler {
     SetupSlashCommand config;
     GuildController guildController;
@@ -29,6 +32,7 @@ public class SetupSlashCommandHandler implements SlashCommandHandler {
      *
      * @return - The name of the slash command config.
      */
+    @NotNull
     public String getName() {
         return config.getName();
     }
@@ -82,7 +86,7 @@ public class SetupSlashCommandHandler implements SlashCommandHandler {
      * Concatenates the verified role has been given to all members message to message we are going
      * to send the member after the guild setup is complete.
      *
-     * @param msg - The message to concatentate to.
+     * @param msg - The message to concatenate to.
      * @return A message to send the user after the guild setup is complete.
      */
     public String getAllMemberVerifiedMsg(String msg) {

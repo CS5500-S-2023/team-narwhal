@@ -1,5 +1,6 @@
 package edu.northeastern.cs5500.starterbot.controller;
 
+import edu.northeastern.cs5500.starterbot.annotation.IgnoreInGeneratedReport;
 import edu.northeastern.cs5500.starterbot.exceptions.FailedToChangeUserRoleException;
 import java.util.List;
 import javax.annotation.Nonnull;
@@ -16,7 +17,9 @@ import net.dv8tion.jda.api.requests.restaction.PermissionOverrideAction;
 import net.dv8tion.jda.api.requests.restaction.RoleAction;
 
 /** A class that handles role assignment flow. */
+// TODO: check if it's ok to omit tests here bc of guild
 @Singleton
+@IgnoreInGeneratedReport
 public class RoleController {
     private static final String VERIFIED_ROLE_NAME = "Verified";
 

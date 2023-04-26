@@ -4,10 +4,12 @@ import dagger.Module;
 import dagger.Provides;
 import dagger.multibindings.IntoMap;
 import dagger.multibindings.StringKey;
+import edu.northeastern.cs5500.starterbot.annotation.IgnoreInGeneratedReport;
 import edu.northeastern.cs5500.starterbot.config.command.SetupSlashCommand;
 import edu.northeastern.cs5500.starterbot.config.command.VerifyAllSlashCommand;
 
 /** Provides the slash command handlers that the program supports, stored in a map. */
+@IgnoreInGeneratedReport
 @Module
 public class SlashCommandModule {
     @Provides

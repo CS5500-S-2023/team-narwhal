@@ -40,25 +40,16 @@ public class AuthenticationStateTest {
         assertThat(AuthenticationState.values())
                 .asList()
                 .containsExactly(
-                        AuthenticationState.UNKNOWN,
-                        AuthenticationState.WAITING_FOR_RESPONSE,
-                        AuthenticationState.INCORRECT_RESPONSE,
-                        AuthenticationState.VERIFIED,
-                        AuthenticationState.TOO_MANY_ATTEMPTS,
-                        AuthenticationState.FAILED_TO_SEND);
+                        unknown, waiting, incorrect, verified, tooManyAttempts, failedToSend);
     }
 
     @Test
     void valueOf() {
-        assertThat(AuthenticationState.valueOf("UNKNOWN")).isEqualTo(AuthenticationState.UNKNOWN);
-        assertThat(AuthenticationState.valueOf("WAITING_FOR_RESPONSE"))
-                .isEqualTo(AuthenticationState.WAITING_FOR_RESPONSE);
-        assertThat(AuthenticationState.valueOf("INCORRECT_RESPONSE"))
-                .isEqualTo(AuthenticationState.INCORRECT_RESPONSE);
-        assertThat(AuthenticationState.valueOf("VERIFIED")).isEqualTo(AuthenticationState.VERIFIED);
-        assertThat(AuthenticationState.valueOf("TOO_MANY_ATTEMPTS"))
-                .isEqualTo(AuthenticationState.TOO_MANY_ATTEMPTS);
-        assertThat(AuthenticationState.valueOf("FAILED_TO_SEND"))
-                .isEqualTo(AuthenticationState.FAILED_TO_SEND);
+        assertThat(AuthenticationState.valueOf("UNKNOWN")).isEqualTo(unknown);
+        assertThat(AuthenticationState.valueOf("WAITING_FOR_RESPONSE")).isEqualTo(waiting);
+        assertThat(AuthenticationState.valueOf("INCORRECT_RESPONSE")).isEqualTo(incorrect);
+        assertThat(AuthenticationState.valueOf("VERIFIED")).isEqualTo(verified);
+        assertThat(AuthenticationState.valueOf("TOO_MANY_ATTEMPTS")).isEqualTo(tooManyAttempts);
+        assertThat(AuthenticationState.valueOf("FAILED_TO_SEND")).isEqualTo(failedToSend);
     }
 }
