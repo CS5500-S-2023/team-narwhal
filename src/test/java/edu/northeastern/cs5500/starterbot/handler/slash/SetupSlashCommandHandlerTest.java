@@ -29,9 +29,6 @@ class SetupSlashCommandHandlerTest {
     }
 
     @Test
-    void handleSlashCommandInteraction() {}
-
-    @Test
     void getPublicRolePermissionsUpdatedMsg() {
         assertThat(testSetUpSlashCommandHandler.getPublicRolePermissionsUpdatedMsg("hello"))
                 .isEqualTo("hello\n" + "✅ Server permissions updated.");

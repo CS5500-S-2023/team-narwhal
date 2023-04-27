@@ -10,7 +10,7 @@ import net.dv8tion.jda.api.entities.User;
 
 /** A class that handles membership flow. */
 @Singleton
-@IgnoreInGeneratedReport
+@IgnoreInGeneratedReport // Can't test; depends on JDA User and Guild
 public class MembershipController {
 
     MembershipRepository membershipRepository;
