@@ -55,12 +55,10 @@ public class WelcomeJoinHandler implements JoinHandler {
      * @return a MessageCreateBuilder with a welcome msg and buttons
      */
     public MessageCreateBuilder generateWelcomeMsg(String guildName) {
-        // Creating message string to send user in private channel
+        // Creating message string to send user in private channe
         String welcomeMessage =
                 String.format(
-                        "Welcome to \"%s\" server!"
-                                + "Before you can get access, "
-                                + "please verify using one of the following methods:",
+                        "You're trying to join the %s server! Before you can do so, please verify that you are a human via one of the following methods:",
                         guildName);
 
         // Builds the message and adds buttons
