@@ -19,7 +19,7 @@ import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.dv8tion.jda.api.utils.messages.MessageCreateBuilder;
 
 /** A class to welcome a member when they join a server. */
-@IgnoreInGeneratedReport
+@IgnoreInGeneratedReport // Can't test; depends on JDA
 public class WelcomeJoinHandler implements JoinHandler {
     @Inject Map<AuthenticationType, AuthenticationConfig> authenticationMethods;
     MembershipController membershipController;

@@ -1,5 +1,6 @@
 package edu.northeastern.cs5500.starterbot.handler.button;
 
+import edu.northeastern.cs5500.starterbot.annotation.IgnoreInGeneratedReport;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -24,6 +25,7 @@ public class CaptchaButtonHandler extends AuthenticationButtonHandler {
     }
 
     /** Runs after a CAPTCHA button is clicked. */
+    @IgnoreInGeneratedReport // can't test; depends on JDA and SimpleCaptcha
     @Override
     public void handleButtonInteraction(ButtonInteractionEvent event) {
         // Edit message to accomplish 2 things:
@@ -51,6 +53,7 @@ public class CaptchaButtonHandler extends AuthenticationButtonHandler {
      *
      * @return a FileUpload object that can be rendered
      */
+    @IgnoreInGeneratedReport // can't test; depends on JDA
     public FileUpload generateCaptchaFile(Captcha captcha) {
         return FileUpload.fromData(
                 imageToByteArray(Objects.requireNonNull(captcha.getImage())), "image.png");
@@ -70,6 +73,7 @@ public class CaptchaButtonHandler extends AuthenticationButtonHandler {
         return Objects.requireNonNull(stream.toByteArray());
     }
 
+    @IgnoreInGeneratedReport // can't test; depends on JDA
     @Nonnull
     private MessageCreateData generateLoadingCaptchaMsg() {
         return new MessageCreateBuilder().setContent("Generating captcha...").build();

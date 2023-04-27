@@ -19,7 +19,7 @@ import net.dv8tion.jda.api.requests.restaction.RoleAction;
 /** A class that handles role assignment flow. */
 // TODO: check if it's ok to omit tests here bc of guild
 @Singleton
-@IgnoreInGeneratedReport
+@IgnoreInGeneratedReport // Can't test; depends on JDA Role, Guild, and etc.
 public class RoleController {
     private static final String VERIFIED_ROLE_NAME = "Verified";
 
