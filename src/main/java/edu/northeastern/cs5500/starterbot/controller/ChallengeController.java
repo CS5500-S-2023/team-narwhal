@@ -77,6 +77,7 @@ public class ChallengeController {
         challenge.setAnswer(answer);
         challenge.setState(AuthenticationState.UNKNOWN);
 
+        this.challengeRepository.update(challenge);
         return challenge;
     }
 
@@ -88,6 +89,7 @@ public class ChallengeController {
      */
     public AuthenticationChallenge passChallenge(@Nonnull AuthenticationChallenge challenge) {
         challenge.setState(AuthenticationState.VERIFIED);
+        this.challengeRepository.update(challenge);
         return challenge;
     }
 
@@ -102,6 +104,7 @@ public class ChallengeController {
         challenge.setNumAttempts(attempts + 1);
         challenge.setState(AuthenticationState.INCORRECT_RESPONSE);
 
+        this.challengeRepository.update(challenge);
         return challenge;
     }
 
