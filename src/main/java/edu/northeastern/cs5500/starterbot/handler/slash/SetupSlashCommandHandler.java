@@ -79,7 +79,7 @@ public class SetupSlashCommandHandler implements SlashCommandHandler {
      * @return A message to send the user after the guild setup is complete.
      */
     public String getPublicRolePermissionsUpdatedMsg(String msg) {
-        return String.format("%s%n%s", msg, "✅ Server permissions updated.");
+        return String.format("%s%n%s", msg, ":white_check_mark: Server permissions updated.");
     }
 
     /**
@@ -90,6 +90,8 @@ public class SetupSlashCommandHandler implements SlashCommandHandler {
      * @return A message to send the user after the guild setup is complete.
      */
     public String getAllMemberVerifiedMsg(String msg) {
-        return String.format("%s%n%s", msg, "✅ \"Verified\" role has been given to all members.");
+        return String.format(
+                "%s%n%s",
+                msg, ":white_check_mark: \"Verified\" role has been given to all members.");
     }
 }

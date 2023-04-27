@@ -1,5 +1,6 @@
 package edu.northeastern.cs5500.starterbot.config.authentication;
 
+import edu.northeastern.cs5500.starterbot.annotation.IgnoreInGeneratedReport;
 import javax.annotation.Nonnull;
 import lombok.Data;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
@@ -16,6 +17,7 @@ public abstract class AuthenticationConfig {
      *
      * @return a Button.
      */
+    @IgnoreInGeneratedReport
     public Button asButton() {
         return Button.primary(String.format("%s:%s", NAME, id), getLabel());
     }
