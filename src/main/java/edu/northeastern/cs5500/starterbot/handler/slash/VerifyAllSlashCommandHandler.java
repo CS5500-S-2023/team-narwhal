@@ -5,10 +5,10 @@ import edu.northeastern.cs5500.starterbot.config.command.VerifyAllSlashCommand;
 import edu.northeastern.cs5500.starterbot.controller.GuildController;
 import edu.northeastern.cs5500.starterbot.controller.RoleController;
 import edu.northeastern.cs5500.starterbot.exceptions.FailedToChangeUserRoleException;
+import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
-import javax.annotation.Nonnull;
 
 /** Handles the /verify-all command. */
 public class VerifyAllSlashCommandHandler implements SlashCommandHandler {
