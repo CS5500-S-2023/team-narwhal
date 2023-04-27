@@ -1,30 +1,33 @@
 package edu.northeastern.cs5500.starterbot.handler.button;
 
-import java.io.IOException;
+import static com.google.common.truth.Truth.assertThat;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class CaptchaButtonHandlerTest {
-    private CaptchaButtonHandler captchaButtonHandler;
+class CaptchaButtonHandlerTest {
+    private CaptchaButtonHandler testCaptchaButtonHandler;
 
     @BeforeEach
     void setUp() {
-        captchaButtonHandler = new CaptchaButtonHandler();
+        testCaptchaButtonHandler = new CaptchaButtonHandler();
     }
 
     @Test
-    void testGenerateCaptchaFile() throws IOException {
-        /*
-        Captcha captcha = new Captcha.Builder(200, 50).addText().build();
-        BufferedImage image = Objects.requireNonNull(captcha.getImage());
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        ImageIO.write(image, "png", stream);
-        FileUpload file = FileUpload.fromData(stream.toByteArray(), "image.png");
-        assertThat(captchaButtonHandler.generateCaptchaFile(captcha)).isEqualTo(file);
-        TODO: how to test this?
-         */
+    void getName() {
+        assertThat(testCaptchaButtonHandler.getName()).isEqualTo("authenticate");
     }
 
     @Test
-    void testHandleButtonInteraction() {}
+    void isHandlerFor() {
+        assertThat(testCaptchaButtonHandler.isHandlerFor("authenticate:captcha")).isTrue();
+        assertThat(testCaptchaButtonHandler.isHandlerFor("authenticate:text")).isFalse();
+        assertThat(testCaptchaButtonHandler.isHandlerFor("")).isFalse();
+    }
+
+    @Test
+    void handleButtonInteraction() {}
+
+    @Test
+    void generateCaptchaFile() {}
 }

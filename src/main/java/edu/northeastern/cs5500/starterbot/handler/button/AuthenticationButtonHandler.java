@@ -3,17 +3,19 @@ package edu.northeastern.cs5500.starterbot.handler.button;
 import edu.northeastern.cs5500.starterbot.controller.AuthenticationController;
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 /** Abstract class for all authentication method buttons. */
+@Getter
+@Setter
+@RequiredArgsConstructor
 public abstract class AuthenticationButtonHandler implements ButtonHandler {
     @Inject AuthenticationController authenticationController;
 
     private static final String NAME = "authenticate";
     @Nonnull private String id;
-
-    protected AuthenticationButtonHandler(@Nonnull String id) {
-        this.id = id;
-    }
 
     /**
      * Gets the name for the handler.
@@ -23,16 +25,6 @@ public abstract class AuthenticationButtonHandler implements ButtonHandler {
     @Nonnull
     public String getName() {
         return NAME;
-    }
-
-    /**
-     * Gets the id for the handler.
-     *
-     * @return the id
-     */
-    @Nonnull
-    public String getId() {
-        return id;
     }
 
     /**

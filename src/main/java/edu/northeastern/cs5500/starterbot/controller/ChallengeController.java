@@ -16,6 +16,7 @@ import javax.inject.Singleton;
  */
 @Singleton
 public class ChallengeController {
+
     ChallengeRepository challengeRepository;
 
     @Inject
@@ -24,7 +25,7 @@ public class ChallengeController {
     }
 
     /**
-     * Creates an AuthenticationChallege.
+     * Creates an AuthenticationChallenge.
      *
      * @param userId - The user creating the AuthenticationChallenge.
      * @param answer - The answer to the AuthenticationChallenge.

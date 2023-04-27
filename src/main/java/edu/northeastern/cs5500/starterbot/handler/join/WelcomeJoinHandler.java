@@ -1,5 +1,6 @@
 package edu.northeastern.cs5500.starterbot.handler.join;
 
+import edu.northeastern.cs5500.starterbot.annotation.IgnoreInGeneratedReport;
 import edu.northeastern.cs5500.starterbot.config.authentication.AuthenticationConfig;
 import edu.northeastern.cs5500.starterbot.config.authentication.AuthenticationType;
 import edu.northeastern.cs5500.starterbot.controller.MembershipController;
@@ -18,6 +19,7 @@ import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.dv8tion.jda.api.utils.messages.MessageCreateBuilder;
 
 /** A class to welcome a member when they join a server. */
+@IgnoreInGeneratedReport
 public class WelcomeJoinHandler implements JoinHandler {
     @Inject Map<AuthenticationType, AuthenticationConfig> authenticationMethods;
     MembershipController membershipController;

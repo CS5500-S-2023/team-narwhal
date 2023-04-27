@@ -9,7 +9,6 @@ import java.util.Objects;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-/** */
 public class ChallengeControllerTest {
 
     private ChallengeRepository challengeRepository;
