@@ -11,7 +11,6 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import org.jetbrains.annotations.NotNull;
 
 /** A class to handle /setup command. */
-@IgnoreInGeneratedReport
 public class SetupSlashCommandHandler implements SlashCommandHandler {
     SetupSlashCommand config;
     GuildController guildController;
@@ -38,6 +37,7 @@ public class SetupSlashCommandHandler implements SlashCommandHandler {
     }
 
     /** Runs after a /setup command is entered. */
+    @IgnoreInGeneratedReport // Can't test; depends on JDA
     public void handleSlashCommandInteraction(SlashCommandInteractionEvent event) {
         event.deferReply().setEphemeral(true).queue();
         Guild guild = event.getGuild();

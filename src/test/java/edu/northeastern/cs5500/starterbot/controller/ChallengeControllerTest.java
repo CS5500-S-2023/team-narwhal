@@ -70,5 +70,7 @@ public class ChallengeControllerTest {
     }
 
     @Test
-    void testCheckCooldown() {}
+    void testCheckCooldown() {
+        assertThat(challengeController.checkCooldown(challenge1)).isTrue();
+    }
 }

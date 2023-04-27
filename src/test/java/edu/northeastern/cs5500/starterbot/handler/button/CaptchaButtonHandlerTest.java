@@ -24,10 +24,4 @@ class CaptchaButtonHandlerTest {
         assertThat(testCaptchaButtonHandler.isHandlerFor("authenticate:text")).isFalse();
         assertThat(testCaptchaButtonHandler.isHandlerFor("")).isFalse();
     }
-
-    @Test
-    void handleButtonInteraction() {}
-
-    @Test
-    void generateCaptchaFile() {}
 }

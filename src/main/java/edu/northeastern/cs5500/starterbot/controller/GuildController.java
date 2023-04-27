@@ -13,7 +13,7 @@ import javax.inject.Singleton;
  */
 @Singleton
 // TODO: check if it's ok to omit tests here
-@IgnoreInGeneratedReport
+@IgnoreInGeneratedReport // Can't test; depends on JDA Guild
 public class GuildController {
     GuildSetupStateRepository guildSetupStateRepository;
 

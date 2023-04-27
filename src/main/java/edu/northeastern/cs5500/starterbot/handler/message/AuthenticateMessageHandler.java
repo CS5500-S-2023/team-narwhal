@@ -24,7 +24,7 @@ import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.dv8tion.jda.api.utils.messages.MessageCreateBuilder;
 
 /** A class to handle messages related to authentication. */
-@IgnoreInGeneratedReport
+@IgnoreInGeneratedReport // Can't test; depends on JDA
 @Slf4j
 public class AuthenticateMessageHandler implements MessageHandler {
     @Inject Map<AuthenticationType, AuthenticationConfig> authenticationMethods;

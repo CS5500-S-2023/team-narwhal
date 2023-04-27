@@ -54,7 +54,13 @@ class ChallengeRepositoryTest {
     }
 
     @Test
-    void update() {}
+    void update() {
+        testRepo.add(testChallenge1);
+        testRepo.update(testChallenge2);
+
+        assertThat(testRepo.get(testId1).getId()).isEqualTo(testId1);
+        assertThat(testRepo.get(testId2).getId()).isEqualTo(testId2);
+    }
 
     @Test
     void delete() {

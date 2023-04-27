@@ -26,7 +26,4 @@ class VerifyAllSlashCommandHandlerTest {
     void getName() {
         assertThat(verifyAllSlashCommandHandler.getName()).matches("verify-all");
     }
-
-    @Test
-    void handleSlashCommandInteraction() {}
 }
