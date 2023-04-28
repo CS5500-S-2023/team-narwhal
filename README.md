@@ -20,7 +20,7 @@ You can follow the instructions below if you wish to customize the bot.
 
 <details>
   <summary>Show more</summary>
-  
+
 ### How to Install and Run the Bot Locally
 1. Download the git repo or clone the repo to your local develop environment
 
@@ -80,7 +80,7 @@ You can also add the environment variable in the run configuration, e.g. in Inte
 ![235009800-5072221e-18e2-49a1-9132-18d260d4b3db](https://user-images.githubusercontent.com/90870823/235015194-f89290db-7ba6-4a68-85aa-45ba50c22f4c.png)
 
 5. Start you bot
-  
+
 After adding the bot to your Discord server and configuring the bot token, you are ready to run the bot.
 You can run the bot by typing in the following command in terminal:
 
@@ -90,15 +90,15 @@ You can run the bot by typing in the following command in terminal:
 You can also run the bot by clicking on the run button in the App.java class. Note that this is IDE dependent.
 
 You should see the following message if your bot is running.
-  
+
 ![Screenshot 2023-04-27 at 5 13 04 PM](https://user-images.githubusercontent.com/90870823/235016309-0a4dafa0-fb32-4bb8-8ca0-1c099d981840.png)
 
 6. Run /setup command
-  
-After adding the bot to your server and the bot is running, you MUST run the /setup command. This command change the default permission setting for anyone joining the server. This will ensure the security of your server even when the bot is down. 
-  
+
+After adding the bot to your server and the bot is running, you MUST run the /setup command. This command change the default permission setting for anyone joining the server. This will ensure the security of your server even when the bot is down.
+
 You can run the /setup command by typing "/setup" in the text channel.
-  
+
 ![Screenshot 2023-04-27 at 4 37 14 PM](https://user-images.githubusercontent.com/90870823/235016220-89149b97-0811-4e22-b243-f5bde4e79a1d.png)
 
 After running this command, you should see a success message
@@ -106,7 +106,7 @@ After running this command, you should see a success message
 <img width="345" alt="Screenshot 2023-04-27 at 3 52 10 PM" src="https://user-images.githubusercontent.com/90870823/235012084-6868122e-e1f0-459d-874e-2386e084f506.png">
 
 7. /verify-all command
-  
+
 You can also run /verify-all command to add a verified role to all the members before you added the bot to the server, so that those members don't have to verify themselevs again.
 
 ### Deploy app on remoter server
@@ -125,7 +125,7 @@ cd build/reports/jacoco/test/html
 python3 -m http.server 8000
 ```
 </details>
-  
+
 ## Idea and Design Process
 Please refer to our project [shared drive](https://drive.google.com/drive/folders/1e_y-lF_UVHFFMFOBv5O8v1xZfMVsw-mu?usp=share_link) for detailed bot design idea and our progress.
 
@@ -134,4 +134,3 @@ This project was developed collaboratively by Matthew Fox (fox.mat@northeastern.
 
 ## Acknowledgement
 This project was built on top of Professor Alexander Lash's starter bot provided in his CS5500 class at Northeastern University, Seattle.
-  
