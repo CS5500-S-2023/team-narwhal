@@ -1,7 +1,7 @@
 # CS5500 Final Project: SpamFree Bot in Discord
 
 ## About the Project
-The SpamFree bot allows discord server owners to verify their members upon joining the server by solving challenges, such as CAPTCHA challenges. Adding the SpamFree bot will help prevent unauthorized users and spam bots from entering the server, providing members a more secure environment. 
+The SpamFree bot allows discord server owners to verify their members upon joining the server by solving challenges, such as CAPTCHA challenges. Adding the SpamFree bot will help prevent unauthorized users and spam bots from entering the server, providing members a more secure environment.
 
 Our bot allows users to choose from three authentication methods:
 
@@ -29,7 +29,7 @@ To test this bot join our [test server](https://discord.gg/naFqaaJK). You can al
     - [Maven](https://maven.apache.org/)
     - [MongoDB](https://www.mongodb.com/)
     - [Truth](https://truth.dev/)
-   
+
 ## Installation
 
 ### Set up Discord Developer Portal Account
@@ -47,10 +47,10 @@ To test this bot join our [test server](https://discord.gg/naFqaaJK). You can al
   ![Bot permissions](https://user-images.githubusercontent.com/90870823/235008802-9550e19b-82f0-4fa0-b510-458ad58619d5.png)
 6. Copy the generated URL at the bottom
 7. Paste the generated URL to your web browser. An invitation prompt should show up.
-  
+
     ![Bot invite to server](https://user-images.githubusercontent.com/90870823/235008931-d988de80-e5f3-486c-b664-cb7459ff312a.png)
 8. Select the server you want to add the bot to
-    - If you do not have a 
+    - If you do not have a
     server or don't want to create one, you can join our [test server](https://discord.gg/naFqaaJK) where the bot is added to test bot functionalities.
 9. Hit "Authorize" and your bot should be added to your chosen Discord server
     ![Authorize prompt](https://user-images.githubusercontent.com/90870823/235008995-63faea62-1f51-4572-b4e7-c09b6b7b5b1e.png)
