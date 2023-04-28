@@ -31,12 +31,14 @@ class SetupSlashCommandHandlerTest {
     @Test
     void getPublicRolePermissionsUpdatedMsg() {
         assertThat(testSetUpSlashCommandHandler.getPublicRolePermissionsUpdatedMsg("hello"))
-                .isEqualTo("hello\n" + "✅ Server permissions updated.");
+                .isEqualTo("hello\n" + ":white_check_mark: Server permissions updated.");
     }
 
     @Test
     void getAllMemberVerifiedMsg() {
         assertThat(testSetUpSlashCommandHandler.getAllMemberVerifiedMsg("yes"))
-                .isEqualTo("yes\n" + "✅ \"Verified\" role has been given to all members.");
+                .isEqualTo(
+                        "yes\n"
+                                + ":white_check_mark: \"Verified\" role has been given to all members.");
     }
 }
