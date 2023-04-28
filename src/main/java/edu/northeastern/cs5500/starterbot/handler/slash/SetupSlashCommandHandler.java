@@ -11,7 +11,6 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import org.jetbrains.annotations.NotNull;
 
 /** A class to handle /setup command. */
-@IgnoreInGeneratedReport
 public class SetupSlashCommandHandler implements SlashCommandHandler {
     SetupSlashCommand config;
     GuildController guildController;
@@ -38,6 +37,7 @@ public class SetupSlashCommandHandler implements SlashCommandHandler {
     }
 
     /** Runs after a /setup command is entered. */
+    @IgnoreInGeneratedReport // Can't test; depends on JDA
     public void handleSlashCommandInteraction(SlashCommandInteractionEvent event) {
         event.deferReply().setEphemeral(true).queue();
         Guild guild = event.getGuild();
@@ -79,7 +79,7 @@ public class SetupSlashCommandHandler implements SlashCommandHandler {
      * @return A message to send the user after the guild setup is complete.
      */
     public String getPublicRolePermissionsUpdatedMsg(String msg) {
-        return String.format("%s%n%s", msg, "✅ Server permissions updated.");
+        return String.format("%s%n%s", msg, ":white_check_mark: Server permissions updated.");
     }
 
     /**
@@ -90,6 +90,8 @@ public class SetupSlashCommandHandler implements SlashCommandHandler {
      * @return A message to send the user after the guild setup is complete.
      */
     public String getAllMemberVerifiedMsg(String msg) {
-        return String.format("%s%n%s", msg, "✅ \"Verified\" role has been given to all members.");
+        return String.format(
+                "%s%n%s",
+                msg, ":white_check_mark: \"Verified\" role has been given to all members.");
     }
 }

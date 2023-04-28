@@ -1,8 +1,8 @@
 package edu.northeastern.cs5500.starterbot.controller;
 
-import edu.northeastern.cs5500.starterbot.annotation.IgnoreInGeneratedReport;
 import edu.northeastern.cs5500.starterbot.exceptions.FailedToChangeUserRoleException;
 import edu.northeastern.cs5500.starterbot.exceptions.NoAuthenticationSessionException;
+import edu.northeastern.cs5500.starterbot.exceptions.NoMembershipFoundException;
 import edu.northeastern.cs5500.starterbot.model.AuthenticationChallenge;
 import edu.northeastern.cs5500.starterbot.model.Membership;
 import java.util.Objects;
@@ -17,7 +17,6 @@ import net.dv8tion.jda.api.entities.User;
  * Handles user attempts and determines if it's successful or not
  */
 @Singleton
-@IgnoreInGeneratedReport
 public class AuthenticationController {
 
     RoleController roleController;
@@ -73,7 +72,8 @@ public class AuthenticationController {
      * @throws FailedToChangeUserRoleException
      */
     public AuthenticationChallenge attemptChallenge(@Nonnull String userId, String userInput)
-            throws NoAuthenticationSessionException, FailedToChangeUserRoleException {
+            throws NoAuthenticationSessionException, FailedToChangeUserRoleException,
+                    NoMembershipFoundException {
         AuthenticationChallenge challenge = challengeController.getChallenge(userId);
         if (challenge == null) {
             throw new NoAuthenticationSessionException(
@@ -97,12 +97,13 @@ public class AuthenticationController {
      */
     public AuthenticationChallenge onSuccessfulAttempt(
             @Nonnull String userId, @Nonnull AuthenticationChallenge challenge)
-            throws FailedToChangeUserRoleException {
+            throws NoMembershipFoundException, FailedToChangeUserRoleException {
         Membership membership = membershipController.getMembership(userId);
 
-        if (Objects.isNull(membership)) {
-            return null;
+        if (membership == null) {
+            throw new NoMembershipFoundException();
         }
+
         User user = Objects.requireNonNull(membership).getUser();
         Guild guild = membership.getGuild();
 

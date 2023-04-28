@@ -17,9 +17,8 @@ import net.dv8tion.jda.api.requests.restaction.PermissionOverrideAction;
 import net.dv8tion.jda.api.requests.restaction.RoleAction;
 
 /** A class that handles role assignment flow. */
-// TODO: check if it's ok to omit tests here bc of guild
 @Singleton
-@IgnoreInGeneratedReport
+@IgnoreInGeneratedReport // Can't test; depends on JDA Role, Guild, and etc.
 public class RoleController {
     private static final String VERIFIED_ROLE_NAME = "Verified";
 
@@ -36,13 +35,13 @@ public class RoleController {
      * @return an unverified role
      */
     public Role getVerifiedRole(@Nonnull Guild guild) {
-        // Loops through all roles in the guild to see if the unverified role already exists
+        // Loops through all roles in the guild to see if the Verified role already exists
         List<Role> roles = guild.getRolesByName(VERIFIED_ROLE_NAME, false);
         if (!roles.isEmpty()) {
             return roles.get(0);
         }
 
-        // Creates the unverified role as it does not currently exist in the guild
+        // Creates the Verified role as it does not currently exist in the guild
         RoleAction roleAction = guild.createRole();
         roleAction.setName(VERIFIED_ROLE_NAME).setPermissions(Permission.ALL_CHANNEL_PERMISSIONS);
         Role role = roleAction.complete();

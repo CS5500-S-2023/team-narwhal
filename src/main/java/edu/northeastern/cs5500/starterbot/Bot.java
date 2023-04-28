@@ -39,6 +39,7 @@ import net.dv8tion.jda.api.utils.MemberCachePolicy;
             CommandModule.class,
             SlashCommandModule.class,
         })
+@IgnoreInGeneratedReport
 @Singleton
 interface BotComponent {
     public Bot bot();

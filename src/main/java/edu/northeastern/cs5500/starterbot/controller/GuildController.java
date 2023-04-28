@@ -12,8 +12,7 @@ import javax.inject.Singleton;
  * Delete a challenge 4. Update attempts
  */
 @Singleton
-// TODO: check if it's ok to omit tests here
-@IgnoreInGeneratedReport
+@IgnoreInGeneratedReport // Can't test; depends on JDA Guild
 public class GuildController {
     GuildSetupStateRepository guildSetupStateRepository;
 
