@@ -28,11 +28,11 @@ public class RoleController {
     }
 
     /**
-     * Get an unverified role with no permissions in a guild. Creates a new one if it does not
-     * exist.
+     * Get an verified role with all channel permissions in a guild. Creates a new one if it does
+     * not exist.
      *
      * @param guild - the guild the user is trying to join
-     * @return an unverified role
+     * @return an verified role
      */
     public Role getVerifiedRole(@Nonnull Guild guild) {
         // Loops through all roles in the guild to see if the Verified role already exists
@@ -50,7 +50,7 @@ public class RoleController {
     }
 
     /**
-     * Adds an unverified role to the member trying to join the guild
+     * Adds an verified role to the member trying to join the guild
      *
      * @param guild - the guild the user is trying to join
      * @param user - the user trying to join the guild
@@ -87,7 +87,7 @@ public class RoleController {
     }
 
     /**
-     * Removes all permissions from @everyone for the guild.
+     * Removes all guild permissions from @everyone for the guild.
      *
      * @param guild - The guild we are updating permissions for.
      */
@@ -112,8 +112,7 @@ public class RoleController {
     }
 
     /**
-     * Overrides permissions for all channels; Ensures unverified role cannot see any channels or
-     * members
+     * Overrides permissions for all channels; Ensures verified role can see channels and members
      *
      * @param guild - the guild the user is trying to join
      * @param role - role to give permission override to
