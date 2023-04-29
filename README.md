@@ -11,7 +11,7 @@ Our authentication process is easy to navigate:
 
 ![Screenshot 2023-04-27 at 4 52 27 PM](https://user-images.githubusercontent.com/90870823/235014314-74a7327f-27b7-47b1-b730-776efdf6e436.png)
 
-To test this bot join our [test server](https://discord.gg/naFqaaJK). You can also refer to the project [shared drive](https://drive.google.com/drive/folders/1e_y-lF_UVHFFMFOBv5O8v1xZfMVsw-mu?usp=share_link) for our detailed bot design ideas and our progress.
+To test this bot join our [test server](https://discord.gg/naFqaaJK). You can also refer to the project [shared drive](https://drive.google.com/drive/folders/1e_y-lF_UVHFFMFOBv5O8v1xZfMVsw-mu?usp=share_link) for our detailed bot design ideas and our progress. To learn more about our bot you can view this [youtube](https://www.youtube.com/watch?v=sz1fN2KYP48) video.
 
 ### Built With
 
@@ -52,7 +52,7 @@ To test this bot join our [test server](https://discord.gg/naFqaaJK). You can al
 8. Select the server you want to add the bot to
     - If you do not have a
     server or don't want to create one, you can join our [test server](https://discord.gg/naFqaaJK) where the bot is added to test bot functionalities.
-9. Hit "Authorize" and your bot should be added to your chosen Discord server
+9. Hit "Authorize" and your bot should be added to your chosen Discord server <br>
     ![Authorize prompt](https://user-images.githubusercontent.com/90870823/235008995-63faea62-1f51-4572-b4e7-c09b6b7b5b1e.png)
 
     ![Authorized](https://user-images.githubusercontent.com/90870823/235009001-d46e76fb-296f-4e97-8cc5-0ba29ca7c836.png)
@@ -185,6 +185,12 @@ python3 -m http.server 8000
 
 ### How to Deploy App
 You can launch the bot on a cloud hosting platform, we recommend [fly.io](https://fly.io/).
+
+1. Change your app name in fly.toml
+2. Install flyctl by following this [tutorial](https://fly.io/docs/hands-on/install-flyctl/)
+3. Add the bot token in your secrets by following this [tutorial](https://fly.io/docs/reference/secrets/)
+4. Commit changes
+5. The application will immediately deploy when merged
 
 ## Idea and Design Process
 Please refer to our project [shared drive](https://drive.google.com/drive/folders/1e_y-lF_UVHFFMFOBv5O8v1xZfMVsw-mu?usp=share_link) for our detailed bot design ideas and our progress.
