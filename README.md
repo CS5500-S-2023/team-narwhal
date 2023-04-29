@@ -52,7 +52,7 @@ To test this bot join our [test server](https://discord.gg/naFqaaJK). You can al
 8. Select the server you want to add the bot to
     - If you do not have a
     server or don't want to create one, you can join our [test server](https://discord.gg/naFqaaJK) where the bot is added to test bot functionalities.
-9. Hit "Authorize" and your bot should be added to your chosen Discord server
+9. Hit "Authorize" and your bot should be added to your chosen Discord server <br>
     ![Authorize prompt](https://user-images.githubusercontent.com/90870823/235008995-63faea62-1f51-4572-b4e7-c09b6b7b5b1e.png)
 
     ![Authorized](https://user-images.githubusercontent.com/90870823/235009001-d46e76fb-296f-4e97-8cc5-0ba29ca7c836.png)
