@@ -5,6 +5,7 @@ import static com.google.common.truth.Truth.assertThat;
 import edu.northeastern.cs5500.starterbot.model.AuthenticationChallenge;
 import edu.northeastern.cs5500.starterbot.model.AuthenticationState;
 import edu.northeastern.cs5500.starterbot.repository.ChallengeRepository;
+import java.util.Date;
 import java.util.Objects;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -71,6 +72,7 @@ public class ChallengeControllerTest {
 
     @Test
     void testCheckCooldown() {
+        challenge1.setTimeStamp(new Date(0));
         assertThat(challengeController.checkCooldown(challenge1)).isTrue();
     }
 }

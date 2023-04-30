@@ -35,24 +35,28 @@ To test this bot join our [test server](https://discord.gg/naFqaaJK). You can al
 ### Set up Discord Developer Portal Account
 1. Sign up for a [Discord developer account](https://discord.com/developers/applications)
 2. Familiarize yourself with creating a Discord application using [Discord documentation](https://discord.com/developers/docs/intro).
-2. Create a new application
+3. Create a new application
 
 ### Add Bot to Server
 1. Navigate to your [application](https://discord.com/developers/applications)
-2. Click on the **OAuth2** tab
-3. Click on the **URL Generator**
-4. Select **Bot**
+2. Click on the **Bot** tab<br>
+    ![Bot tab](https://user-images.githubusercontent.com/88064362/235332685-313cd499-666b-4001-a417-cf0816821c90.png)
+3. Turn on all Privileged Gateway Intents
+    ![Privileged Gateway Intents](https://user-images.githubusercontent.com/88064362/235332932-53c5dba6-575b-4f03-a203-74055fedc795.png)
+4. Click on the **OAuth2** tab
+5. Click on the **URL Generator**
+6. Select **Bot**
   ![OAuth2 URL Generator](https://user-images.githubusercontent.com/90870823/235008401-d08f5ce5-b159-42da-b440-13fceeca818a.png)
-5. After you've seleced "Bot" you should see an expanded "Bot permissions" panel, select "Administrator"
+7. After you've seleced "Bot" you should see an expanded "Bot permissions" panel, select "Administrator"
   ![Bot permissions](https://user-images.githubusercontent.com/90870823/235008802-9550e19b-82f0-4fa0-b510-458ad58619d5.png)
-6. Copy the generated URL at the bottom
-7. Paste the generated URL to your web browser. An invitation prompt should show up.
+8. Copy the generated URL at the bottom
+9. Paste the generated URL to your web browser. An invitation prompt should show up.
 
     ![Bot invite to server](https://user-images.githubusercontent.com/90870823/235008931-d988de80-e5f3-486c-b664-cb7459ff312a.png)
-8. Select the server you want to add the bot to
+10. Select the server you want to add the bot to
     - If you do not have a
     server or don't want to create one, you can join our [test server](https://discord.gg/naFqaaJK) where the bot is added to test bot functionalities.
-9. Hit "Authorize" and your bot should be added to your chosen Discord server <br>
+11. Hit "Authorize" and your bot should be added to your chosen Discord server <br>
     ![Authorize prompt](https://user-images.githubusercontent.com/90870823/235008995-63faea62-1f51-4572-b4e7-c09b6b7b5b1e.png)
 
     ![Authorized](https://user-images.githubusercontent.com/90870823/235009001-d46e76fb-296f-4e97-8cc5-0ba29ca7c836.png)
